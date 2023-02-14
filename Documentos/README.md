@@ -1,1 +1,3 @@
-Carpeta donde se alojar√°n los documentos que describen el sistema
+
+
+En este documento se almacenar·n todos los documentos que describan la funcionalidad del sistema.
