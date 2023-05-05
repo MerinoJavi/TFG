@@ -14,7 +14,7 @@ public class Main extends Application {
 	
 //	private BorderPane r;
 	public Main() {
-		this.primaryStage = new Stage();
+		this.primaryStage = new Stage(); 
 	}
 
 
