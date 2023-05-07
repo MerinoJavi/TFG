@@ -1,8 +1,14 @@
 package mm.makery.app;
 	
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
+import mm.makery.app.model.*;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -15,9 +21,13 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private Scene loginScene;
 	
-
+	
+	/*
+	 * Constructor
+	 */
 	public Main() {
-		this.primaryStage = new Stage();  
+		this.primaryStage = new Stage();
+	
 	}
 
 
@@ -31,6 +41,7 @@ public class Main extends Application {
 			//Configuro y muestro la ventana con el menu de login
 			primaryStage.setTitle("Menu de login");
 			primaryStage.setScene(loginScene);
+			//TODO: Poner icono de la app
 			
 			primaryStage.show();
 			
@@ -46,9 +57,14 @@ public class Main extends Application {
 
 		initRootLayout();
 	}
-	/**************************************************************************************************************/
-	public static void main(String[] args) {
-		
+	/**
+	 * @throws SQLException ************************************************************************************************************/
+	public static void main(String[] args) throws SQLException {
+		//Creo la conexion a la base de datos 
+		String url = "jdbc:mysql://localhost:3306/TFG";
+		String user = "root";
+		String pass = "9P$H7nI5!*8p";
+		Connection conexion = DriverManager.getConnection(url,user,pass);
 		launch(args);
 	}
 }
