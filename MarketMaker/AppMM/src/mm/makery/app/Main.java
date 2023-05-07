@@ -6,19 +6,22 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.Parent;
+import mm.makery.app.view.*;
 
 public class Main extends Application {
 	private Stage primaryStage;
 	private Scene loginScene;
 	
-//	private BorderPane r;
+
 	public Main() {
 		this.primaryStage = new Stage();  
 	}
 
 
-
+//MENÚ PRINCIPAL PARA ELEGIR USUARIO
 	public void initRootLayout() { 
 		try {
 			Parent root = FXMLLoader.load(Main.class.getResource("view/LoginMenu.fxml"));
@@ -36,12 +39,16 @@ public class Main extends Application {
 		}
 		
 	}
-	
+	/*******************SE INICIA AUTOMATICAMENTE CUANDO EJECUTO LA APLICACION*****************************/
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
+		
+
 		initRootLayout();
 	}
+	/**************************************************************************************************************/
 	public static void main(String[] args) {
+		
 		launch(args);
 	}
 }
