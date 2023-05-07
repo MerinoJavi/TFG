@@ -31,7 +31,7 @@ public class Main extends Application {
 	}
 
 
-//MENÚ PRINCIPAL PARA ELEGIR USUARIO
+//PRIMERA VISTA QUE SALE AL INICIAR LA APLICACION
 	public void initRootLayout() { 
 		try {
 			Parent root = FXMLLoader.load(Main.class.getResource("view/LoginMenu.fxml"));
@@ -39,7 +39,7 @@ public class Main extends Application {
 			//Creo la escena
 			loginScene = new Scene(root);
 			//Configuro y muestro la ventana con el menu de login
-			primaryStage.setTitle("Menu de login");
+			primaryStage.setTitle("MarketMakerAPP");
 			primaryStage.setScene(loginScene);
 			//TODO: Poner icono de la app
 			
@@ -54,7 +54,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 		
-
 		initRootLayout();
 	}
 	/**

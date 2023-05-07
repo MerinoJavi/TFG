@@ -31,10 +31,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="F:/TFG/TFG/MarketMaker/AppMM/ojdbc11.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/mysql connector java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
