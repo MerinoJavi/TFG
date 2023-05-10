@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import  javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
@@ -17,7 +18,8 @@ public class PaginaClienteController {
 	
 	@FXML
 	private Button DeleteProfile;
-	
+	@FXML
+	private Label statusLabel;
 	@FXML
 	   //****************Cerrar sesion*******************************//
 	    private void handleLogout(ActionEvent event) throws IOException {

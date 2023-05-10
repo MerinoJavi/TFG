@@ -1,6 +1,13 @@
 package mm.makery.app.view;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -43,7 +50,7 @@ public class LoginController {
     	
     }
     @FXML
-    private void handleLogin(ActionEvent event) throws IOException {
+    private void handleLogin(ActionEvent event) throws IOException, SQLException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (isValidCredentials(username, password)) {
@@ -89,9 +96,22 @@ public class LoginController {
     }
 
     //Comprobar si el usuario existe
-    private boolean isValidCredentials(String username, String password) {
+    private boolean isValidCredentials(String username, String password) throws SQLException {
         // Logica de autenticación
-        return username.equals("usuario") && password.equals("contraseña");
+    	Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
+    	String sql = "SELECT usuario,password,salt FROM cliente WHERE usuario = '" + username + "'";
+    	PreparedStatement st = conexion.prepareStatement(sql);
+	    ResultSet result = st.executeQuery();
+	    String usuarioBBDD=result.getString("usuario");//atributo que se encuentra en la BBDD
+    	String passwordHashed=result.getString("password");//password hasheada en la bbdd
+	    String salt = result.getString("salt");
+    	//Comparar usuario con usuario introducido y contraseña hasheada en la base de datos con la contraseña introducida. Para ello, tengo que volver a hashearla con el mismo salt
+	    String passhashed=BCrypt.hashpw(password, salt);
+	    st.close();
+		conexion.close();
+		
+	    return usuarioBBDD.equals(username) && passwordHashed.equals(passhashed);
+	    
     }
     
     //VUELVE A LA VISTA ANTERIOR

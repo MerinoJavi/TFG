@@ -32,5 +32,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/mysql connector java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/jBCrypt-0.4.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
