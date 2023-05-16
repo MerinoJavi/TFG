@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -18,6 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
+import mm.makery.app.model.SesionUsuario;
 import javafx.scene.*;
 import javafx.scene.image.*;
 public class LoginController {
@@ -49,6 +51,13 @@ public class LoginController {
 		return logoutButton;
     	
     }
+    public static int generateRandomNumber(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("n must not be negative");
+        }
+        // generar un número aleatorio entre 0 y `n`. Cambio la semilla para evitar repeticiones en numeros random y no sea la misma siempre
+        return new Random(System.currentTimeMillis()).nextInt(n + 1);
+    }
     @FXML
     private void handleLogin(ActionEvent event) throws IOException, SQLException {
         String username = usernameField.getText();
@@ -58,7 +67,10 @@ public class LoginController {
             statusLabel.setText("Bienvenido,  " + username);
             usernameField.clear();
             passwordField.clear();
-            
+            //Guardo el token de inicio de sesion y el usuario que lo ha iniciado
+            SesionUsuario sesiones = new SesionUsuario();
+            sesiones.addsesionusuario(Integer.toString(generateRandomNumber(1000)), username);
+            //Cargo la pantalla del usuario
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
     		LoginController log = new LoginController();
     		Parent nextScreen = loader.load();
@@ -96,23 +108,48 @@ public class LoginController {
     }
 
     //Comprobar si el usuario existe
-    private boolean isValidCredentials(String username, String password) throws SQLException {
-        // Logica de autenticación
-    	Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
-    	String sql = "SELECT usuario,password,salt FROM cliente WHERE usuario = '" + username + "'";
-    	PreparedStatement st = conexion.prepareStatement(sql);
-	    ResultSet result = st.executeQuery();
-	    String usuarioBBDD=result.getString("usuario");//atributo que se encuentra en la BBDD
-    	String passwordHashed=result.getString("password");//password hasheada en la bbdd
-	    String salt = result.getString("salt");
-    	//Comparar usuario con usuario introducido y contraseña hasheada en la base de datos con la contraseña introducida. Para ello, tengo que volver a hashearla con el mismo salt
-	    String passhashed=BCrypt.hashpw(password, salt);
-	    st.close();
-		conexion.close();
-		
-	    return usuarioBBDD.equals(username) && passwordHashed.equals(passhashed);
-	    
-    }
+	private boolean isValidCredentials(String username, String password)  {
+		// Logica de autenticación
+		Connection conexion=null;
+		PreparedStatement st = null;
+		ResultSet result = null;
+		try {
+		 conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+		String sql = "SELECT usuario,password,salt FROM cliente WHERE usuario = '" + username + "'";
+		 st = conexion.prepareStatement(sql);
+		 result = st.executeQuery();
+		if (result.next()) {
+			String usuarioBBDD = result.getString("usuario");// atributo que se encuentra en la BBDD
+			String passwordHashed = result.getString("password");// password hasheada en la bbdd
+			String salt = result.getString("salt");
+			// Comparar usuario con usuario introducido y contraseña hasheada en la base de
+			// datos con la contraseña introducida. Para ello, tengo que volver a hashearla
+			// con el mismo salt
+			String passhashed = BCrypt.hashpw(password, salt);
+			//st.close();
+			//conexion.close();
+			return usuarioBBDD.equals(username) && passwordHashed.equals(passhashed);
+		}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally { //Tratamiento de recursos utilizados
+			try {
+				if(result!=null) {
+					result.close();
+				}
+				if(st!=null) {
+					st.close();
+				}
+				if(conexion!=null) {
+					conexion.close();
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
     
     //VUELVE A LA VISTA ANTERIOR
     /*

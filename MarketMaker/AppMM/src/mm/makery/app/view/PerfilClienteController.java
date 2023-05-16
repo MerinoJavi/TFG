@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import  javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
@@ -13,6 +14,21 @@ public class PerfilClienteController {
 	
 	@FXML
 	private Button logoutbutton;
+	@FXML
+	private Button deleteProfile;
+	@FXML
+	private Label nombre;
+	@FXML
+	private Label apellidos;
+	@FXML
+	private Label correo;
+	@FXML
+	private Label provincia;
+	@FXML
+	private Label pais;
+	@FXML
+	private Label direccion;
+	
 	@FXML
 	   //****************Cerrar sesion*******************************//
 	    private void handleLogout(ActionEvent event) throws IOException {
@@ -30,5 +46,10 @@ public class PerfilClienteController {
 			currentStage.show();
 	        //logoutButton.setDisable(true);
 	    }
+	
+	@FXML
+	private void handleDeleteProfile(ActionEvent event) {
+		
+	}
 
 }
