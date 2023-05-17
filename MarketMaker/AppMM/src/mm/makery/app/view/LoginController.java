@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 import org.mindrot.jbcrypt.BCrypt;
-
+import mm.makery.app.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.Alert;
@@ -63,13 +63,17 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (isValidCredentials(username, password)) {
+        	Main m = new Main();
+        	SesionUsuario s = new SesionUsuario();
+        	s.addsesionusuario(generateRandomNumber(1000), username);
+        	
             isLoggedIn = true;
             statusLabel.setText("Bienvenido,  " + username);
             usernameField.clear();
             passwordField.clear();
             //Guardo el token de inicio de sesion y el usuario que lo ha iniciado
             SesionUsuario sesiones = new SesionUsuario();
-            sesiones.addsesionusuario(Integer.toString(generateRandomNumber(1000)), username);
+            sesiones.addsesionusuario(generateRandomNumber(1000), username);
             //Cargo la pantalla del usuario
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
     		LoginController log = new LoginController();
@@ -93,6 +97,7 @@ public class LoginController {
    //****************Cerrar sesion*******************************//
     private void handleLogout(ActionEvent event) throws IOException {
         isLoggedIn = false;
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginMenu.fxml"));
 		//LoginController log = new LoginController();
         
@@ -132,7 +137,7 @@ public class LoginController {
 		}
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally { //Tratamiento de recursos utilizados
+		} finally { //Tratamiento de recursos utilizados. Cerrarlos todos
 			try {
 				if(result!=null) {
 					result.close();

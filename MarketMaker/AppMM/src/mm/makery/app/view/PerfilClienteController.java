@@ -49,7 +49,7 @@ public class PerfilClienteController {
 	
 	@FXML
 	private void handleDeleteProfile(ActionEvent event) {
-		
+		 
 	}
 
 }

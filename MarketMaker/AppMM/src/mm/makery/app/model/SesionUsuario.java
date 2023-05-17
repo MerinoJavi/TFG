@@ -4,26 +4,26 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class SesionUsuario {
-	private Map<String,String> sesionesactivas;
+	private Map<String,Integer> sesionesactivas;
 	
 	
 	public SesionUsuario() {
 		sesionesactivas = new HashMap<>();
 	}
 	
-	public void addsesionusuario(String token,String username) {
-		sesionesactivas.put(token, username);
+	public void addsesionusuario(int token,String username) {
+		sesionesactivas.put(username, token);
 	}
 	
 	public void eliminarsesionusuario(String username) {
 		sesionesactivas.remove(username);
 	}
-	public String  obtenerUsuarioPorToken(String token) {
-		return sesionesactivas.get(token);
+	public Integer obtenerTokenPorUsuario(String username) {
+		return sesionesactivas.get(username);
 	}
 
-	public String obtenerTokenPorUsuario(Map<String, String> map, String username) {
-		for (Map.Entry<String, String> entry : map.entrySet()) {
+	public Integer obtenerTokenPorUsuario(Map<Integer, String> map, String username) {
+		for (Map.Entry<Integer, String> entry : map.entrySet()) {
 			if (entry.getValue().equals(username)) {
 				return entry.getKey();
 			}
