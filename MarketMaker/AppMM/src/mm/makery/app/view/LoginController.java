@@ -2,11 +2,15 @@ package mm.makery.app.view;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
+import mm.makery.app.view.PerfilClienteController;
+import java.time.LocalDate;
 
 import org.mindrot.jbcrypt.BCrypt;
 import mm.makery.app.Main;
@@ -44,7 +48,6 @@ public class LoginController {
      
     private boolean isLoggedIn = false;
 
-    private Main main = new Main();
 	public LoginController() {
 		
 	}
@@ -64,16 +67,10 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (isValidCredentials(username, password)) {
-        	Main m = new Main();
-        	SesionUsuario s = new SesionUsuario();
-        	s.addsesionusuario(generateRandomNumber(1000), username);
-        	
             isLoggedIn = true;
             statusLabel.setText("Bienvenido,  " + username);
             usernameField.clear();
             passwordField.clear();
-            //Guardo el token de inicio de sesion y el usuario que lo ha iniciado//
-            main.getSesiones().addsesionusuario(generateRandomNumber(1000), username);
             //Cargo la pantalla del usuario
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
     		LoginController log = new LoginController();
@@ -84,7 +81,6 @@ public class LoginController {
     		currentStage.show();
             
         } else {
-            //statusLabel.setText("Los datos introducidos no son correctos.");
         	Alert alert = new Alert(Alert.AlertType.ERROR);
         	alert.setHeaderText(null);
         	alert.setTitle("Error");
@@ -118,15 +114,31 @@ public class LoginController {
 		Connection conexion=null;
 		PreparedStatement st = null;
 		ResultSet result = null;
+	
+		
 		try {
 		 conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
-		String sql = "SELECT usuario,password,salt FROM cliente WHERE usuario = '" + username + "'";
+		String sql = "SELECT usuario,password,salt,Nombre,Apellidos,email,provincia,pais,direccion,fechanacimiento FROM cliente WHERE usuario = '" + username + "'";
 		 st = conexion.prepareStatement(sql);
 		 result = st.executeQuery();
 		if (result.next()) {
 			String usuarioBBDD = result.getString("usuario");// atributo que se encuentra en la BBDD
 			String passwordHashed = result.getString("password");// password hasheada en la bbdd
 			String salt = result.getString("salt");
+			
+			String nombre = result.getString("Nombre");
+			String apellidos = result.getString("Apellidos");
+			String email = result.getString("email");
+			Date fecha = result.getDate("fechanacimiento");
+			String provincia = result.getString("provincia");
+			String pais = result.getString("pais");
+			String direccion = result.getString("direccion");
+			
+			
+			//Sesion del usuario almacenada en el arraylist
+			SesionUsuario sesion = new SesionUsuario(nombre, apellidos, fecha, usuarioBBDD, email, provincia, pais, direccion);
+			SesionUsuario.usuarioABuscar = usuarioBBDD;
+			SesionUsuario.usuarios.add(sesion);
 			// Comparar usuario con usuario introducido y contraseña hasheada en la base de
 			// datos con la contraseña introducida. Para ello, tengo que volver a hashearla
 			// con el mismo salt

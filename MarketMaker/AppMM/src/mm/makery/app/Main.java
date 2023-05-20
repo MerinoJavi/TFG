@@ -20,7 +20,6 @@ import mm.makery.app.view.*;
 public class Main extends Application {
 	private Stage primaryStage;
 	private Scene loginScene;
-	private SesionUsuario sesiones = new SesionUsuario();
 	
 	/*
 	 * Constructor
@@ -57,9 +56,7 @@ public class Main extends Application {
 		initRootLayout();
 	}
 	
-	public SesionUsuario getSesiones() {
-		return sesiones;
-	}
+	
 	/**
 	 * @throws SQLException ************************************************************************************************************/
 	public static void main(String[] args) throws SQLException {

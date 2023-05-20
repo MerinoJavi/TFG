@@ -102,6 +102,7 @@ public class RegistroClienteController {
 		    
 			Alert a = new Alert(AlertType.INFORMATION);
 			a.setTitle("¡Has sido registrado con éxito!");
+			a.setHeaderText(null);
 			a.setContentText("Ya puedes iniciar sesion en la plataforma");
 			a.showAndWait();
 			

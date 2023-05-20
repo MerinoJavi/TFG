@@ -1,33 +1,95 @@
 package mm.makery.app.model;
 
 import java.util.Map;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class SesionUsuario {
-	private Map<String,Integer> sesionesactivas;
+	private String nombre;
+	private String apellidos;
+	private Date fechanacimiento;
+	private String usuario;
+	private String email;
+	private String provincia;
+	private String pais;
+	private String direccion;
+	
+	public static ArrayList<SesionUsuario> usuarios;
+	public static String usuarioABuscar;
 	
 	
-	public SesionUsuario() {
-		sesionesactivas = new HashMap<>();
+	public SesionUsuario(String nombre, String apellidos, Date fechanacimiento, String usuario, String email,
+			String provincia, String pais, String direccion) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.fechanacimiento = fechanacimiento;
+		this.usuario = usuario;
+		this.email = email;
+		this.provincia = provincia;
+		this.pais = pais;
+		this.direccion = direccion;
+		
+		usuarios = new ArrayList<>();
 	}
 	
-	public void addsesionusuario(int token,String username) {
-		sesionesactivas.put(username, token);
+	public ArrayList<SesionUsuario> getUsuarios(){
+		return usuarios;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public Date getFechanacimiento() {
+		return fechanacimiento;
+	}
+	public void setFechanacimiento(Date fechanacimiento) {
+		this.fechanacimiento = fechanacimiento;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getProvincia() {
+		return provincia;
+	}
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+	public String getPais() {
+		return pais;
+	}
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	
-	public void eliminarsesionusuario(String username) {
-		sesionesactivas.remove(username);
+	public void addSesion(SesionUsuario se) {
+		usuarios.add(se);
 	}
-	public Integer obtenerTokenPorUsuario(String username) {
-		return sesionesactivas.get(username);
-	}
-
-	public static String obtenerUsuarioDadoToken(HashMap<String, Integer> map, Integer token) {
-		for (HashMap.Entry<String, Integer> entry : map.entrySet()) {
-			if (entry.getValue().equals(token)) {
-				return entry.getKey();
-			}
-		}
-		return null;
-	}
+	
+	
+	
 }
