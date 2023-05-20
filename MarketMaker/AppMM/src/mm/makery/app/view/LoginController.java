@@ -44,6 +44,7 @@ public class LoginController {
      
     private boolean isLoggedIn = false;
 
+    private Main main = new Main();
 	public LoginController() {
 		
 	}
@@ -71,9 +72,8 @@ public class LoginController {
             statusLabel.setText("Bienvenido,  " + username);
             usernameField.clear();
             passwordField.clear();
-            //Guardo el token de inicio de sesion y el usuario que lo ha iniciado
-            SesionUsuario sesiones = new SesionUsuario();
-            sesiones.addsesionusuario(generateRandomNumber(1000), username);
+            //Guardo el token de inicio de sesion y el usuario que lo ha iniciado//
+            main.getSesiones().addsesionusuario(generateRandomNumber(1000), username);
             //Cargo la pantalla del usuario
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
     		LoginController log = new LoginController();

@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
+import mm.makery.app.Main;
+import mm.makery.app.model.SesionUsuario;
 
 public class PerfilClienteController {
 	
@@ -28,7 +30,7 @@ public class PerfilClienteController {
 	private Label pais;
 	@FXML
 	private Label direccion;
-	
+	private Main main = new Main();
 	@FXML
 	   //****************Cerrar sesion*******************************//
 	    private void handleLogout(ActionEvent event) throws IOException {
@@ -47,6 +49,13 @@ public class PerfilClienteController {
 	        //logoutButton.setDisable(true);
 	    }
 	
+	//Obtengo el nombre de usuario que ha iniciado sesion comparandolo con el hashmap de main y de ahi obtengo sus datos
+	@FXML
+	private void initialize() { //Se ejecuta automaticamente cuando ejecuto el FXML
+		SesionUsuario sesiones = main.getSesiones();
+		
+		
+	}
 	@FXML
 	private void handleDeleteProfile(ActionEvent event) {
 		 

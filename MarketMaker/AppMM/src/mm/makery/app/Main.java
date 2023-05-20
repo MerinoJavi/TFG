@@ -20,7 +20,7 @@ import mm.makery.app.view.*;
 public class Main extends Application {
 	private Stage primaryStage;
 	private Scene loginScene;
-	private SesionUsuario sesiones;
+	private SesionUsuario sesiones = new SesionUsuario();
 	
 	/*
 	 * Constructor
@@ -53,7 +53,7 @@ public class Main extends Application {
 	/*******************SE INICIA AUTOMATICAMENTE CUANDO EJECUTO LA APLICACION*****************************/
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		sesiones = new SesionUsuario();
+		//sesiones = new SesionUsuario();
 		initRootLayout();
 	}
 	
