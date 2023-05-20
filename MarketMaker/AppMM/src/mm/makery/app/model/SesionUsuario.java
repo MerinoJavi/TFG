@@ -22,8 +22,8 @@ public class SesionUsuario {
 		return sesionesactivas.get(username);
 	}
 
-	public String obtenerUsuarioDadoToken(Map<Integer, String> map, Integer token) {
-		for (Map.Entry<String, Integer> entry : map.ke) {
+	public static String obtenerUsuarioDadoToken(HashMap<String, Integer> map, Integer token) {
+		for (HashMap.Entry<String, Integer> entry : map.entrySet()) {
 			if (entry.getValue().equals(token)) {
 				return entry.getKey();
 			}
