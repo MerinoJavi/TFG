@@ -70,7 +70,8 @@ public class PerfilClienteController {
 		for(SesionUsuario sesion: SesionUsuario.usuarios) {
 			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
 				//Almacenar los datos en las label
-				System.out.println(sesion.getUsuario());
+				//System.out.println(sesion.getUsuario());
+				
 				user.setText(sesion.getUsuario());
 				nombre.setText(sesion.getNombre());
 				apellidos.setText(sesion.getApellidos());
@@ -91,7 +92,7 @@ public class PerfilClienteController {
 			 conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
 			 String sql = "DELETE from cliente where usuario='"+user.getText()+"'";
 			 st = conex.prepareStatement(sql);
-			 
+			 //Mensaje de alerta para confirmar la accion
 			 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			 alert.setHeaderText(null);
 			 alert.setTitle("Confirmación");

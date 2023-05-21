@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
+import mm.makery.app.model.SesionUsuario;
 
 public class PaginaClienteController {
 	@FXML
@@ -20,6 +21,7 @@ public class PaginaClienteController {
 	private Button DeleteProfile;
 	@FXML
 	private Label statusLabel;
+	
 	@FXML
 	   //****************Cerrar sesion*******************************//
 	    private void handleLogout(ActionEvent event) throws IOException {
@@ -51,5 +53,16 @@ public class PaginaClienteController {
 		currentStage.setScene(nextScreenScene);
 		currentStage.show();
         //logoutButton.setDisable(true);
+	}
+	
+	@FXML
+	//Para mostrar el nombre en la label y el numero de productos que tiene en el carrito, pero eso para mas adelante
+	public void initialize() {
+		for(SesionUsuario sesion: SesionUsuario.usuarios) {
+			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
+				//Almacenar los datos en la label para mostrar el nombre de usuario
+				statusLabel.setText("Bienvenido, "+ sesion.getNombre());
+			}
+		}
 	}
 }
