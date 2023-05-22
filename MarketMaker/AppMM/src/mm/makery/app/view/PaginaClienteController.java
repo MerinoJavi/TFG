@@ -61,7 +61,7 @@ public class PaginaClienteController {
 		for(SesionUsuario sesion: SesionUsuario.usuarios) {
 			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
 				//Almacenar los datos en la label para mostrar el nombre de usuario
-				statusLabel.setText("Bienvenido, "+ sesion.getNombre());
+				statusLabel.setText("¡Bienvenido, "+ sesion.getNombre()+"!");
 			}
 		}
 	}

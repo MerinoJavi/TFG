@@ -77,6 +77,7 @@ public class LoginController {
     		Parent nextScreen = loader.load();
     		Scene nextScreenScene = new Scene(nextScreen);
     		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    		//Para que salga en la misma pantalla y no abra otra ventana
     		currentStage.setScene(nextScreenScene);
     		currentStage.show();
             
