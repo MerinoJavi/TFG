@@ -96,7 +96,7 @@ public class PerfilClienteController {
 			 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			 alert.setHeaderText(null);
 			 alert.setTitle("Confirmación");
-			 alert.setContentText("¿Estas seguro de confirmar la acción?");
+			 alert.setContentText("¿Está seguro de confirmar la acción?");
 			 Optional<ButtonType> action = alert.showAndWait();
 			 
 			 if(action.get()==ButtonType.OK) {

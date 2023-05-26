@@ -19,7 +19,6 @@ public class LoginMenuController {
 	private Button CommerceButton;
 	
 	//Metodo para cargar el login de cada uno de los usuarios y pasar de una vista a otra. Por ahora solo voy a hacer el del cliente. Cargo su pantalla fxml.
-	//TODO: Cambiar nombre de metodo. Establecer switches o ifs para elegir según el usuario
 	@FXML
 	public void handleNextScreen(ActionEvent event) throws IOException{
 		

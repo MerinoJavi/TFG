@@ -76,6 +76,7 @@ public class LoginAdminController {
 	            //Cargo la pantalla del usuario
 	        	FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
 	    		LoginController log = new LoginController();
+	    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
 	    		Parent nextScreen = loader.load();
 	    		Scene nextScreenScene = new Scene(nextScreen);
 	    		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

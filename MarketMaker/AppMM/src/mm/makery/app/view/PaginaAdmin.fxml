@@ -22,7 +22,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="403.0" layoutY="18.0" mnemonicParsing="false" stylesheets="@../style/logoutbutton.css" text="Mi cuenta">
+                  <Button fx:id="profile" layoutX="403.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleGoAdminProfile" stylesheets="@../style/logoutbutton.css" text="Mi cuenta">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -38,7 +38,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button layoutX="479.0" layoutY="18.0" mnemonicParsing="false" stylesheets="@../style/logoutbutton.css" text="Ajustes">
+                  <Button layoutX="479.0" layoutY="18.0" mnemonicParsing="false" stylesheets="@../style/logoutbutton.css" text="Solicitudes">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
