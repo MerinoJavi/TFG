@@ -87,7 +87,7 @@ public class RegistroClienteController {
 		
 		//Guardo datos en la BBDD haciendo inyeccion en SQL
 		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
+		Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
 			int id=generateRandomNumber(1000);
 			String sql = "INSERT INTO cliente(idCliente,Nombre,Apellidos,fechanacimiento,password,usuario,email,provincia,pais,direccion,salt) VALUES ("
 					+ id + ",'" + nombre + "','" + apellidos + "','" + fechaNacimiento + "','"
