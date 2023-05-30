@@ -60,8 +60,8 @@ public class SolicitudComercioController {
 		
 		try {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
-			String sql = "INSERT INTO solicitudcomercio(nombre,nif,municipio,provincia,codigopostal,pais,direccion,telefono,email) VALUES ("
-					+name+"','"+nif+"','"+mun+"','"+prov+"','"+cod+"','"+p+"','"+dir+"','"+tlf+"','"+correo+"')";
+			String sql = "INSERT INTO solicitudcomercio(nombre,nif,municipio,provincia,codigopostal,pais,direccion,telefono,email) VALUES ('"
+		             + name + "','" + nif + "','" + mun + "','" + prov + "','" + cod + "','" + p + "','" + dir + "','" + tlf + "','" + correo + "')";
 			PreparedStatement prep = conexion.prepareStatement(sql);
 			prep.executeUpdate();
 			prep.close();
@@ -77,6 +77,12 @@ public class SolicitudComercioController {
 	        e.printStackTrace();
 		}
 		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("¡Solicitud enviada! :-)");
+		alert.setHeaderText(null);
+        alert.setContentText("La solicitud está a la espera de ser aceptada por un administrador. Será comunicado por el correo introducido en la solicitud una vez se sepa la resolución de la misma.");
+        alert.showAndWait();
+		
 		//Borro los campos
 		nombre.clear();
 		NIF.clear();
@@ -87,7 +93,6 @@ public class SolicitudComercioController {
 		direccion.clear();
 		telefono.clear();
 		email.clear();
-		
 		
 	}
 	
