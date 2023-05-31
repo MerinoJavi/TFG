@@ -13,15 +13,19 @@ public class SesionUsuario {
 	private String usuario;
 	private String email;
 	private String provincia;
+	private String municipio;
 	private String pais;
 	private String direccion;
+	private String nif;
+	private String codigopostal;
+	private String telefono;
 	
 	public static ArrayList<SesionUsuario> usuarios;
 	public static String usuarioABuscar;
 	
 	
 	public SesionUsuario(String nombre, String apellidos, Date fechanacimiento, String usuario, String email,
-			String provincia, String pais, String direccion) {
+			String provincia, String pais, String direccion,String codigop,String n,String mun) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fechanacimiento = fechanacimiento;
@@ -30,6 +34,9 @@ public class SesionUsuario {
 		this.provincia = provincia;
 		this.pais = pais;
 		this.direccion = direccion;
+		this.codigopostal=codigop;
+		this.nif=n;
+		this.municipio=mun;
 		
 		usuarios = new ArrayList<>();
 	}

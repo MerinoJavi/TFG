@@ -33,7 +33,7 @@ public class Main extends Application {
 //PRIMERA VISTA QUE SALE AL INICIAR LA APLICACION
 	public void initRootLayout() { 
 		try {
-			Parent root = FXMLLoader.load(Main.class.getResource("view/SolicitudComercio.fxml"));
+			Parent root = FXMLLoader.load(Main.class.getResource("view/LoginComercio.fxml"));
 			
 			//Creo la escena
 			loginScene = new Scene(root);

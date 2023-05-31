@@ -137,7 +137,7 @@ public class LoginController {
 			
 			
 			//Sesion del usuario almacenada en el arraylist
-			SesionUsuario sesion = new SesionUsuario(nombre, apellidos, fecha, usuarioBBDD, email, provincia, pais, direccion);
+			SesionUsuario sesion = new SesionUsuario(nombre, apellidos, fecha, usuarioBBDD, email, provincia, pais, direccion,null,null,null);
 			SesionUsuario.usuarioABuscar = usuarioBBDD;
 			SesionUsuario.usuarios.add(sesion);
 			// Comparar usuario con usuario introducido y contraseña hasheada en la base de
