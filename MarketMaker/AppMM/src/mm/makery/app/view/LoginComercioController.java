@@ -113,7 +113,7 @@ public class LoginComercioController {
 				String email = result.getString("email");
 				
 				//Sesion del usuario almacenada en el arraylist
-				SesionUsuario sesion = new SesionUsuario(nombre, null, null, usuarioBBDD, email, provincia, pais, direccion,codigopostal,nif,municipio);
+				SesionUsuario sesion = new SesionUsuario(nombre, null, null, usuarioBBDD, email, provincia, pais, direccion,codigopostal,nif,municipio,telefono);
 				SesionUsuario.usuarioABuscar = usuarioBBDD;
 				SesionUsuario.usuarios.add(sesion);
 				// Comparar usuario con usuario introducido y contraseña hasheada en la base de

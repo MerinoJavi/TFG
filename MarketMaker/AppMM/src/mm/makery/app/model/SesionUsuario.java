@@ -25,7 +25,7 @@ public class SesionUsuario {
 	
 	
 	public SesionUsuario(String nombre, String apellidos, Date fechanacimiento, String usuario, String email,
-			String provincia, String pais, String direccion,String codigop,String n,String mun) {
+			String provincia, String pais, String direccion,String codigop,String n,String mun,String telf) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fechanacimiento = fechanacimiento;
@@ -37,7 +37,7 @@ public class SesionUsuario {
 		this.codigopostal=codigop;
 		this.nif=n;
 		this.municipio=mun;
-		
+		this.telefono=telf;
 		usuarios = new ArrayList<>();
 	}
 	
@@ -65,6 +65,38 @@ public class SesionUsuario {
 	public String getUsuario() {
 		return usuario;
 	}
+	public String getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
+	}
+
+	public String getNif() {
+		return nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+
+	public String getCodigopostal() {
+		return codigopostal;
+	}
+
+	public void setCodigopostal(String codigopostal) {
+		this.codigopostal = codigopostal;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}

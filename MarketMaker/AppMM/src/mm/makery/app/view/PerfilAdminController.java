@@ -108,7 +108,6 @@ public class PerfilAdminController {
 	private void handleEditButton(ActionEvent e) {
 		// Creo formulario
 		VBox formulario = new VBox(10);
-		// Pongo por defecto los campos que hay en la base de datos
 		nombreField.setText("");
 		apellidosField.setText("");
 		usuarioField.setText("");
