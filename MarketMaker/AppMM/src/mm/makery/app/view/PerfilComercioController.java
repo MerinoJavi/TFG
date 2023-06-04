@@ -18,7 +18,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mm.makery.app.model.SesionUsuario;
 
@@ -46,6 +49,37 @@ public class PerfilComercioController {
 	private Label tlf;
 	@FXML
 	private Label email;
+	@FXML
+	private Label pais;
+	
+	@FXML
+	private Button saveEdits = new Button("Guardar");
+	@FXML
+	private Button cancelEdits = new Button("Cancelar");
+	@FXML
+	private Button editDataComercio;
+	@FXML
+	private TextField nombreField = new TextField();
+	@FXML
+	private TextField nifField = new TextField();
+	@FXML
+	private TextField municipioField = new TextField();
+	@FXML
+	private TextField provinciaField = new TextField();
+	@FXML
+	private TextField codigopostalField = new TextField();
+	@FXML
+	private TextField paisField = new TextField();
+	@FXML
+	private TextField direccionField = new TextField();
+	@FXML
+	private TextField telefonoField = new TextField();
+	@FXML
+	private TextField emailField = new TextField();
+	@FXML
+	private PasswordField password = new PasswordField();
+	@FXML
+	private TextField usuarioField = new TextField();
 	
 	@FXML
 	   //****************Cerrar sesion*******************************//
@@ -81,6 +115,7 @@ public class PerfilComercioController {
 				NIF.setText(sesion.getNif());
 				municipio.setText(sesion.getMunicipio());
 				provincia.setText(sesion.getProvincia());
+				pais.setText(sesion.getPais());
 				codigopostal.setText(sesion.getCodigopostal());
 				direccion.setText(sesion.getDireccion());
 				tlf.setText(sesion.getTelefono());
@@ -147,6 +182,112 @@ public class PerfilComercioController {
 	        alert.showAndWait();
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void handleEditButton(ActionEvent e) {
+		// Creo formulario
+		VBox formulario = new VBox(10);
+		nombreField.setText("");
+		usuarioField.setText("");
+		nifField.setText("");
+		municipioField.setText("");
+		provinciaField.setText("");
+		codigopostalField.setText("");
+		paisField.setText("");
+		direccionField.setText("");
+		telefonoField.setText("");
+		emailField.setText("");
+		
+		
+		// Agrego los campos al formulario, y los botones guardar y cancelar
+		formulario.getChildren().addAll(new Label("Nombre: "), nombreField);
+		formulario.getChildren().addAll(new Label("Usuario: "), usuarioField);
+		formulario.getChildren().addAll(new Label("NIF: "), nifField);
+		formulario.getChildren().addAll(new Label("Municipio: "), municipioField);
+		formulario.getChildren().addAll(new Label("Provincia: "), provinciaField);
+		formulario.getChildren().addAll(new Label("Codigo posta: "), codigopostalField);
+		formulario.getChildren().addAll(new Label("Pais: "), paisField);
+		formulario.getChildren().addAll(new Label("Direccion: "), direccionField);
+		formulario.getChildren().addAll(new Label("Telefono: "), telefonoField);
+		formulario.getChildren().addAll(new Label("Email: "), emailField);
+		
+		//Pongo los datos actuales del perfil
+		nombreField.setText(nombre.getText());
+		usuarioField.setText(user.getText());
+		nifField.setText(NIF.getText());
+		municipioField.setText(municipio.getText());
+		provinciaField.setText(provincia.getText());
+		codigopostalField.setText(codigopostal.getText());
+		paisField.setText(pais.getText());
+		direccionField.setText(direccion.getText());
+		telefonoField.setText(tlf.getText());
+		emailField.setText(email.getText());
+		
+		
+		//Añado los botones
+		formulario.getChildren().add(saveEdits);
+		formulario.getChildren().add(cancelEdits);
+		// Crear escena con el formulario
+
+		Scene formularioScene = new Scene(formulario, 600, 400);
+		// Obtengo ventana actual
+		Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		currentStage.setScene(formularioScene);
+
+		// Guardar los cambios en la base de datos
+		saveEdits.setOnAction(event -> {
+			try {
+				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+						"9P$H7nI5!*8p");
+				String sql = "UPDATE comercio SET nombre='" + nombreField.getText() + "',nif='" + nifField.getText()
+						+ "',municipio='" + municipioField.getText() + "',provincia='" + provinciaField.getText()
+						+ "',codigopostal='" + codigopostalField.getText() + "',pais='" + paisField.getText()
+						+ "',direccion='" + direccionField.getText() + "',telefono='" + telefonoField.getText()
+						+ "',email='" + emailField.getText() + "',usuario='" + usuarioField.getText()
+						+ "' WHERE usuario='" + usuarioField.getText() + "'";
+				PreparedStatement st = conexion.prepareStatement(sql);
+				st.executeUpdate();
+
+				Alert a = new Alert(AlertType.INFORMATION);
+				a.setTitle("¡Cambios guardados");
+				a.setHeaderText(null);
+				a.setContentText(null);
+				a.showAndWait();
+				// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
+				st.close();
+				conexion.close();
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+
+		cancelEdits.setOnAction(event -> {
+			// Cargo la pagina XML correspondiente al menu de logins
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilComercio.fxml"));
+			// LoginController log = new LoginController();
+
+			// loader.setController(log);
+			Parent nextScreen = null;
+			try {
+				nextScreen = loader.load();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			// log = loader.getController();
+			// Cargo el XML siguiente en una nueva escena, que posteriormente casteo la
+			// ventana que obtengo y la establezco en la escena actual para que no me cree
+			// otra ventana.
+			Scene nextScreenScene = new Scene(nextScreen);
+			Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			currentStage.setScene(nextScreenScene);
+			currentStage.show(); // Muestro la pagina LoginMenu
+			// logoutButton.setDisable(true);
+		});
+
 	}
 		
 		

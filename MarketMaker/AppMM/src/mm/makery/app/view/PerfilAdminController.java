@@ -117,6 +117,13 @@ public class PerfilAdminController {
 		formulario.getChildren().addAll(new Label("Apellidos: "), apellidosField);
 		formulario.getChildren().addAll(new Label("Usuario: "), usuarioField);
 		formulario.getChildren().addAll(new Label("Correo: "), correoField);
+		
+		//Pongo los datos actuales del perfil
+		nombreField.setText(nombre.getText());
+		apellidosField.setText(apellidos.getText());
+		usuarioField.setText(usuario.getText());
+		correoField.setText(correo.getText());
+		//Añado los botones
 		formulario.getChildren().add(saveEdits);
 		formulario.getChildren().add(cancelEdits);
 		// Crear escena con el formulario
