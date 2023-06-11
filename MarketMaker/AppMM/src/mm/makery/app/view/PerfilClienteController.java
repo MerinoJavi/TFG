@@ -14,7 +14,9 @@ import javafx.event.ActionEvent;
 import  javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
@@ -42,7 +44,27 @@ public class PerfilClienteController {
 	private Label direccion;
 	@FXML
 	private Label user;
-
+	
+	@FXML
+	private Button saveEdits = new Button("Guardar");
+	@FXML
+	private Button cancelEdits = new Button("Cancelar");
+	@FXML
+	private Button editButton;
+	@FXML
+	private TextField usuarioField = new TextField();
+	@FXML
+	private TextField nombreField = new TextField();
+	@FXML
+	private TextField apellidosField = new TextField();
+	@FXML
+	private TextField correoField = new TextField();
+	@FXML
+	private TextField provinciaField = new TextField();
+	@FXML
+	private TextField paisField = new TextField();
+	@FXML
+	private TextField direccionField = new TextField();
 	
 
 	@FXML
@@ -142,5 +164,95 @@ public class PerfilClienteController {
 		}
 	}
 	
+	@FXML
+	private void handleEditButton(ActionEvent e) {
+		// Creo formulario
+				VBox formulario = new VBox(10);
+				nombreField.setText("");
+				apellidosField.setText("");
+				usuarioField.setText("");
+				correoField.setText("");
+				provinciaField.setText("");
+				paisField.setText("");
+				direccionField.setText("");
+				// Agrego los campos al formulario, y los botones guardar y cancelar
+				formulario.getChildren().addAll(new Label("Nombre: "), nombreField);
+				formulario.getChildren().addAll(new Label("Apellidos: "), apellidosField);
+				formulario.getChildren().addAll(new Label("Usuario: "), usuarioField);
+				formulario.getChildren().addAll(new Label("Correo: "), correoField);
+				formulario.getChildren().addAll(new Label("Provincia: "), provinciaField);
+				formulario.getChildren().addAll(new Label("País: "), paisField);
+				formulario.getChildren().addAll(new Label("Dirección: "), direccionField);
+				
+				//Pongo los datos actuales del perfil
+				nombreField.setText(nombre.getText());
+				apellidosField.setText(apellidos.getText());
+				usuarioField.setText(user.getText());
+				correoField.setText(correo.getText());
+				provinciaField.setText(provincia.getText());
+				paisField.setText(pais.getText());
+				direccionField.setText(direccion.getText());
+				//Añado los botones
+				formulario.getChildren().add(saveEdits);
+				formulario.getChildren().add(cancelEdits);
+				
+				// Crear escena con el formulario
+				Scene formularioScene = new Scene(formulario, 600, 400);
+				// Obtengo ventana actual
+				Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+				currentStage.setScene(formularioScene);
+
+				// Guardar los cambios en la base de datos
+				saveEdits.setOnAction(event -> {
+					try {
+						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+								"9P$H7nI5!*8p");
+						String sql = "UPDATE cliente SET Nombre='" + nombreField.getText() + "',Apellidos='"
+								+ apellidosField.getText() + "',usuario='" + usuarioField.getText() + "',email='"
+								+ correoField.getText() + "',provincia='" + provinciaField.getText() + "',pais='"
+								+ paisField.getText() + "',direccion='" + direccionField.getText() + "' WHERE usuario='"
+								+ user.getText() + "'";
+						PreparedStatement st = conexion.prepareStatement(sql);
+						st.executeUpdate();
+
+						Alert a = new Alert(AlertType.INFORMATION);
+						a.setTitle("¡Cambios guardados");
+						a.setHeaderText(null);
+						a.setContentText(null);
+						a.showAndWait();
+						// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
+						st.close();
+						conexion.close();
+
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				});
+
+				cancelEdits.setOnAction(event -> {
+					// Cargo la pagina XML correspondiente al menu de logins
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilCliente.fxml"));
+					// LoginController log = new LoginController();
+
+					// loader.setController(log);
+					Parent nextScreen = null;
+					try {
+						nextScreen = loader.load();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					// log = loader.getController();
+					// Cargo el XML siguiente en una nueva escena, que posteriormente casteo la
+					// ventana que obtengo y la establezco en la escena actual para que no me cree
+					// otra ventana.
+					Scene nextScreenScene = new Scene(nextScreen);
+					Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					currentStage.setScene(nextScreenScene);
+					currentStage.show(); // Muestro la pagina LoginMenu
+					// logoutButton.setDisable(true);
+				});
+	}
 
 }

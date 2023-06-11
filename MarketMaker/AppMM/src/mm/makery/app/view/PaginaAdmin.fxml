@@ -38,7 +38,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button layoutX="479.0" layoutY="18.0" mnemonicParsing="false" stylesheets="@../style/logoutbutton.css" text="Solicitudes">
+                  <Button layoutX="479.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleGoRequest" stylesheets="@../style/logoutbutton.css" text="Solicitudes">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>

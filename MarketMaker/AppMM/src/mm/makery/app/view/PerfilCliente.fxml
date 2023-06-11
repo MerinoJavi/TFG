@@ -45,6 +45,7 @@
                         <Label fx:id="user" text="Label" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
+                  <Button layoutX="188.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleEditButton" text="Editar..." />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="402.0">
