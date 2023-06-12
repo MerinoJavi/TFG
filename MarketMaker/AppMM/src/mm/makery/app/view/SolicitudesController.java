@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -83,6 +84,9 @@ public class SolicitudesController {
 				// añado las label de la informacion de la solicitud enviada por el comercio,
 				// con los datos añadidos anteriormente sacados de la consulta a la tabla
 				// solicitudcomercio
+				//Hago una consulta que se ejecutara mas adelante si la solicitud es aceptada 
+			//	String str = "INSERT INTO comercio(nombre,nif,municipio,provincia,codigopostal,pais,direccion,telefono,email) VALUES ('" + nombrecomercio + "', '" + nifLabel.getText() + "','" + municipio.getText() + "','" + provincia.getText() + "','" + codigopostal.getText() + "','" + pais.getText() + "','" + direccion.getText() + "','" + telefono.getText() + "','" + email.getText() + "')";
+
 				datos.getChildren().addAll(nombreLabel, nifLabel, municipio, provincia, codigopostal, pais, direccion,
 						telefono, email);
 
@@ -110,17 +114,29 @@ public class SolicitudesController {
 							int numfilaseliminadas = st.executeUpdate(s);
 							if (numfilaseliminadas > 0) {
 								Alert alertInfo = new Alert(AlertType.INFORMATION);
-								alertInfo.setTitle("Perfil eliminado");
+								alertInfo.setTitle("¡Solicitud aceptada!");
 								alertInfo.setHeaderText(null);
-								alertInfo.setContentText("La solicitud ha sido aceptada con éxito.");
+								alertInfo.setContentText("La solicitud ha sido aceptada con éxito. ");
 								alertInfo.showAndWait();
-								
+								//Añado la solicitud al comercio, aunque falta por ponerle contraseña y salt. Que me salte un formulario para añadir una contraseña creada por el administrasdor, generar salt aleatoria, hashear con sha256 y añadirlo a la bbdd, y ya directamente se crea el usuario, para automatizarlo todo :)
+							//	statement = conAceptar.prepareStatement(str);
+							//	statement.executeUpdate(str);
+								//Creo de nuevo la escena para actualizar la pagina de solicitudes
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("Solicitudes.fxml"));
+								Parent nextScreen = loader.load();
+								Scene nextScreenScene = new Scene(nextScreen);
+								Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+								currentStage.setScene(nextScreenScene);
+								currentStage.show();
 							}
 						}
 
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						System.err.println("Error en la base de datos");
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					try {
@@ -144,6 +160,69 @@ public class SolicitudesController {
 
 				});
 
+				rejectButton.setOnAction(ev->{
+					Connection conRechazar;
+					ResultSet r;
+					Statement statement = null;
+
+					try {
+						conRechazar = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+								"9P$H7nI5!*8p");
+						String s = "DELETE from solicitudcomercio where nombre='" + nombrecomercio + "'"; // Creo la consulta pero no la disparo todavia, hasta que no sea confirmada
+						statement = conRechazar.prepareStatement(s);
+
+						// Mensaje de alerta para confirmar la accion
+						Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+						alert.setHeaderText(null);
+						alert.setTitle("Confirmación");
+						alert.setContentText("¿Está seguro de confirmar la acción?");
+						Optional<ButtonType> action = alert.showAndWait();
+						if (action.get() == (ButtonType.OK)) { // Acepto la solicitud
+							int numfilaseliminadas = st.executeUpdate(s);
+							if (numfilaseliminadas > 0) {
+								Alert alertInfo = new Alert(AlertType.INFORMATION);
+								alertInfo.setTitle("Solicitud eliminada");
+								alertInfo.setHeaderText(null);
+								alertInfo.setContentText("La solicitud ha sido rechazada. Notifica al comercio para que vuelva a realizar la solicitud.");
+								alertInfo.showAndWait();
+								//Creo de nuevo la escena para actualizar la pagina de solicitudes
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("Solicitudes.fxml"));
+								Parent nextScreen = loader.load();
+								Scene nextScreenScene = new Scene(nextScreen);
+								Stage currentStage = (Stage) ((Node) ev.getSource()).getScene().getWindow();
+								currentStage.setScene(nextScreenScene);
+								currentStage.show();
+								
+							}
+						}
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error en la base de datos");
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						result.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						st.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						conexion.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
 			}
 
 		} catch (SQLException e) {
