@@ -21,7 +21,7 @@
                      </graphic>
                   </Button>
                   <TextField layoutX="53.0" layoutY="13.0" prefHeight="25.0" prefWidth="246.0" />
-                  <Button layoutX="350.0" layoutY="13.0" mnemonicParsing="false" text="Mis productos" />
+                  <Button layoutX="350.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleGoProducts" text="Mis productos" />
                   <Button fx:id="ProfileClient" layoutX="472.0" layoutY="12.0" mnemonicParsing="false" onAction="#handlegoProfile" text="Ajustes" />
                </children>
             </AnchorPane>

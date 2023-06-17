@@ -49,5 +49,18 @@ public class PaginaComercioController {
 			currentStage.show();
 	        //logoutButton.setDisable(true);
 		}
+		
+		@FXML
+		private void handleGoProducts(ActionEvent event) throws IOException {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductosComercio.fxml"));
+			
+			//loader.setController(log);
+			Parent nextScreen = loader.load();
+			//log = loader.getController();
+			Scene nextScreenScene = new Scene(nextScreen);
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			currentStage.setScene(nextScreenScene);
+			currentStage.show();
+		}
 
 }

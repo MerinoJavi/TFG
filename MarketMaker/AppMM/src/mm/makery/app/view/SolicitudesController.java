@@ -261,16 +261,6 @@ public class SolicitudesController {
 	    }
 	}
 
-
-
-
-
-
-
-
-
-
-
 	private List<String> obtenerNombresComercios() {
 		List<String> nombrescomercios = new ArrayList<String>();
 		Connection conexion;

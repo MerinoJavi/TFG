@@ -19,7 +19,7 @@ public class SesionUsuario {
 	private String nif;
 	private String codigopostal;
 	private String telefono;
-	
+
 	public static ArrayList<SesionUsuario> usuarios;
 	public static String usuarioABuscar;
 	
