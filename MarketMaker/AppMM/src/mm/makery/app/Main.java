@@ -57,7 +57,7 @@ public class Main extends Application {
 		loadingStage.setScene(new Scene(vbox));
 		loadingStage.show();
 
-		// Cargar la escena principal en segundo plano
+		// Cargar la escena principal en segundo plano con la clase Task para no bloquear la interfaz
 		Task<Void> loadTask = new Task<Void>() {
 		    @Override
 		    protected Void call() throws Exception {

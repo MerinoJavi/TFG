@@ -1,7 +1,12 @@
 package mm.makery.app.view;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.scene.control.Alert;
 import java.sql.Connection;
@@ -33,6 +38,9 @@ import mm.makery.app.model.SesionUsuario;
 import javafx.stage.FileChooser;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class ProductosComercioController {
 
@@ -44,9 +52,11 @@ public class ProductosComercioController {
 	@FXML
 	private FileChooser fc= new FileChooser();
 	@FXML
-	private TableView<Button>table;
+	private VBox infoproducto;
 	@FXML
 	private VBox botones;
+	@FXML
+	private Button edit = new Button("Editar...");
 	
 	private String path;
 	private String nifcomercio;
@@ -68,13 +78,67 @@ public class ProductosComercioController {
 				botones.setVgrow(boton, Priority.ALWAYS);
 				botones.getChildren().addAll(boton,separator);
 				botones.setSpacing(5); //Espacio de separacion de 10px
-				
+				boton.setOnAction(event->{
+					mostrarDatos(p);
+				});
 				boton=null;
 			}
 		}
 		//Tengo que crear un boton por cada producto que tenga el comercio, y que al clikcar me muestre la informacion d ese producto
+	}
+	
+	@FXML
+	private void mostrarDatos(String nombreproducto) {
+		//Para sacar los datos de la bbdd
+		Label nombre=new Label("");
+		Label pvp=new Label("");
+		Label descripcion=new Label("");
+		String imagen="";
+		//Para guardar en la base de datos
+		Label nombreBD;
+		Label pvpBD;
+		Label descrBD;
+		Label imagenBD;
 		
+		infoproducto.getChildren().clear(); //Borramos todos los datos anteriores que hubieran
+		
+		//Proceso para leer y visualizar los datos del producto
+		try {
+			Connection conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+					"9P$H7nI5!*8p");
+			//Recopilo la informacion, añado botones y hago la funcionalidad de cada uno
+			String sql = "SELECT nombre,pvp,descripcion,imagen from producto where idcomercio="+nifcomercio;
+			Statement st = conex.createStatement();
+			ResultSet result = st.executeQuery(sql);
+			
+			//Almaceno los valores de la base de datos para mostrarlos. El tratamiento de la imagen queda pendiente para mas adelante
+			if(result.next()) {
+				nombre.setText(result.getString("nombre"));
+				pvp.setText(result.getString("pvp"));
+				descripcion.setText(result.getString("descripcion"));
+				imagen = result.getString("imagen");
+			}
+			//Ahora meto los datos en el VBox creado en Scenebuilder para mostrar los datos
+			infoproducto.getChildren().addAll(new Label("Título: "),nombre);
+			infoproducto.getChildren().addAll(new Label("PVP: "),pvp);
+			infoproducto.getChildren().addAll(new Label("Descripción: "),descripcion);
+			//Transformacion de la ruta de la imagen para que se muestre la imagen correctamente. Obtengo la ruta y lo transformo en un objeto ImageView de JavaFX
+			String fixpath = "C:\\\\Users\\\\javi_\\\\OneDrive\\\\Escritorio\\\\foto.jpg";
 
+			
+			InputStream i = new FileInputStream(fixpath);
+			Image image = new Image(i);
+			ImageView imageview = new ImageView(image);
+			imageview.setFitWidth(100);
+			imageview.setFitHeight(100);
+			infoproducto.getChildren().add(imageview);
+			
+		} catch (SQLException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	//Obtengo los productos del comercio para que los botones lleven su nombre
