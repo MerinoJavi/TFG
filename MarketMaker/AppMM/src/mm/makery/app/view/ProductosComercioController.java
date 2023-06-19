@@ -107,9 +107,12 @@ public class ProductosComercioController {
 			Connection conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
 					"9P$H7nI5!*8p");
 			//Recopilo la informacion, añado botones y hago la funcionalidad de cada uno
-			String sql = "SELECT nombre,pvp,descripcion,imagen from producto where idcomercio="+nifcomercio;
-			Statement st = conex.createStatement();
-			ResultSet result = st.executeQuery(sql);
+			//Para evitar atauqes de inyeccion SQL, le paso los parametros más tarde
+			String sql = "SELECT nombre,pvp,descripcion,imagen from producto where idcomercio= ? and nombre=?";
+			PreparedStatement st = conex.prepareStatement(sql);
+			st.setString(1, nifcomercio);
+			st.setString(2, nombreproducto);
+			ResultSet result = st.executeQuery();
 			
 			//Almaceno los valores de la base de datos para mostrarlos. El tratamiento de la imagen queda pendiente para mas adelante
 			if(result.next()) {
@@ -123,7 +126,7 @@ public class ProductosComercioController {
 			infoproducto.getChildren().addAll(new Label("PVP: "),pvp);
 			infoproducto.getChildren().addAll(new Label("Descripción: "),descripcion);
 			//Transformacion de la ruta de la imagen para que se muestre la imagen correctamente. Obtengo la ruta y lo transformo en un objeto ImageView de JavaFX
-			String fixpath = "C:\\\\Users\\\\javi_\\\\OneDrive\\\\Escritorio\\\\foto.jpg";
+			String fixpath = imagen.replace(":", ":\\\\").replaceAll("TFG","TFG\\\\").replace("MarketMaker", "MarketMaker\\\\").replaceAll("AppMM", "AppMM\\\\").replace("src", "src\\\\").replace("images", "images\\\\");
 
 			
 			InputStream i = new FileInputStream(fixpath);
@@ -132,7 +135,7 @@ public class ProductosComercioController {
 			imageview.setFitWidth(100);
 			imageview.setFitHeight(100);
 			infoproducto.getChildren().add(imageview);
-			
+			fixpath="";
 		} catch (SQLException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
