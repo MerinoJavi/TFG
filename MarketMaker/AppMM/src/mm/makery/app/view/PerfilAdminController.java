@@ -143,7 +143,7 @@ public class PerfilAdminController {
 						+ correoField.getText() + "' WHERE usuario='" + usuario.getText() + "'";
 				PreparedStatement st = conexion.prepareStatement(sql);
 				st.executeUpdate();
-
+				//Muestro alerta de confirmacion
 				Alert a = new Alert(AlertType.INFORMATION);
 				a.setTitle("¡Cambios guardados");
 				a.setHeaderText(null);
