@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
@@ -41,7 +42,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.Menu;
 
 public class PaginaAdmin {
-
+	@FXML
+	private Label comercioLabel;
 	@FXML
 	private TextField searchField;
 	@FXML
@@ -81,6 +83,7 @@ public class PaginaAdmin {
 	
 	@FXML
 	private void initialize() {
+		
 		Platform.runLater(() -> {
 	        ArrayList<String> nombres = searchCommercesDB();
 	        carrusel.setAlignment(Pos.CENTER);
