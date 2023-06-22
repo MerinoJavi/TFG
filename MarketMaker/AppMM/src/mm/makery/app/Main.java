@@ -74,11 +74,12 @@ public class Main extends Application {
 		        // Cargar la escena principal
 		        Platform.runLater(() -> {
 		            try {
-		                Parent root = FXMLLoader.load(Main.class.getResource("view/LoginComercio.fxml"));
+		                Parent root = FXMLLoader.load(Main.class.getResource("view/LoginAdmin.fxml"));
 		                loginScene = new Scene(root);
 		                primaryStage.setScene(loginScene);
 		                primaryStage.setTitle("MarketMakerAPP");
 		                //TODO: Poner icono de la app
+		              
 		                primaryStage.show();
 		            } catch (IOException e) {
 		                e.printStackTrace();

@@ -238,38 +238,58 @@ public class ProductosComercioController {
 					currentStage.show(); 
 				});
 				
-				delete.setOnAction(evento->{
-					Connection conEliminar;
-					try {
-						conEliminar = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
-								"9P$H7nI5!*8p");
-					Statement statement = conEliminar.createStatement();
-					String deleteQuery = "DELETE FROM producto where idcomercio='"+nifcomercio+"' and nombre='"+nombre.getText()+"'";
-					Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Confirmación");
-                    alert.setContentText("¿Está seguro de confirmar la acción?");
-                    Optional<ButtonType> action = alert.showAndWait();
-                    if(action.get()==ButtonType.OK) {
-                    	int filaeliminada = st.executeUpdate(deleteQuery);
-                    	if(filaeliminada>0) {
-                    		Alert a = new Alert(Alert.AlertType.INFORMATION);
-                            a.setHeaderText(null);
-                            a.setTitle("¡Producto eliminado!");
-                            a.setContentText("El producto ha sido eliminado satisfactoriamente");
-                    	}else {
-                    		Alert error = new Alert(Alert.AlertType.ERROR);
-                            error.setHeaderText(null);
-                            error.setTitle("Error al eliminar!");
-                            error.setContentText("El producto no existe");
-                    	}
-                    }
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					 
-				});
+				
+			});
+			
+			delete.setOnAction(evento->{
+				Connection conEliminar=null;
+				try {
+					conEliminar = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+							"9P$H7nI5!*8p");
+				Statement statement = conEliminar.createStatement();
+				String deleteQuery = "DELETE FROM producto where idcomercio='"+nifcomercio+"' and nombre='"+nombre.getText()+"'";
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Confirmación");
+                alert.setContentText("¿Está seguro de confirmar la acción? Una vez lo haga no podrá restablecer los datos.");
+                Optional<ButtonType> action = alert.showAndWait();
+                if(action.get()==ButtonType.OK) {
+                	int filaeliminada = st.executeUpdate(deleteQuery);
+                	if(filaeliminada>0) {
+                		Alert a = new Alert(Alert.AlertType.INFORMATION);
+                        a.setHeaderText(null);
+                        a.setTitle("¡Producto eliminado!");
+                        a.setContentText("El producto ha sido eliminado satisfactoriamente");
+                        a.showAndWait();
+                     // Recargo la pagina para comprobar que el objeto ha sido eliminado
+    					FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductosComercio.fxml"));
+    					Parent nextScreen = null;
+    					try {
+    						nextScreen = loader.load();
+    					} catch (IOException e1) {
+    						// TODO Auto-generated catch block
+    						e1.printStackTrace();
+    					}
+    					// Cargo el XML siguiente en una nueva escena, que posteriormente casteo la
+    					// ventana que obtengo y la establezco en la escena actual para que no me cree
+    					// otra ventana.
+    					Scene nextScreenScene = new Scene(nextScreen);
+    					Stage current = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+    					current.setScene(nextScreenScene);
+    					current.show(); 
+                        
+                	}else {
+                		Alert error = new Alert(Alert.AlertType.ERROR);
+                        error.setHeaderText(null);
+                        error.setTitle("Error al eliminar!");
+                        error.setContentText("El producto no existe");
+                	}
+                }
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
 			});
 		} catch (SQLException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
