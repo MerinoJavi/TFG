@@ -42,6 +42,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 
 
 public class ProductosComercioController {
@@ -70,11 +71,14 @@ public class ProductosComercioController {
 	private TextField descripcionField = new TextField();
 	@FXML
 	private Button delete = new Button("Eliminar producto");
+	@FXML
+	private TextField productField;
+	
 	private String imagen="";
 	private String newImagen=""; //String en caso de que se quiera cambiar la ruta de la imagen si se quiere coger otra
 	private String path;
 	private String nifcomercio;
-
+	private boolean found=false;
 	private int idproducto;
 	@FXML
 	private void initialize() { // Se ejecuta automaticamente cuando ejecuto el FXML
@@ -417,5 +421,59 @@ public class ProductosComercioController {
 			}
 
 		});
+	}
+	@FXML
+	//Busqueda del producto en el campo textfield, devuelve el que he escrito o el que coincida con lo que escribo
+	private void searchProduct(ActionEvent event) {
+		String nombreproducto = productField.getText();
+	
+		if(nombreproducto.isEmpty()) {
+							// Cargo la pagina XML correspondiente al menu de logins
+					        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductosComercio.fxml"));
+				
+							Parent nextScreen;
+							try {
+								nextScreen = loader.load();
+								//Cargo el XML siguiente en una nueva escena, que posteriormente casteo la ventana que obtengo y la establezco en la escena actual para que no me cree otra ventana.
+								Scene nextScreenScene = new Scene(nextScreen);
+								Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+								currentStage.setScene(nextScreenScene);
+								currentStage.show(); //Muestro la pagina 
+						        //logoutButton.setDisable(true);	
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}				
+		}
+		productField.setOnKeyPressed(e->{
+			botones.getChildren().clear();
+			if(e.getCode().equals(KeyCode.ENTER)) {
+				for(String p:getProductos()) {
+					if(p.toLowerCase().contains(nombreproducto.toLowerCase())) {
+						found=true;
+						Separator separator = new Separator(Orientation.HORIZONTAL);
+						Button boton = new Button(p);
+						//Establezco el ancho del boton al mismo que el del VBox para que ocupe toda su celda
+						boton.setMaxWidth(Double.MAX_VALUE);
+						botones.setVgrow(boton, Priority.ALWAYS);
+						botones.getChildren().addAll(boton,separator);
+						botones.setSpacing(5); //Espacio de separacion de 10px
+						boton.setOnAction(ev->{
+							mostrarDatos(p);
+						});
+						boton=null; // pongo a null para el siguiente nombre
+					}
+					
+				}
+				if(!found) {
+					Alert a = new Alert(AlertType.INFORMATION);
+					a.setTitle("Error al realizar la búsqueda");
+					a.setHeaderText("No hay resultados para "+nombreproducto);
+					a.setContentText("Este producto no está registrado en la aplicación");
+					a.showAndWait();
+				}
+			}
+		});
+		
 	}
 }

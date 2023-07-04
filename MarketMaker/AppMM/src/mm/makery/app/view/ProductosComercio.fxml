@@ -18,6 +18,7 @@
                      </font>
                   </Label>
                   <Button layoutX="817.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleAddProduct" text="Añadir nuevo producto" />
+                  <TextField fx:id="productField" layoutX="83.0" layoutY="14.0" onAction="#searchProduct" prefHeight="25.0" prefWidth="245.0" promptText="Filtra por nombre" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="1022.0">
                <children>

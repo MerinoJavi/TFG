@@ -60,9 +60,9 @@ public class PaginaAdmin {
 	@FXML
 	private VBox carruselComercios=new VBox(10);
 	@FXML
-	private HBox carrusel = new HBox();
+	private HBox carrusel = new HBox(); //El usado para hacer la animacion
 	
-	
+	private boolean commerceFound=false;
 	private ArrayList<String> searchCommercesDB() {
 		Connection conexion;
 		
@@ -176,6 +176,7 @@ public class PaginaAdmin {
 	//Busca el comercio tecleando el nombre o gran parte del mismo
 	@FXML
 	private void searchCommerce(ActionEvent event) throws IOException {
+		commerceFound=false;
 		String commerceName = searchField.getText();
 		carruselComercios.getChildren().clear(); //Lo vacio para que no me repita los mismos botones una y otra vez
 		
@@ -214,6 +215,7 @@ public class PaginaAdmin {
 							a.setTitle("El comercio existe!");
 							a.showAndWait();
 							 */
+							commerceFound=true;
 							Button comercioVBox = new Button(nombreBD);
 							comercioVBox.setMaxWidth(Double.MAX_VALUE);
 							Separator s = new Separator(Orientation.HORIZONTAL);
@@ -250,6 +252,14 @@ public class PaginaAdmin {
 							});
 						}
 						
+					}
+					
+					if(!commerceFound) {
+						Alert a = new Alert(AlertType.INFORMATION);
+						a.setTitle("Error al realizar la búsqueda");
+						a.setHeaderText("No hay resultados para "+commerceName);
+						a.setContentText("El comercio no se encuentra registrado en la aplicación");
+						a.showAndWait();
 					}
 					result.close();
 					sta.close();
