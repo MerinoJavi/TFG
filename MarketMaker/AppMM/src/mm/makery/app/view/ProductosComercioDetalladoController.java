@@ -275,6 +275,7 @@ public class ProductosComercioDetalladoController {
 						    	       Alert a = new Alert(AlertType.ERROR);
 						    	       a.setTitle("Producto añadido");
 						    	       a.setContentText("Ya has añadido este producto. Dirigete al carrito para incrementar la cantidad de este producto.");
+						    	       a.showAndWait();
 						    	    }
 						    	});
 
