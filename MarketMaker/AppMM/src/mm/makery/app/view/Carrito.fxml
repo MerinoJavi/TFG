@@ -14,12 +14,17 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <VBox fx:id="productos" layoutX="7.0" prefHeight="708.0" prefWidth="752.0" />
+                        <VBox fx:id="productos" layoutX="-5.0" prefHeight="708.0" prefWidth="766.0" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="242.0">
                      <children>
-                        <VBox prefHeight="708.0" prefWidth="243.0" />
+                        <VBox fx:id="productosOptions" prefHeight="129.0" prefWidth="243.0">
+                           <children>
+                              <Separator prefWidth="200.0" />
+                           </children></VBox>
+                        <VBox layoutX="-1.0" layoutY="129.0" prefHeight="576.0" prefWidth="243.0" />
+                        <Separator layoutX="-3.0" layoutY="129.0" prefHeight="3.0" prefWidth="248.0" />
                      </children>
                   </AnchorPane>
               </items>
