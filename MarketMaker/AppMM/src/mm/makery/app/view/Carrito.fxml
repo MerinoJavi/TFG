@@ -36,9 +36,9 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Button layoutX="71.0" layoutY="228.0" mnemonicParsing="false" style="-fx-background-color: #E4C00B; -fx-background-radius: 20 20 20 20;" text="Tramitar pedido" />
-                        <Separator layoutX="14.0" layoutY="163.0" prefHeight="3.0" prefWidth="213.0" />
-                        <Separator layoutX="15.0" layoutY="307.0" prefHeight="3.0" prefWidth="215.0" />
+                        <Button layoutX="74.0" layoutY="271.0" mnemonicParsing="false" onAction="#confirmPurchase" style="-fx-background-color: #E4C00B; -fx-background-radius: 20 20 20 20;" text="Tramitar pedido" />
+                        <Separator layoutY="163.0" prefHeight="3.0" prefWidth="248.0" />
+                        <Separator layoutX="-2.0" layoutY="307.0" prefHeight="3.0" prefWidth="246.0" />
                      </children>
                   </AnchorPane>
               </items>

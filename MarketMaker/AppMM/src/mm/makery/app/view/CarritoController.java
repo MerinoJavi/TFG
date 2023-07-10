@@ -119,7 +119,8 @@ public class CarritoController {
 
 							// Actualizo la cantidad del producto
 							newCantidad.setOnKeyPressed(key -> {
-								if (key.getCode().equals(KeyCode.ENTER)) {
+								double c = Double.parseDouble(newCantidad.getText());
+								if (key.getCode().equals(KeyCode.ENTER)&&c>0&&!newCantidad.getText().isEmpty()){
 									String productoIdQuery = "SELECT idproducto from producto where nombre='"
 											+ productoButton.getText() + "'";
 									PreparedStatement p;
@@ -164,6 +165,12 @@ public class CarritoController {
 										al.setContentText(null);
 										al.showAndWait();
 									}
+								}else { //Cantidad negativa, lanza error
+									Alert error = new Alert(AlertType.ERROR);
+									error.setTitle("Cantidad no válida");
+									error.setHeaderText("La cantidad introducida no es válida");
+									error.setContentText(null);
+									error.showAndWait();
 								}
 							});
 						});
@@ -255,5 +262,59 @@ public class CarritoController {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	private void confirmPurchase(ActionEvent e) {
+		try {
+			Connection conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+			String getIdClientQuery = "SELECT idcliente from cliente where usuario='"+SesionUsuario.usuarioABuscar+"'";
+			PreparedStatement idClientSta = conex.prepareStatement(getIdClientQuery);
+			ResultSet ResultIdClient = idClientSta.executeQuery();
+			int idClientCart;
+			//Borro el carrito pasandole el id del cliente que ha iniciado sesion
+			if(ResultIdClient.next()) {
+				idClientCart = ResultIdClient.getInt("idcliente");
+				String deleteCartQuery = "DELETE  from carrito where id_cliente="+idClientCart;
+				Statement stDelete = conex.prepareStatement(deleteCartQuery);
+				
+				int numfilaseliminadas = stDelete.executeUpdate(deleteCartQuery);
+				//Alerta que confirma la eliminacion
+				if(numfilaseliminadas>0) {
+					Alert al = new Alert(AlertType.INFORMATION);
+					al.setTitle("¡Compra realizada!");
+					al.setHeaderText("La compra ha sido realizada");
+					al.setContentText("La compra ha sido realizada con éxito. Gracias por utilizar nuestra app :-)");
+					al.showAndWait();
+					//Recargo la pagina
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("Carrito.fxml"));
+		    		LoginController log = new LoginController();
+		    		Parent nextScreen = loader.load();
+		    		Scene nextScreenScene = new Scene(nextScreen);
+		    		Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		    		currentStage.setScene(nextScreenScene);
+		    		currentStage.show();
+				}
+				
+			}
+			//Error al realizar la compra. Lanzo alerta
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error al realizar la compra");
+			a.setHeaderText(null);
+			a.setContentText("Ha ocurrido un error al realizar la compra. Vuelve a intentarlo más tarde.");
+			a.showAndWait();
+			e1.printStackTrace();
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setTitle("Error con el servidor");
+			alerta.setHeaderText(null);
+			alerta.setContentText("No se ha podido comunicar con el servidor. Intentelo más tarde");
+			alerta.showAndWait();
+		}
+	}
+	
 
 }

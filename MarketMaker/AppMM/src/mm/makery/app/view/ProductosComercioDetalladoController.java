@@ -274,6 +274,7 @@ public class ProductosComercioDetalladoController {
 						    	    } catch (SQLException e1) {
 						    	       Alert a = new Alert(AlertType.ERROR);
 						    	       a.setTitle("Producto añadido");
+						    	       a.setHeaderText(null);
 						    	       a.setContentText("Ya has añadido este producto. Dirigete al carrito para incrementar la cantidad de este producto.");
 						    	       a.showAndWait();
 						    	    }
