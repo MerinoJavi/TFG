@@ -36,6 +36,7 @@ import javafx.geometry.Pos;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import mm.makery.app.model.SesionUsuario;
+import javafx.scene.control.Tooltip;
 
 public class ProductosComercioDetalladoController {
 	
@@ -134,7 +135,6 @@ public class ProductosComercioDetalladoController {
 		*/
 		productField.setOnKeyPressed(e->{
 			if(e.getCode().equals(KeyCode.ENTER)) {
-				System.out.println("Enter pulsado");
 				try {
 					Connection conexionComercio = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
 					PreparedStatement sta = conexionComercio.prepareStatement("SELECT nombre,descripcion,pvp,imagen from producto where idcomercio=?");
@@ -143,7 +143,6 @@ public class ProductosComercioDetalladoController {
 					while(result.next()) {
 						if(result.getString("nombre").toLowerCase().contains(productName.toLowerCase())) { //Buscar el producto que contenga la palabra que hayamos introducido
 							encontrado=true;
-							System.out.println("Definitivamente coinciden");
 							Label nombreproducto =new Label( result.getString("nombre"));
 							Label descripcion =new Label( result.getString("descripcion"));
 							Label pvp =new Label( result.getString("pvp"));
@@ -178,6 +177,12 @@ public class ProductosComercioDetalladoController {
 						    	 scale.setX(1.0);
 						          scale.setY(1.0);
 						     });
+						     //Si es el usuario anonimo, que se desactive
+						     if(SesionUsuario.usuarioABuscar==null) {
+						    	 addcart.setDisable(true);
+						    	 Tooltip tooltip = new Tooltip("Registrate e inicia sesión para poder realizar compras");
+						    	 Tooltip.install(addcart, tooltip);
+						     }
 						     addcart.setOnAction(event2 -> {
 						    	    try {
 						    	        Connection conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
@@ -300,6 +305,56 @@ public class ProductosComercioDetalladoController {
 				}
 			}
 		});
+	}
+	
+	@FXML
+	public void handleGoBack(ActionEvent event) throws IOException{
+		if(LoginMenuController.esAnonimo) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+			LoginController log = new LoginController();
+			
+			//loader.setController(log);
+			Parent nextScreen = loader.load();
+			Scene nextScreenScene = new Scene(nextScreen);
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			currentStage.setScene(nextScreenScene);
+			currentStage.show();
+		}else if(LoginMenuController.esAdmin) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+			LoginController log = new LoginController();
+			
+			//loader.setController(log);
+			Parent nextScreen = loader.load();
+			Scene nextScreenScene = new Scene(nextScreen);
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			currentStage.setScene(nextScreenScene);
+			currentStage.show();
+		}else if(LoginMenuController.esComercio) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaComercio.fxml"));
+			LoginController log = new LoginController();
+			
+			//loader.setController(log);
+			Parent nextScreen = loader.load();
+			Scene nextScreenScene = new Scene(nextScreen);
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			currentStage.setScene(nextScreenScene);
+			currentStage.show();
+		}else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
+			LoginController log = new LoginController();
+			
+			//loader.setController(log);
+			Parent nextScreen = loader.load();
+			Scene nextScreenScene = new Scene(nextScreen);
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			currentStage.setScene(nextScreenScene);
+			currentStage.show();
+		}
+		
+		
+		
+		
+		
 	}
 
 }

@@ -74,7 +74,7 @@ public class Main extends Application {
 		        // Cargar la escena principal
 		        Platform.runLater(() -> {
 		            try {
-		                Parent root = FXMLLoader.load(Main.class.getResource("view/LoginClient.fxml"));
+		                Parent root = FXMLLoader.load(Main.class.getResource("view/Home.fxml"));
 		                loginScene = new Scene(root);
 		                primaryStage.setScene(loginScene);
 		                primaryStage.setTitle("MarketMakerAPP");

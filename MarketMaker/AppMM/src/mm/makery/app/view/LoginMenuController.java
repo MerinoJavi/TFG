@@ -18,7 +18,11 @@ public class LoginMenuController {
 	@FXML 
 	private Button CommerceButton;
 	
-	//Metodo para cargar el login de cada uno de los usuarios y pasar de una vista a otra. Por ahora solo voy a hacer el del cliente. Cargo su pantalla fxml.
+	public static boolean esCliente=false;
+	public static boolean esComercio=false;
+	public static boolean esAdmin=false;
+	public static boolean esAnonimo=true;
+	//Metodo para cargar el login de cada uno de los usuarios y pasar de una vista a otra.
 	@FXML
 	public void handleNextScreen(ActionEvent event) throws IOException{
 		
@@ -31,8 +35,46 @@ public class LoginMenuController {
 		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		currentStage.setScene(nextScreenScene);
 		currentStage.show();
-		
+		esCliente=true;
+		esComercio=false;
+		esAdmin=false;
+		esAnonimo=false;
 	}
 	
+	@FXML
+	public void handleCommerceButton(ActionEvent event) throws IOException{
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginComercio.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
+		esCliente=false;
+		esComercio=true;
+		esAdmin=false;
+		esAnonimo=false;
+	}
+	
+	@FXML
+	public void handleAdminButton(ActionEvent event) throws IOException{
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginAdmin.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
+		esCliente=false;
+		esComercio=false;
+		esAdmin=true;
+		esAnonimo=false;
+	}
 	
 }

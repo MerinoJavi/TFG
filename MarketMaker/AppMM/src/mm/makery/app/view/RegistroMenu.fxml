@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="233.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Cliente" />
+      <Button layoutX="233.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Comercio" />
+   </children>
+</AnchorPane>
