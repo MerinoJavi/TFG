@@ -177,113 +177,123 @@ public class ProductosComercioDetalladoController {
 						    	 scale.setX(1.0);
 						          scale.setY(1.0);
 						     });
+						     
 						     //Si es el usuario anonimo, que se desactive
 						     if(SesionUsuario.usuarioABuscar==null) {
 						    	 addcart.setDisable(true);
-						    	 Tooltip tooltip = new Tooltip("Registrate e inicia sesión para poder realizar compras");
-						    	 Tooltip.install(addcart, tooltip);
+						    	
 						     }
-						     addcart.setOnAction(event2 -> {
-						    	    try {
-						    	        Connection conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+						     
+						    	 addcart.setOnAction(event2 -> {
+							    	    try {
+							    	        Connection conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
 
-						    	        // Obtener el id del cliente
-						    	        String getClienteIdQuery = "SELECT idCliente FROM cliente WHERE usuario = ?";
-						    	        PreparedStatement getClienteIdSta = conex.prepareStatement(getClienteIdQuery);
-						    	        getClienteIdSta.setString(1, SesionUsuario.usuarioABuscar);
-						    	        ResultSet clienteIdResult = getClienteIdSta.executeQuery();
-						    	        int idcliente = -1;
-						    	        if (clienteIdResult.next()) {
-						    	            idcliente = clienteIdResult.getInt("idCliente");
-						    	        }
-						    	        
-						    	        // Obtener el id del producto
-						    	        String getProductoIdQuery = "SELECT idproducto FROM producto WHERE nombre = ?";
-						    	        PreparedStatement getProductoIdSta = conex.prepareStatement(getProductoIdQuery);
-						    	        getProductoIdSta.setString(1, nombreproducto.getText());
-						    	        ResultSet productoIdResult = getProductoIdSta.executeQuery();
-						    	        int idproducto = -1;
-						    	        if (productoIdResult.next()) {
-						    	            idproducto = productoIdResult.getInt("idproducto");
-						    	        }
+							    	        // Obtener el id del cliente
+							    	        String getClienteIdQuery = "SELECT idCliente FROM cliente WHERE usuario = ?";
+							    	        PreparedStatement getClienteIdSta = conex.prepareStatement(getClienteIdQuery);
+							    	        getClienteIdSta.setString(1, SesionUsuario.usuarioABuscar);
+							    	        ResultSet clienteIdResult = getClienteIdSta.executeQuery();
+							    	        int idcliente = -1;
+							    	        if (clienteIdResult.next()) {
+							    	            idcliente=clienteIdResult.getInt("idCliente");
+							    	            System.out.println("Id del cliente:"+idcliente);
+							    	        }
+							    	        
+							    	        // Obtener el id del producto
+							    	        String getProductoIdQuery = "SELECT idproducto FROM producto WHERE nombre = ?";
+							    	        PreparedStatement getProductoIdSta = conex.prepareStatement(getProductoIdQuery);
+							    	        getProductoIdSta.setString(1, nombreproducto.getText());
+							    	        ResultSet productoIdResult = getProductoIdSta.executeQuery();
+							    	        int idproducto = -1;
+							    	        if (productoIdResult.next()) {
+							    	            idproducto = productoIdResult.getInt("idproducto");
+							    	            System.out.println("id del producto: "+idproducto);
+							    	        }
 
-						    	        // Verificar si el cliente tiene un carrito existente
-						    	        String checkCarritoQuery = "SELECT idcarrito FROM carrito WHERE id_cliente = ?";
-						    	        PreparedStatement checkCarritoSta = conex.prepareStatement(checkCarritoQuery);
-						    	        checkCarritoSta.setInt(1, idcliente);
-						    	        ResultSet carritoResult = checkCarritoSta.executeQuery();
+							    	        // Verificar si el cliente tiene un carrito existente
+							    	        String checkCarritoQuery = "SELECT idcarrito FROM carrito WHERE id_cliente = ?";
+							    	        PreparedStatement checkCarritoSta = conex.prepareStatement(checkCarritoQuery);
+							    	        checkCarritoSta.setInt(1, idcliente);
+							    	        ResultSet carritoResult = checkCarritoSta.executeQuery();
 
-						    	        // Si el cliente tiene un carrito, agregar el producto al carrito
-						    	        if (carritoResult.next()) {
-						    	            int idcarrito = carritoResult.getInt("idcarrito");
-						    	            String addProductoQuery = "INSERT INTO carrito (idcarrito,id_producto,id_cliente,cantidad,precio_unitario) VALUES (?,?,?,1,?)";
-						    	            PreparedStatement addProductoSta = conex.prepareStatement(addProductoQuery);
-						    	            addProductoSta.setInt(1, idcarrito);
+							    	        // Si el cliente tiene un carrito, agregar el producto al carrito
+							    	        if (carritoResult.next()) {
+							    	            int idcarrito = carritoResult.getInt("idcarrito");
+							    	            String addProductoQuery = "INSERT INTO carrito (idcarrito,id_producto,id_cliente,cantidad,precio_unitario) VALUES (?,?,?,1,?)";
+							    	            PreparedStatement addProductoSta = conex.prepareStatement(addProductoQuery);
+							    	            addProductoSta.setInt(1, idcarrito);
 
-						    	            // Obtener el precio del producto desde la tabla Producto
-						    	            String getPrecioQuery = "SELECT pvp FROM Producto WHERE idproducto = ?";
-						    	            PreparedStatement getPrecioSta = conex.prepareStatement(getPrecioQuery);
-						    	            getPrecioSta.setInt(1, idproducto);
-						    	            ResultSet precioResult = getPrecioSta.executeQuery();
+							    	            // Obtener el precio del producto desde la tabla Producto
+							    	            String getPrecioQuery = "SELECT pvp FROM Producto WHERE idproducto = ?";
+							    	            PreparedStatement getPrecioSta = conex.prepareStatement(getPrecioQuery);
+							    	            getPrecioSta.setInt(1, idproducto);
+							    	            ResultSet precioResult = getPrecioSta.executeQuery();
 
-						    	            if (precioResult.next()) {
-						    	                double precioProducto = precioResult.getDouble("pvp");
-						    	                addProductoSta.setDouble(4, precioProducto);
-						    	            }
-						    	            addProductoSta.setInt(2, idproducto);
-						    	            addProductoSta.setInt(3, idcliente);
-						    	            // Ejecutar la inserción del producto en el carrito
-						    	            addProductoSta.executeUpdate();
-						    	            
-						    	            Alert a = new Alert(AlertType.INFORMATION);
-						    	            a.setTitle("¡Producto añadido!");
-						    	            a.setContentText("Dirigete al carrito si deseas incrementar la cantidad de este producto");
-						    	            a.showAndWait();
-						    	        } else {
-						    	        	// Si el cliente no tiene un carrito, crear uno nuevo y agregar el producto al carrito
-						    	        	Random r = new Random();
-						    	        	int idCarrito=r.nextInt(100); // Obtener el id del carrito generado
-						    	        	  String createCarritoQuery = "INSERT INTO carrito (idcarrito,id_cliente) VALUES (?,?)";
-							    	            PreparedStatement createCarritoSta = conex.prepareStatement(createCarritoQuery, Statement.RETURN_GENERATED_KEYS);
+							    	            if (precioResult.next()) {
+							    	                double precioProducto = precioResult.getDouble("pvp");
+							    	                addProductoSta.setDouble(4, precioProducto);
+							    	            }
+							    	            addProductoSta.setInt(2, idproducto);
+							    	            addProductoSta.setInt(3, idcliente);
+							    	            // Ejecutar la inserción del producto en el carrito
+							    	            addProductoSta.executeUpdate();
+							    	            
+							    	            Alert a = new Alert(AlertType.INFORMATION);
+							    	            a.setTitle("¡Producto añadido!");
+							    	            a.setContentText("Dirigete al carrito si deseas incrementar la cantidad de este producto");
+							    	            a.showAndWait();
+							    	        } else {
+							    	        	// Si el cliente no tiene un carrito, crear uno nuevo y agregar el producto al carrito
+							    	        	Random r = new Random();
+							    	        	int idCarrito=r.nextInt(100); // Obtener el id del carrito generado
+							    	        	  String createCarritoQuery = "INSERT INTO carrito (idcarrito,id_cliente,id_producto) VALUES (?,?,?)";
+								    	            PreparedStatement createCarritoSta = conex.prepareStatement(createCarritoQuery);
 
-							    	            createCarritoSta.setInt(1, idCarrito);
-							    	            createCarritoSta.setInt(2, idcliente);
-							    	            createCarritoSta.executeUpdate();
-						    	            // Agregar el producto al carrito. Aqui mejor hacer un UPDATE en vez de un INSERT
-						    	            String addProductoQuery = "UPDATE carrito SET id_producto=?,cantidad=1,precio_unitario=? WHERE idcarrito="+idCarrito;
-						    	            PreparedStatement addProductoSta = conex.prepareStatement(addProductoQuery);
-						    	            addProductoSta.setInt(1, idproducto);
-						    	          
+								    	            createCarritoSta.setInt(1, idCarrito);
+								    	            createCarritoSta.setInt(2, idcliente);
+								    	            createCarritoSta.setInt(3, idproducto);
+								    	            createCarritoSta.executeUpdate();
+							    	            // Agregar el producto al carrito. Aqui mejor hacer un UPDATE en vez de un INSERT
+							    	            String addProductoQuery = "UPDATE carrito SET id_producto=?,cantidad=1,precio_unitario=? WHERE idcarrito="+idCarrito;
+							    	            PreparedStatement addProductoSta = conex.prepareStatement(addProductoQuery);
+							    	            addProductoSta.setInt(1, idproducto);
+							    	          
 
-						    	            // Obtener el precio del producto desde la tabla Producto
-						    	            String getPrecioQuery = "SELECT pvp FROM producto WHERE idproducto = ?";
-						    	            PreparedStatement getPrecioSta = conex.prepareStatement(getPrecioQuery);
-						    	            getPrecioSta.setInt(1, idproducto);
-						    	            ResultSet precioResult = getPrecioSta.executeQuery();
+							    	            // Obtener el precio del producto desde la tabla Producto
+							    	            String getPrecioQuery = "SELECT pvp FROM producto WHERE idproducto = ?";
+							    	            PreparedStatement getPrecioSta = conex.prepareStatement(getPrecioQuery);
+							    	            getPrecioSta.setInt(1, idproducto);
+							    	            ResultSet precioResult = getPrecioSta.executeQuery();
 
-						    	            if (precioResult.next()) {
-						    	                double precioProducto = precioResult.getDouble("pvp");
-						    	                addProductoSta.setDouble(2, precioProducto);
-						    	            }
+							    	            if (precioResult.next()) {
+							    	                double precioProducto = precioResult.getDouble("pvp");
+							    	                addProductoSta.setDouble(2, precioProducto);
+							    	            }
 
-						    	            // Ejecutar la inserción del producto en el carrito
-						    	            addProductoSta.executeUpdate();
-						    	            /*
-						    	            // Incrementar la cantidad de objetos del cliente (será 1, ya que es el primer producto en el carrito)
-						    	            String updateClienteQuery = "UPDATE carrito SET cantidad = 1 WHERE idcliente = ?";
-						    	            PreparedStatement updateClienteSta = conex.prepareStatement(updateClienteQuery);
-						    	            updateClienteSta.setInt(1, idcliente);
-						    	            updateClienteSta.executeUpdate();
-						    	            */
-						    	        }
-						    	    } catch (SQLException e1) {
-						    	       Alert a = new Alert(AlertType.ERROR);
-						    	       a.setTitle("Producto añadido");
-						    	       a.setHeaderText(null);
-						    	       a.setContentText("Ya has añadido este producto. Dirigete al carrito para incrementar la cantidad de este producto.");
-						    	       a.showAndWait();
-						    	    }
-						    	});
+							    	            // Ejecutar la inserción del producto en el carrito
+							    	            addProductoSta.executeUpdate();
+							    	            /*
+							    	            // Incrementar la cantidad de objetos del cliente (será 1, ya que es el primer producto en el carrito)
+							    	            String updateClienteQuery = "UPDATE carrito SET cantidad = 1 WHERE idcliente = ?";
+							    	            PreparedStatement updateClienteSta = conex.prepareStatement(updateClienteQuery);
+							    	            updateClienteSta.setInt(1, idcliente);
+							    	            updateClienteSta.executeUpdate();
+							    	            */
+							    	            Alert al = new Alert(AlertType.INFORMATION);
+							    	            al.setTitle("Producto añadido!");
+							    	            al.setHeaderText(null);
+							    	            al.setContentText("El producto ha sido añadido al carrito. Dirigete al carrito para incrementar su cantidad");
+							    	        }
+							    	    } catch (SQLException e1) {
+							    	       Alert a = new Alert(AlertType.ERROR);
+							    	       a.setTitle("Producto añadido");
+							    	       a.setHeaderText(null);
+							    	       a.setContentText("Ya has añadido este producto. Dirigete al carrito para incrementar la cantidad de este producto.");
+							    	       a.showAndWait();
+							    	    }
+							    	});
+						     
+						    
 
 						}
 						
