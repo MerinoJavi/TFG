@@ -283,6 +283,7 @@ public class ProductosComercioDetalladoController {
 							    	            al.setTitle("Producto añadido!");
 							    	            al.setHeaderText(null);
 							    	            al.setContentText("El producto ha sido añadido al carrito. Dirigete al carrito para incrementar su cantidad");
+							    	            al.showAndWait();
 							    	        }
 							    	    } catch (SQLException e1) {
 							    	       Alert a = new Alert(AlertType.ERROR);
