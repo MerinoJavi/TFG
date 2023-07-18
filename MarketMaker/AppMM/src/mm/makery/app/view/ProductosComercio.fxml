@@ -26,17 +26,28 @@
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <VBox fx:id="infoproducto" layoutX="471.0" layoutY="31.0" prefHeight="678.0" prefWidth="556.0">
-                     <children>
-                        <Separator prefWidth="200.0" />
-                     </children></VBox>
                   <SplitPane dividerPositions="0.9936170212765958" layoutX="-1.0" layoutY="-4.0" prefHeight="718.0" prefWidth="472.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="715.0" prefWidth="195.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="715.0" prefWidth="195.0">
+                           <children>
+                              <ScrollPane layoutY="6.0" prefHeight="710.0" prefWidth="464.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="463.0">
+                                       <children>
+                                          <VBox fx:id="botones" prefHeight="694.0" prefWidth="464.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="258.0" prefWidth="278.0" />
                     </items>
                   </SplitPane>
-                  <VBox fx:id="botones" layoutY="-4.0" prefHeight="716.0" prefWidth="464.0" />
+                  <VBox fx:id="infoproducto" layoutX="469.0" layoutY="29.0" prefHeight="681.0" prefWidth="552.0">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                     </children>
+                  </VBox>
                </children></AnchorPane>
         </items>
       </SplitPane>
@@ -45,6 +56,6 @@
             <Image url="@../../../../images/LogOut.png" />
          </image>
       </ImageView>
-      <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" text="Volver" />
+      <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#goBack" text="Volver" />
    </children>
 </AnchorPane>

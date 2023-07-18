@@ -49,8 +49,8 @@
                      </children>
                   </GridPane>
                   <Button fx:id="enviar" layoutX="154.0" layoutY="410.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" prefHeight="25.0" prefWidth="54.0" text="Enviar" />
-                  <Button fx:id="cancelar" layoutX="411.0" layoutY="410.0" mnemonicParsing="false" text="Cancelar" />
-                  <Button layoutX="30.0" layoutY="26.0" mnemonicParsing="false" text="Volver" />
+                  <Button fx:id="cancelar" layoutX="411.0" layoutY="410.0" mnemonicParsing="false" onAction="#goBack" text="Cancelar" />
+                  <Button layoutX="30.0" layoutY="26.0" mnemonicParsing="false" onAction="#goBack" text="Volver" />
                </children>
             </AnchorPane>
         </content>

@@ -39,4 +39,17 @@ public class RegistroMenuController {
 		currentStage.show();
 		
 	}
+	
+	@FXML
+	private void goBack(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
+	}
 }

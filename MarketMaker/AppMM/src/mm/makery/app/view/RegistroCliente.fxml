@@ -45,7 +45,7 @@
                      </children>
                   </GridPane>
                   <Button fx:id="registerButton" layoutX="261.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Regístrate" />
-                  <Button layoutX="31.0" layoutY="14.0" mnemonicParsing="false" text="Atrás" />
+                  <Button layoutX="31.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Atrás" />
                   <TextField fx:id="direccionField" layoutX="287.0" layoutY="265.0" prefHeight="25.0" prefWidth="167.0" />
                   <Label layoutX="120.0" layoutY="269.0" text="Dirección" />
                </children>

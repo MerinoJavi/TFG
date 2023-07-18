@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
@@ -317,6 +318,19 @@ public class SolicitudesController {
 			string.append(hex);
 		}
 		return string.toString();
+	}
+	
+	@FXML
+	private void goBack(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
 	}
 
 }

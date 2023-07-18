@@ -296,7 +296,36 @@ public class PerfilAdminController {
 						a.showAndWait();
 					}
 				});
-
+				cancelEdits.setOnAction(e->{
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilAdmin.fxml"));
+		    		LoginController log = new LoginController();
+		    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
+		    		Parent nextScreen;
+					try {
+						nextScreen = loader.load();
+						Scene nextScreenScene = new Scene(nextScreen);
+			    		Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			    		currentStage.setScene(nextScreenScene);
+			    		currentStage.show();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    		
+				});
+	}
+	
+	@FXML
+	private void goBack(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
 	}
 	
 	

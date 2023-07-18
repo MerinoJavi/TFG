@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import  javafx.scene.control.Button;
 import javafx.fxml.*;
-import javafx.scene.Parent;
 import javafx.scene.*;
 import javafx.stage.*;
 
@@ -75,6 +74,23 @@ public class LoginMenuController {
 		esComercio=false;
 		esAdmin=true;
 		esAnonimo=false;
+	}
+	
+	@FXML
+	private void goBack(ActionEvent event) throws IOException {
+		esCliente=false;
+		esComercio=false;
+		esAdmin=false;
+		esAnonimo=true;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
 	}
 	
 }

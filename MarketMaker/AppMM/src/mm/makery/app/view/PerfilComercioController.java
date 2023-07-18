@@ -190,7 +190,7 @@ public class PerfilComercioController {
 		VBox formulario = new VBox(10);
 		nombreField.setText("");
 		usuarioField.setText("");
-		nifField.setText("");
+	//	nifField.setText("");
 		municipioField.setText("");
 		provinciaField.setText("");
 		codigopostalField.setText("");
@@ -203,7 +203,7 @@ public class PerfilComercioController {
 		// Agrego los campos al formulario, y los botones guardar y cancelar
 		formulario.getChildren().addAll(new Label("Nombre: "), nombreField);
 		formulario.getChildren().addAll(new Label("Usuario: "), usuarioField);
-		formulario.getChildren().addAll(new Label("NIF: "), nifField);
+		//formulario.getChildren().addAll(new Label("NIF: "), nifField);
 		formulario.getChildren().addAll(new Label("Municipio: "), municipioField);
 		formulario.getChildren().addAll(new Label("Provincia: "), provinciaField);
 		formulario.getChildren().addAll(new Label("Codigo posta: "), codigopostalField);
@@ -260,6 +260,11 @@ public class PerfilComercioController {
 
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
+				Alert a= new Alert(AlertType.ERROR);
+				a.setTitle("Error");
+				a.setHeaderText("Error al actualizar los datos. Inténtelo de nuevo");
+				a.setContentText(null);
+				a.showAndWait();
 				e1.printStackTrace();
 			}
 		});
@@ -290,7 +295,19 @@ public class PerfilComercioController {
 
 	}
 		
+	@FXML
+	private void goBack(ActionEvent event) throws IOException {
 		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaComercio.fxml"));
+		LoginController log = new LoginController();
+		
+		//loader.setController(log);
+		Parent nextScreen = loader.load();
+		Scene nextScreenScene = new Scene(nextScreen);
+		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		currentStage.setScene(nextScreenScene);
+		currentStage.show();
+	}
 	
 	
 	
