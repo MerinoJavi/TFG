@@ -7,7 +7,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -91,11 +93,24 @@ public class PerfilAdminController {
 			if (sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
 				// Almacenar los datos en las label
 				// System.out.println(sesion.getUsuario());
-
-				usuario.setText(sesion.getUsuario());
-				nombre.setText(sesion.getNombre());
-				apellidos.setText(sesion.getApellidos());
-				correo.setText(sesion.getEmail());
+				Connection conexion;
+				try {
+					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+					String sql = "SELECT nombre,apellidos,usuario,email from administrador where usuario='"+SesionUsuario.usuarioABuscar+"'";
+					Statement st = conexion.createStatement(); 
+					ResultSet result = st.executeQuery(sql);
+					if(result.next()) {
+					usuario.setText(result.getString("usuario"));
+					nombre.setText(result.getString("nombre"));
+					apellidos.setText(result.getString("apellidos"));
+					correo.setText(result.getString("email"));
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				// provincia.setText(sesion.getProvincia());
 				// pais.setText(sesion.getPais());
 				// direccion.setText(sesion.getDireccion());

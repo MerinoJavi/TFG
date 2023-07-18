@@ -15,7 +15,6 @@
       <TextField fx:id="usernameField" layoutX="215.0" layoutY="175.0" />
       <PasswordField fx:id="passwordField" layoutX="215.0" layoutY="219.0" />
       <Button fx:id="loginButton" layoutX="260.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleLogin" text="Ingresar" />
-      <Label fx:id="statusLabel" layoutX="443.0" layoutY="69.0" text="Label" />
       <Button fx:id="goBackButton" layoutX="35.0" layoutY="26.0" mnemonicParsing="false" onAction="#handlegoBack" text="Atrás" />
    </children>
 </AnchorPane>

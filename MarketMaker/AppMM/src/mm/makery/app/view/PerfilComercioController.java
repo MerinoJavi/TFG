@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -109,17 +110,34 @@ public class PerfilComercioController {
 			if (sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
 				// Almacenar los datos en las label
 				// System.out.println(sesion.getUsuario());
-
-				user.setText(sesion.getUsuario());
-				nombre.setText(sesion.getNombre());
-				NIF.setText(sesion.getNif());
-				municipio.setText(sesion.getMunicipio());
-				provincia.setText(sesion.getProvincia());
-				pais.setText(sesion.getPais());
-				codigopostal.setText(sesion.getCodigopostal());
-				direccion.setText(sesion.getDireccion());
-				tlf.setText(sesion.getTelefono());
-				email.setText(sesion.getEmail());
+				Connection conex;
+				try {
+					conex = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+					String sql = "SELECT  usuario,nombre,nif,municipio,provincia,pais,codigopostal,direccion,telefono,email from comercio where usuario='"+SesionUsuario.usuarioABuscar+"'";
+					Statement st = conex.createStatement(); 
+					ResultSet result = st.executeQuery(sql);
+					if (result.next()) {
+						user.setText(result.getString("usuario"));
+						nombre.setText(result.getString("nombre"));
+						NIF.setText(result.getString("nif"));
+						municipio.setText(result.getString("municipio"));
+						provincia.setText(result.getString("provincia"));
+						pais.setText(result.getString("pais"));
+						codigopostal.setText(result.getString("codigopostal"));
+						direccion.setText(result.getString("direccion"));
+						tlf.setText(result.getString("telefono"));
+						email.setText(result.getString("email"));
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Alert a = new Alert(AlertType.ERROR);
+					a.setTitle("Error al buscar el usuario");
+					a.setContentText("No se ha encontrado el usuario");
+					a.showAndWait();
+				}
+				
 			}
 		}
 
@@ -257,6 +275,18 @@ public class PerfilComercioController {
 				// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
 				st.close();
 				conexion.close();
+				
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilComercio.fxml"));
+				//LoginController log = new LoginController();
+		        
+		        
+				//loader.setController(log);
+				Parent nextScreen = loader.load();
+				//log = loader.getController();
+				Scene nextScreenScene = new Scene(nextScreen);
+				Stage c = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				currentStage.setScene(nextScreenScene);
+				currentStage.show();
 
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -265,6 +295,9 @@ public class PerfilComercioController {
 				a.setHeaderText("Error al actualizar los datos. Inténtelo de nuevo");
 				a.setContentText(null);
 				a.showAndWait();
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.sql.Statement;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.*;
@@ -93,14 +94,31 @@ public class PerfilClienteController {
 			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
 				//Almacenar los datos en las label
 				//System.out.println(sesion.getUsuario());
+				Connection conexion;
+				try {
+					conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+					String sql = "SELECT * from cliente where usuario='"+SesionUsuario.usuarioABuscar+"'";
+					Statement st = conexion.createStatement(); 
+					ResultSet result = st.executeQuery(sql);
+					if(result.next()) {
+						user.setText(result.getString("usuario"));
+						nombre.setText(result.getString("Nombre"));
+						apellidos.setText(result.getString("Apellidos"));
+						correo.setText(result.getString("email"));
+						provincia.setText(result.getString("provincia"));
+						pais.setText(result.getString("pais"));
+						direccion.setText(result.getString("direccion"));
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Alert a = new Alert(AlertType.ERROR);
+					a.setTitle("Error al buscar el usuario");
+					a.setContentText("No se ha encontrado el usuario");
+					a.showAndWait();
+				}
 				
-				user.setText(sesion.getUsuario());
-				nombre.setText(sesion.getNombre());
-				apellidos.setText(sesion.getApellidos());
-				correo.setText(sesion.getEmail());
-				provincia.setText(sesion.getProvincia());
-				pais.setText(sesion.getPais());
-				direccion.setText(sesion.getDireccion());
 			}
 		}
 		
@@ -223,11 +241,23 @@ public class PerfilClienteController {
 						// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
 						st.close();
 						conexion.close();
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilCliente.fxml"));
+						LoginController log = new LoginController();
+						
+						//loader.setController(log);
+						Parent nextScreen = loader.load();
+						Scene nextScreenScene = new Scene(nextScreen);
+						Stage c = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						currentStage.setScene(nextScreenScene);
+						currentStage.show();
+						
+						initialize();
 
-					} catch (SQLException e1) {
+					} catch (SQLException | IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+				
 				});
 
 				cancelEdits.setOnAction(event -> {
