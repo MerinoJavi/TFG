@@ -1,12 +1,17 @@
 package mm.makery.app.view;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Statement;
 
 import javafx.scene.control.Alert;
@@ -15,6 +20,7 @@ import javafx.event.ActionEvent;
 import  javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
@@ -66,7 +72,10 @@ public class PerfilClienteController {
 	private TextField paisField = new TextField();
 	@FXML
 	private TextField direccionField = new TextField();
-	
+	@FXML
+	private PasswordField passField=new PasswordField();
+	@FXML
+	private PasswordField repeatpassField = new PasswordField();
 
 	@FXML
 	   //****************Cerrar sesion*******************************//
@@ -297,6 +306,94 @@ public class PerfilClienteController {
 		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		currentStage.setScene(nextScreenScene);
 		currentStage.show();
+	}
+	
+	@FXML
+	private void changePassword(ActionEvent event) throws NoSuchAlgorithmException {
+		// Creo formulario
+				VBox formulario = new VBox(10);
+				passField.setText("");
+				repeatpassField.setText("");
+				
+				formulario.getChildren().addAll(new Label("Nueva contraseña: "),passField);
+				formulario.getChildren().addAll(new Label("Repite la contraseña: "),repeatpassField);
+				formulario.getChildren().add(saveEdits);
+				formulario.getChildren().add(cancelEdits);
+				
+				// Crear escena con el formulario y mostrarlo en la misma ventana
+
+				Scene formularioScene = new Scene(formulario, 600, 400);
+				// Obtengo ventana actual
+				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				currentStage.setScene(formularioScene);
+				saveEdits.setOnAction(ev->{
+					if(passField.getText().equals(repeatpassField.getText())) {
+						String salt = BCrypt.gensalt();
+						
+						String passhashed = null;
+						passhashed = BCrypt.hashpw(passField.getText(), salt);
+						
+						try {
+							Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+									"9P$H7nI5!*8p");
+							String sql = "UPDATE cliente SET password='" + passhashed + "', salt='" + salt + "' WHERE usuario='" + user.getText() + "'";
+							PreparedStatement st = conexion.prepareStatement(sql);
+							st.executeUpdate();
+
+							Alert a = new Alert(AlertType.INFORMATION);
+							a.setTitle("¡Cambios guardados!");
+							a.setHeaderText(null);
+							a.setContentText(null);
+							// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
+							st.close();
+							conexion.close();
+							Optional<ButtonType> action = a.showAndWait();
+							if(action.get()==ButtonType.OK) {
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+					    		LoginController log = new LoginController();
+					    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
+					    		Parent nextScreen = loader.load();
+					    		Scene nextScreenScene = new Scene(nextScreen);
+					    		Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					    		currentStage.setScene(nextScreenScene);
+					    		currentStage.show();
+							}
+							
+							
+
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}else {// Alerta de contraseña no coincidentes
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Las contraseñas no coinciden.");
+						a.setHeaderText(null);
+						a.setContentText(null);
+						a.showAndWait();
+					}
+				});
+				cancelEdits.setOnAction(e->{
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilComercio.fxml"));
+		    		LoginController log = new LoginController();
+		    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
+		    		Parent nextScreen;
+					try {
+						nextScreen = loader.load();
+						Scene nextScreenScene = new Scene(nextScreen);
+			    		Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			    		currentStage.setScene(nextScreenScene);
+			    		currentStage.show();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    		
+				});
 	}
 
 }

@@ -200,7 +200,7 @@ public class PerfilAdminController {
 
 	}
 	
-	private String hashPasswordSHA256(String password,String salt) throws NoSuchAlgorithmException {
+	protected static String hashPasswordSHA256(String password,String salt) throws NoSuchAlgorithmException {
 		String saltedPassword = salt+password;
 		//Clase para utilzar sha-256
 		MessageDigest dig = MessageDigest.getInstance("SHA-256"); //Establezco algoritmo

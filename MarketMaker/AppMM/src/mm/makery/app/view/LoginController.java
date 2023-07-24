@@ -68,7 +68,7 @@ public class LoginController {
         String password = passwordField.getText();
         if (isValidCredentials(username, password)) {
             isLoggedIn = true;
-            statusLabel.setText("Bienvenido,  " + username);
+          //  statusLabel.setText("Bienvenido,  " + username);
             usernameField.clear();
             passwordField.clear();
             //Cargo la pantalla del usuario

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.mail.Authenticator;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,8 +33,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
-public class SolicitudesController {
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.SimpleEmail;
+
+public class SolicitudesController extends Authenticator {
 
 	@FXML
 	private VBox nombres = new VBox();
@@ -187,13 +195,16 @@ public class SolicitudesController {
 	                                try (PreparedStatement savecommerce = conAceptar.prepareStatement(str)) {
 	                                    savecommerce.executeUpdate();
 	                                }
-
+	                                //Lanzo alerta de solicitud
 	                                Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
 	                                alertInfo.setTitle("¡Solicitud aceptada!");
 	                                alertInfo.setHeaderText(null);
 	                                alertInfo.setContentText("La solicitud ha sido aceptada con éxito. Proporciona los datos al comercio para que pueda iniciar sesión");
 	                                alertInfo.showAndWait();
-
+	                                
+	                                //Correo de confirmacion
+	                                enviarCorreo(nombrecomercio,usuario.getText(),password.getText(), "marketmakertfg@gmail.com");
+	                                
 	                                FXMLLoader loader = new FXMLLoader(getClass().getResource("Solicitudes.fxml"));
 	                                Parent nextScreen = loader.load();
 	                                Scene nextScreenScene = new Scene(nextScreen);
@@ -236,7 +247,9 @@ public class SolicitudesController {
 	                                alertInfo.setHeaderText(null);
 	                                alertInfo.setContentText("La solicitud ha sido eliminada correctamente");
 	                                alertInfo.showAndWait();
-
+	                                
+	                                enviarCorreoDenegacion(nombrecomercio,usuario.getText(),password.getText(), "marketmakertfg@gmail.com");
+	                                
 	                                FXMLLoader loader = new FXMLLoader(getClass().getResource("Solicitudes.fxml"));
 	                                Parent nextScreen = loader.load();
 	                                Scene nextScreenScene = new Scene(nextScreen);
@@ -331,6 +344,84 @@ public class SolicitudesController {
 		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		currentStage.setScene(nextScreenScene);
 		currentStage.show();
+	}
+	//Envia un correo automaticamente para confirmar que ya está registrado, junto a su usuario y contraseña. En este caso solo uso de gmail uno creado e inventado
+	private static void enviarCorreo(String nombrecomercio,String usuario, String password, String destinatario) {
+		String remitente="marketmakertfg@gmail.com";
+		String asunto="Registro en plataforma. Resolución";
+		String msg = "Estimado " + nombrecomercio + ",\n\n"
+                + "Su solicitud ha sido revisada por un administrador del sistema, que ha APROBADO satisfactoriamente su registro en nuestra aplicación"+"\n\n"
+				+"Tu nombre de usuario es: " + usuario + "\n\n"
+                + "Tu contraseña es: " + password + "\n\n"
+                + "Recuerda cambiar las credenciales al iniciar sesión por primera vez y no compartir estos datos con nadie"+"\n\n"
+                +"¡Gracias por registrarte!";
+	    //La clave de aplicación obtenida:
+	    String claveemail = "aaagpnrcalddicky";
+
+	    Properties props = System.getProperties();
+	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+	    props.put("mail.smtp.user", remitente);
+	    props.put("mail.smtp.clave", claveemail);    //La clave de la cuenta
+	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+	    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+	    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+
+	    Session session = Session.getDefaultInstance(props);
+	    MimeMessage message = new MimeMessage(session);
+
+	    try {
+	        message.setFrom(new InternetAddress(remitente));
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
+	        message.setSubject(asunto);
+	        message.setText(msg);
+	        Transport transport = session.getTransport("smtp");
+	        transport.connect("smtp.gmail.com", remitente, claveemail);
+	        transport.sendMessage(message, message.getAllRecipients());
+	        System.out.println("MENSAJE ENVIADO");
+	        transport.close();
+	    }
+	    catch (MessagingException me) {
+	        System.out.println(me.getMessage());   //Si se produce un error
+	    }
+	    
+	    
+	}
+	//Usando JavaMail, se envia un correo para que el comercio sea informado de que su solicitud ha sido rechazada
+	private static void enviarCorreoDenegacion(String nombrecomercio,String usuario, String password, String destinatario) {
+		String remitente="marketmakertfg@gmail.com";
+		String asunto="Registro en plataforma. Resolución";
+		String msg = "Estimado " + nombrecomercio + ", \n\n"
+				+ "Lamento comunicarle que su solicitud ha sido rechazada por un administrador de nuestro sistema. Puede rellenarla de nuevo si así lo desea.";
+	    //La clave de aplicación obtenida:
+	    String claveemail = "aaagpnrcalddicky";
+
+	    Properties props = System.getProperties();
+	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+	    props.put("mail.smtp.user", remitente);
+	    props.put("mail.smtp.clave", claveemail);    //La clave de la cuenta
+	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+	    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+	    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+
+	    Session session = Session.getDefaultInstance(props);
+	    MimeMessage message = new MimeMessage(session);
+
+	    try {
+	        message.setFrom(new InternetAddress(remitente));
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
+	        message.setSubject(asunto);
+	        message.setText(msg);
+	        Transport transport = session.getTransport("smtp");
+	        transport.connect("smtp.gmail.com", remitente, claveemail);
+	        transport.sendMessage(message, message.getAllRecipients());
+	        System.out.println("MENSAJE ENVIADO");
+	        transport.close();
+	    }
+	    catch (MessagingException me) {
+	        System.out.println(me.getMessage());   //Si se produce un error
+	    }
+	    
+	    
 	}
 
 }

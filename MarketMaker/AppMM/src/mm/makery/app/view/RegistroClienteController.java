@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -72,16 +74,85 @@ public class RegistroClienteController {
 	    String direccion = direccionField.getText();
 	    
 	    //Compruebo si algun campo está vacio. Faltan errores varios concretos de cada uno de los campos (nombre incorrecto, email con formato no valido...)
-		if (nombre.isEmpty() || apellidos.isEmpty() || fechaNacimiento == null || password.isEmpty()
-				|| usuario.isEmpty() || email.isEmpty() || provincia.isEmpty() || pais.isEmpty()) {
+		if(esEmailValido(email)) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en algun campo introducido. Revise los campos");
-			a.setContentText("Revise los campos de nuevo");
+			a.setHeaderText("Error en el email introducido Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
 		}
 		
-		
+		if (nombre.isEmpty()||nombre.matches("\\d+")) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en el nombre introducido Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (apellidos.isEmpty()||apellidos.matches("\\d+")) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en el campo de apellidos. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (fechaNacimiento == null) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en la fecha de nacimiento introducida. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (password.isEmpty()|| password.length()<8) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en la contraseña introducida. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (usuario.isEmpty()) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en el usuario introducido Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (email.isEmpty()) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en el email introducido Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (provincia.isEmpty()) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en la provincia introducida.Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (pais.isEmpty()) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en el país introducido. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
+
+		if (direccion.isEmpty()) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en la direccion introducida. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+		}
 		//Encripto contraseña
 		String salt = BCrypt.gensalt();
 		String hashedpassword = BCrypt.hashpw(password, salt);
@@ -131,7 +202,16 @@ public class RegistroClienteController {
 		direccionField.clear();
 		
 		
-	}	
+	}
+	
+	public static boolean esEmailValido(String email) {
+        // Expresión regular para verificar la forma exacta de un email válido
+        String patron = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
 	
 	@FXML
 	private void goBack(ActionEvent event) throws IOException {

@@ -33,5 +33,8 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/mysql connector java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
 	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/jBCrypt-0.4.3.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/jaf-1.1.1/activation.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/commons-email-1.5/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
