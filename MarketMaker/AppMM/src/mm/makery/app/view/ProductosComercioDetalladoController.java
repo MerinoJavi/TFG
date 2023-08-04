@@ -196,7 +196,7 @@ public class ProductosComercioDetalladoController {
 							    	        int idcliente = -1;
 							    	        if (clienteIdResult.next()) {
 							    	            idcliente=clienteIdResult.getInt("idCliente");
-							    	            System.out.println("Id del cliente:"+idcliente);
+							    	       //     System.out.println("Id del cliente:"+idcliente);
 							    	        }
 							    	        
 							    	        // Obtener el id del producto
@@ -207,7 +207,7 @@ public class ProductosComercioDetalladoController {
 							    	        int idproducto = -1;
 							    	        if (productoIdResult.next()) {
 							    	            idproducto = productoIdResult.getInt("idproducto");
-							    	            System.out.println("id del producto: "+idproducto);
+							    	    //        System.out.println("id del producto: "+idproducto);
 							    	        }
 
 							    	        // Verificar si el cliente tiene un carrito existente

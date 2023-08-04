@@ -63,6 +63,7 @@ public class PaginaAdmin {
 	private HBox carrusel = new HBox(); //El usado para hacer la animacion
 	
 	private boolean commerceFound=false;
+	
 	private ArrayList<String> searchCommercesDB() {
 		Connection conexion;
 		

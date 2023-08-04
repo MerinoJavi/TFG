@@ -45,25 +45,9 @@ public class LoginAdminController {
 	    @FXML
 	    private Button goBackButton;
 	    
-	    @FXML
-	    private Label statusLabel;
-	     
 	    private boolean isLoggedIn = false;
 
-	    public LoginAdminController() {
-	    	
-	    }
-	    public Button getlogoutButton() {
-			return logoutButton;
-	    	
-	    }
-	    public static int generateRandomNumber(int n) {
-	        if (n < 0) {
-	            throw new IllegalArgumentException("n must not be negative");
-	        }
-	        // generar un número aleatorio entre 0 y `n`. Cambio la semilla para evitar repeticiones en numeros random y no sea la misma siempre
-	        return new Random(System.currentTimeMillis()).nextInt(n + 1);
-	    }
+	    
 	    @FXML
 	    private void handleLogin(ActionEvent event) throws IOException, SQLException {
 	        String username = usernameField.getText();

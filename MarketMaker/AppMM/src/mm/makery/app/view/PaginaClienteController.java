@@ -104,7 +104,7 @@ public class PaginaClienteController {
 	}
 	
 	@FXML
-	//Para mostrar el nombre en la label y el numero de productos que tiene en el carrito, pero eso para mas adelante
+	
 	public void initialize() {
 		for(SesionUsuario sesion: SesionUsuario.usuarios) {
 			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {

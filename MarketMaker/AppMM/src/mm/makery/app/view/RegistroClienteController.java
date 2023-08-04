@@ -50,9 +50,7 @@ public class RegistroClienteController {
 	private TextField direccionField;
 	
 	
-	//TODO: hacer registro de usuario, comprobar TODOS los datos y si sale todo bien, que muestre una alerta de todo OK
-	public RegistroClienteController() {
-	}
+	
 	public static int generateRandomNumber(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("n must not be negative");

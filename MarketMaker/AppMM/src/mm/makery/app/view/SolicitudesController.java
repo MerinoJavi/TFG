@@ -41,7 +41,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
 
-public class SolicitudesController extends Authenticator {
+public class SolicitudesController extends Authenticator{
 
 	@FXML
 	private VBox nombres = new VBox();
@@ -377,7 +377,7 @@ public class SolicitudesController extends Authenticator {
 	        Transport transport = session.getTransport("smtp");
 	        transport.connect("smtp.gmail.com", remitente, claveemail);
 	        transport.sendMessage(message, message.getAllRecipients());
-	        System.out.println("MENSAJE ENVIADO");
+	      //  System.out.println("MENSAJE ENVIADO");
 	        transport.close();
 	    }
 	    catch (MessagingException me) {
@@ -414,7 +414,7 @@ public class SolicitudesController extends Authenticator {
 	        Transport transport = session.getTransport("smtp");
 	        transport.connect("smtp.gmail.com", remitente, claveemail);
 	        transport.sendMessage(message, message.getAllRecipients());
-	        System.out.println("MENSAJE ENVIADO");
+	//        System.out.println("MENSAJE ENVIADO");
 	        transport.close();
 	    }
 	    catch (MessagingException me) {

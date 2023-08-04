@@ -48,9 +48,7 @@ public class LoginController {
      
     private boolean isLoggedIn = false;
 
-	public LoginController() {
-		
-	}
+	
     public Button getlogoutButton() {
 		return logoutButton;
     	

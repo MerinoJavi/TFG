@@ -171,9 +171,9 @@ public class HomeController {
 							Button comercioVBox = new Button(nombreBD);
 							comercioVBox.setMaxWidth(Double.MAX_VALUE);
 							Separator s = new Separator(Orientation.HORIZONTAL);
-							System.out.println("El boton es creado");
+						//	System.out.println("El boton es creado");
 							carruselComercios.getChildren().addAll(comercioVBox,s);
-							System.out.println("El boton es añadido");
+						//	System.out.println("El boton es añadido");
 							carruselComercios.setSpacing(2);
 							//comercioVBox=null;
 							nombreBD="";
