@@ -70,87 +70,69 @@ public class RegistroClienteController {
 	    String provincia = provinciaField.getText();
 	    String pais = paisField.getText();
 	    String direccion = direccionField.getText();
-	    
 	    //Compruebo si algun campo está vacio. Faltan errores varios concretos de cada uno de los campos (nombre incorrecto, email con formato no valido...)
-		if(esEmailValido(email)) {
-			Alert a = new Alert(AlertType.ERROR);
-			a.setTitle("Error");
-			a.setHeaderText("Error en el email introducido Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
-			a.showAndWait();
-		}
-		
-		if (nombre.isEmpty()||nombre.matches("\\d+")) {
-			Alert a = new Alert(AlertType.ERROR);
+	    
+	    if (nombre.isEmpty() || nombre.matches("\\d+")) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en el nombre introducido Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
-
-		if (apellidos.isEmpty()||apellidos.matches("\\d+")) {
-			Alert a = new Alert(AlertType.ERROR);
+	    } else if (apellidos.isEmpty() || apellidos.matches("\\d+")) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en el campo de apellidos. Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
-
-		if (fechaNacimiento == null) {
-			Alert a = new Alert(AlertType.ERROR);
-			a.setTitle("Error");
-			a.setHeaderText("Error en la fecha de nacimiento introducida. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
-			a.showAndWait();
-		}
-
-		if (password.isEmpty()|| password.length()<8) {
-			Alert a = new Alert(AlertType.ERROR);
-			a.setTitle("Error");
-			a.setHeaderText("Error en la contraseña introducida. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
-			a.showAndWait();
-		}
-
-		if (usuario.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR);
+	    } else if (usuario.isEmpty()) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en el usuario introducido Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
-
-		if (email.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR);
+	    } else if (email.isEmpty()) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en el email introducido Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
-
-		if (provincia.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR);
+	    } else if (!esEmailValido(email)) {
+	    	Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en el email introducido Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+	    } else if (password.isEmpty() || password.length() < 8) {
+	    	Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en la contraseña introducida. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+	    } else if (fechaNacimiento == null) {
+	    	Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setHeaderText("Error en la fecha de nacimiento introducida. Revise los campos");
+			a.setContentText("Revise de nuevo el campo");
+			a.showAndWait();
+	    } else if (provincia.isEmpty()) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en la provincia introducida.Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
-
-		if (pais.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR);
+	    } else if (pais.isEmpty()) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en el país introducido. Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
-
-		if (direccion.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR);
+	    } else if (direccion.isEmpty()) {
+	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en la direccion introducida. Revise los campos");
 			a.setContentText("Revise de nuevo el campo");
 			a.showAndWait();
-		}
+	    } else {
 		//Encripto contraseña
 		String salt = BCrypt.gensalt();
 		String hashedpassword = BCrypt.hashpw(password, salt);
@@ -165,7 +147,7 @@ public class RegistroClienteController {
 			PreparedStatement st = conexion.prepareStatement(sql);
 		    st.executeUpdate();
 			//Creo el objeto cliente con los datos del formulario
-		    Cliente c = new Cliente(nombre,apellidos,email,provincia,direccion,salt,fechaNacimiento);
+		 //   Cliente c = new Cliente(nombre,apellidos,email,provincia,direccion,salt,fechaNacimiento);
 		    //Limpio campos
 		    salt = "";
 		    hashedpassword = "";
@@ -186,7 +168,7 @@ public class RegistroClienteController {
 			alert.setHeaderText(null);
 	        alert.setContentText("No se pudo guardar los datos. Por favor, inténtalo de nuevo.");
 	        alert.showAndWait();
-	        e.printStackTrace();
+	        
 		}
 		//Limpiamos los campos
 		nombreField.clear();
@@ -199,18 +181,29 @@ public class RegistroClienteController {
 		paisField.clear();
 		direccionField.clear();
 		
-		
+		}
 	}
+	/*
+	public static boolean esEmailValido(String email) {
+        // Expresión regular para verificar la forma exacta de un email válido
+		// Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.find();
+    }
+    
+	*/
 	
 	public static boolean esEmailValido(String email) {
         // Expresión regular para verificar la forma exacta de un email válido
-        String patron = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        Pattern pattern = Pattern.compile(patron);
+		// Patrón para validar el email
+		String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-
         return matcher.matches();
     }
-	
 	@FXML
 	private void goBack(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistroMenu.fxml"));
