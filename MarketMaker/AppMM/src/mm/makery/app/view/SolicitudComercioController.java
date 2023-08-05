@@ -54,7 +54,7 @@ public class SolicitudComercioController {
 		String p = pais.getText();
 		String dir = direccion.getText();
 		String tlf = telefono.getText();
-		String correo = email.getText(); 
+		String correo = email.getText();  
 		
 		if(name.isEmpty() || nif.isEmpty() || mun.isEmpty()||prov.isEmpty()||cod.isEmpty()||p.isEmpty()||dir.isEmpty()||tlf.isEmpty()||correo.isEmpty()) {
 			Alert a = new Alert(AlertType.ERROR);
