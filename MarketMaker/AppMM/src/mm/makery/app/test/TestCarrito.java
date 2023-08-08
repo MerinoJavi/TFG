@@ -16,8 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import junit.framework.TestCase;
-
 @RunWith(JUnit4.class)
 public class TestCarrito {
 	
@@ -26,36 +24,40 @@ public class TestCarrito {
 	static Double precioTestNulo=0.0; //Variable para el tests que comprueba que el carrito es nulo
 	int idClient=254; //Cliente del primer test
 	int idClientPrecioNulo=208; //Cliente que no tiene nada en el carrito
+	String root="root";
+	String pass= "9P$H7nI5!*8p";
+	
 	//Prueba para comprobar el precio total de los productos del cliente con id 254.
 	public void getPrecioTotal() {
 		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");	
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG",root,pass);	
 			//Calculo el total del carrito del cliente
 				String productsQuery = "SELECT SUM(cantidad*precio_unitario) AS preciototal from carrito where id_cliente="+idClient;
 				PreparedStatement totalSta = conexion.prepareStatement(productsQuery);
 				ResultSet totalSet = totalSta.executeQuery();
 				if(totalSet.next()) {
-					precioTest = Double.parseDouble(totalSet.getString("preciototal"));
+					precioTest = Double.parseDouble(totalSet.getString("preciototal")); //Almaceno el precio total del carrito del cliente
 			//		System.out.println(precioTest);
 				}
+				//Manejo de cierre de recursos
 				totalSet.close();
 				totalSta.close();
 				conexion.close();
 			
-		} catch (SQLException e) {
+		} catch (SQLException e) { //Manejo de excepciones
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+	//Prueba en la cual se introduce un id de un cliente que no tiene ningun producto en el carrito
 	public void getPrecioTotalNulo() {
 		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");	
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", root, pass);	
 			//Calculo el total del carrito del cliente
 				String productsQuery = "SELECT SUM(cantidad*precio_unitario) AS preciototal from carrito where id_cliente="+idClientPrecioNulo;
 				PreparedStatement totalSta = conexion.prepareStatement(productsQuery);
 				ResultSet totalSet = totalSta.executeQuery();
-				if(totalSet.next()&&!(totalSet.getString("preciototal")==null)) {
+				if(totalSet.next()&&!(totalSet.getDouble("preciototal")==0.0)) {
 					precioTestNulo= Double.parseDouble(totalSet.getString("preciototal"));
 					
 				}else {
@@ -73,7 +75,7 @@ public class TestCarrito {
 	//En este metodo simulo una caida de la base de datos, donde en el test se maneja y captura la excepcion SQLException que se lanza
 	public void getPrecioTotalError() throws SQLException {
 
-		Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");
+		Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", root, pass);
 		// Calculo el total del carrito del cliente
 		String productsQuery = "SELECT SUM(cantidad*precio_unitario) AS preciototal from carrito where id_cliente="
 				+ idClient;
@@ -89,10 +91,10 @@ public class TestCarrito {
 		// conexion.close();
 
 	}
-	
+	//Se intenta obtener el precio total del carrito de un cliente que no está registrado en la base de datos
 	public void getPrecioTotalClienteNoExiste() throws SQLException {
 		
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");	
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", root, pass);	
 			//Calculo el total del carrito del cliente
 				String productsQuery = "SELECT SUM(cantidad*precio_unitario) AS preciototal from carrito where id_cliente="+99999;
 				PreparedStatement totalSta = conexion.prepareStatement(productsQuery);
@@ -109,7 +111,7 @@ public class TestCarrito {
 	
 	//La consulta SQL es incorrecta
 	public void getPrecioTotalExcepcionConsulta() throws SQLException {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root", "9P$H7nI5!*8p");	
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", root, pass);	
 			//Calculo el total del carrito del cliente
 				String productsQuery = "SELECT SUM(cantidad*precio_unitario) AS preciototal  where id_cliente="+idClient;
 				PreparedStatement totalSta = conexion.prepareStatement(productsQuery);
@@ -124,7 +126,7 @@ public class TestCarrito {
 	}
 	//*****************************************************************TESTS************************************************************************************//
 																																																																					  //
-	//Comprobacion de precio del carrito del cliente con id 254																																														 //
+	//Comprobacion de precio del carrito de un cliente registrado en la base de datos																																					 //
 	@Test
 	public void precioTest() {
 		getPrecioTotal();
@@ -166,14 +168,15 @@ public class TestCarrito {
 		}
 	}
 	
+	//Test para comprobar que el precio es positivo
 	@Test
-	public void testTotalNoPositivo() {
+	public void testTotalPositivo() {
 		getPrecioTotal();
 		assertTrue("El precio total no es un numero positivo", precioTest>0);
 		System.out.println("Test 5 correcto!");
-		
 	}
 	
+	//Test donde se captura la excepcion lanzada por sintaxis incorrecta
 	@Test
 	public void TestConsultaSQLIncorrecta() {
 		try {
