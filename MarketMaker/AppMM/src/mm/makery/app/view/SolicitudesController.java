@@ -71,7 +71,7 @@ public class SolicitudesController extends Authenticator{
 			botonNombre.setOnAction(event -> {
 				try {
 					mostrarDatosComercio(nombre);
-				} catch (NoSuchAlgorithmException e) {
+				} catch (NoSuchAlgorithmException e) { 
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -356,7 +356,7 @@ public class SolicitudesController extends Authenticator{
                 + "Recuerda cambiar las credenciales al iniciar sesión por primera vez y no compartir estos datos con nadie"+"\n\n"
                 +"¡Gracias por registrarte!";
 	    //La clave de aplicación obtenida:
-	    String claveemail = "aaagpnrcalddicky";
+	    String claveemail = "zsmznuxfauftexzk";
 
 	    Properties props = System.getProperties();
 	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google

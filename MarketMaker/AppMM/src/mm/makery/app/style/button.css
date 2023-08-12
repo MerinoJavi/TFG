@@ -1,14 +1,9 @@
-/* Definición del estilo del botón */
-.button-style {
-    -fx-background-color: #007bff; /* Color normal de fondo */
-    -fx-text-fill: white;
-    -fx-padding: 10px 20px;
-    -fx-font-size: 14px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-/* Animación de cambio de color al pasar el ratón */
-.button-style:hover {
-    -fx-background-color: #0056b3; /* Nuevo color de fondo al pasar el ratón */
+.cylinder-button {
+    -fx-background-color: #4CAF50; /* Color de fondo */
+    -fx-background-radius: 30; /* Radio para formar el cilindro */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-family: "Arial"; /* Fuente */
+    -fx-font-size: 14px; /* Tamaño de fuente */
+    -fx-padding: 10px 20px; /* Espaciado interno */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0.0, 0, 5); /* Sombra */
 }

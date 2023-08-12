@@ -185,7 +185,7 @@ public class PerfilComercioController {
 		    		currentStage.show();
 		            
 				}else {
-					Alert error = new Alert(AlertType.INFORMATION);
+					Alert error = new Alert(AlertType.INFORMATION); 
 		            error.setTitle("Error al eliminar el perfil.");
 		            error.setHeaderText(null);
 		            error.setContentText("El perfil no ha podido ser eliminado");
@@ -399,7 +399,7 @@ public class PerfilComercioController {
 							conexion.close();
 							Optional<ButtonType> action = a.showAndWait();
 							if(action.get()==ButtonType.OK) {
-								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaComercio.fxml"));
 					    		LoginController log = new LoginController();
 					    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
 					    		Parent nextScreen = loader.load();

@@ -75,7 +75,7 @@ public class PerfilClienteController {
 	@FXML
 	private PasswordField passField=new PasswordField();
 	@FXML
-	private PasswordField repeatpassField = new PasswordField();
+	private PasswordField repeatpassField = new PasswordField(); 
 
 	@FXML
 	   //****************Cerrar sesion*******************************//
@@ -349,7 +349,7 @@ public class PerfilClienteController {
 							conexion.close();
 							Optional<ButtonType> action = a.showAndWait();
 							if(action.get()==ButtonType.OK) {
-								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
 					    		LoginController log = new LoginController();
 					    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
 					    		Parent nextScreen = loader.load();
