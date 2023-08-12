@@ -1,0 +1,14 @@
+/* Definición del estilo del botón */
+.button-style {
+    -fx-background-color: #007bff; /* Color normal de fondo */
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Animación de cambio de color al pasar el ratón */
+.button-style:hover {
+    -fx-background-color: #0056b3; /* Nuevo color de fondo al pasar el ratón */
+}

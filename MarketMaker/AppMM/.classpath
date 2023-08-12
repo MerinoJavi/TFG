@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PruebaJavaFX">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/SceneBuilder/app/SceneBuilderApp.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/SceneBuilder/app/SceneBuilderKit.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/mysql connector java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/jBCrypt-0.4.3.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/jaf-1.1.1/activation.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/commons-email-1.5/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="F:/Mis cosas/UNIVERSIDAD/CUARTO CURSO/Trabajo Fin de Grado/javax.mail.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
