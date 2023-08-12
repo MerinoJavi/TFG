@@ -8,7 +8,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
 
-public class LoginMenuController {
+public class LoginMenuController { 
 
 	@FXML
 	private Button ClientButton;

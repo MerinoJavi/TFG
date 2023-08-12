@@ -41,7 +41,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Menu;
 
-public class PaginaAdmin {
+public class PaginaAdmin { 
 	@FXML
 	private Label comercioLabel;
 	@FXML

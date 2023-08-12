@@ -30,7 +30,7 @@ import javafx.stage.*;
 import mm.makery.app.Main;
 import mm.makery.app.model.SesionUsuario;
 
-public class PerfilClienteController {
+public class PerfilClienteController { 
 	
 	
 	@FXML

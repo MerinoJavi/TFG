@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mm.makery.app.model.SesionUsuario;
 
-public class PerfilComercioController {
+public class PerfilComercioController { 
 
 	@FXML
 	private Button logoutbutton;

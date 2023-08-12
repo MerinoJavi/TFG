@@ -45,7 +45,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 
-public class ProductosComercioController {
+public class ProductosComercioController { 
 	@FXML
 	private Button accept=new Button("Aceptar");
 	@FXML

@@ -41,7 +41,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
 
-public class SolicitudesController extends Authenticator{
+public class SolicitudesController extends Authenticator{ 
 
 	@FXML
 	private VBox nombres = new VBox();

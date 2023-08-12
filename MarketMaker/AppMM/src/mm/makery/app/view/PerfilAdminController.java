@@ -32,7 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mm.makery.app.model.SesionUsuario;
 
-public class PerfilAdminController {
+public class PerfilAdminController { 
 
 	@FXML
 	private Label usuario;

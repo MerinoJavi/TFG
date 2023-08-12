@@ -26,7 +26,7 @@ import mm.makery.app.model.*;
 
 
 
-public class RegistroClienteController {
+public class RegistroClienteController { 
 
 	@FXML
 	private Button registerButton;

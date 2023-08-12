@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class RegistroMenuController {
+public class RegistroMenuController { 
 	@FXML
 	public void handleClientRegisterButton(ActionEvent event) throws IOException{
 		

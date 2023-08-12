@@ -30,7 +30,7 @@ import javafx.stage.*;
 import javafx.util.Duration;
 import mm.makery.app.model.SesionUsuario;
 
-public class PaginaClienteController {
+public class PaginaClienteController { 
 	@FXML
     private Button logoutButton;
 	

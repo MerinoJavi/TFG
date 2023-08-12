@@ -26,7 +26,7 @@ import javafx.stage.*;
 import mm.makery.app.model.SesionUsuario;
 import javafx.scene.*;
 import javafx.scene.image.*;
-public class LoginController {
+public class LoginController { 
 
     @FXML
     private TextField usernameField;
