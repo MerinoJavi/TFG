@@ -1,9 +1,17 @@
-.cylinder-button {
-    -fx-background-color: #4CAF50; /* Color de fondo */
+/* buttonStyles.css */
+
+.button-base {
+	 -fx-background-color: #4CAF50; /* Color de fondo */
     -fx-background-radius: 30; /* Radio para formar el cilindro */
     -fx-text-fill: white; /* Color del texto */
     -fx-font-family: "Arial"; /* Fuente */
     -fx-font-size: 14px; /* Tamaño de fuente */
     -fx-padding: 10px 20px; /* Espaciado interno */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0.0, 0, 5); /* Sombra */
+}
+.button:hover {
+  -fx-scale-x: 0.9; /* Reducir la escala horizontal */
+  -fx-scale-y: 0.9; /* Reducir la escala vertical */
+  -fx-transition-duration: 0.3s; /* Duración de la transición */
+  -fx-transition-timing-function: ease; /* Función de temporización de la transición */
 }

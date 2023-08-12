@@ -37,7 +37,7 @@ public class HomeController {
 	@FXML
 	private VBox carruselComercios=new VBox(10);
 	@FXML
-	private TextField searchField=new TextField();
+	private TextField searchField=new TextField(); 
 	@FXML
 	private HBox carrusel = new HBox(); //El usado para hacer la animacion 
 	
@@ -53,7 +53,8 @@ public class HomeController {
 	        
 	        for (String n : nombres) {
 	            Button comercio = new Button(n);
-	            comercio.setPrefWidth(carrusel.getWidth() / 2);
+	            comercio.setPrefWidth(carrusel.getWidth());
+	            comercio.setPrefHeight(carrusel.getHeight());
 	            carrusel.getChildren().add(comercio);
 	        }
 	        
@@ -82,7 +83,7 @@ public class HomeController {
 	
 	private void startAnimation() {
 		// Duracion de la animacion
-		int animationDuration=5000;
+		int animationDuration=15000;
 		// Crea la transición de desplazamiento
 		carrusel.setTranslateX(-carrusel.getWidth());
         TranslateTransition transitionRight = new TranslateTransition(Duration.millis(animationDuration), carrusel);

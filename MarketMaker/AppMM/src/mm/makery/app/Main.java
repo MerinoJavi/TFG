@@ -76,8 +76,7 @@ public class Main extends Application {
 		            try {
 		                Parent root = FXMLLoader.load(Main.class.getResource("view/Home.fxml"));
 		                loginScene = new Scene(root);
-		                loginScene.getStylesheets().add(getClass().getResource("style/button.css").toExternalForm());
-
+		               
 		                primaryStage.setScene(loginScene);
 		                primaryStage.setTitle("MarketMakerAPP");
 		                //TODO: Poner icono de la app
@@ -111,7 +110,7 @@ public class Main extends Application {
 	
 	/**
 	 * @throws SQLException ************************************************************************************************************/
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException { 
 		//Creo la conexion a la base de datos 
 		String url = "jdbc:mysql://localhost:3306/TFG";
 		String user = "root";
