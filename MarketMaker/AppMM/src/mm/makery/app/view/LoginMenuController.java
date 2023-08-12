@@ -18,7 +18,7 @@ public class LoginMenuController {
 	private Button CommerceButton;
 	
 	public static boolean esCliente=false;
-	public static boolean esComercio=false;
+	public static boolean esComercio=false; 
 	public static boolean esAdmin=false;
 	public static boolean esAnonimo=true;
 	//Metodo para cargar el login de cada uno de los usuarios y pasar de una vista a otra.

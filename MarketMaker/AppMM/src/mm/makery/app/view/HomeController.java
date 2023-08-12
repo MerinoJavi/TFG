@@ -39,7 +39,7 @@ public class HomeController {
 	@FXML
 	private TextField searchField=new TextField();
 	@FXML
-	private HBox carrusel = new HBox(); //El usado para hacer la animacion
+	private HBox carrusel = new HBox(); //El usado para hacer la animacion 
 	
 	
 	private ArrayList<String> nombrescomercios = new ArrayList<>();
@@ -135,7 +135,7 @@ public class HomeController {
 		if(commerceName.isEmpty()) {
 		//   isLoggedIn = false;
 					// Cargo la pagina XML correspondiente al menu de logins
-			        FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
+			        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
 					//LoginController log = new LoginController();
 					//loader.setController(log);
 					Parent nextScreen = loader.load();

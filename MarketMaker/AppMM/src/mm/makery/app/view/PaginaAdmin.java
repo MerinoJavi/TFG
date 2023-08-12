@@ -55,7 +55,7 @@ public class PaginaAdmin {
 	@FXML
 	private Button solicitudes;
 	
-	private String nombreBD=""; //Nombre del coemrcio recogido de la base de datos
+	private String nombreBD=""; //Nombre del coemrcio recogido de la base de datos 
 	private ArrayList<String> nombrescomercios = new ArrayList<>();
 	@FXML
 	private VBox carruselComercios=new VBox(10);
@@ -220,9 +220,9 @@ public class PaginaAdmin {
 							Button comercioVBox = new Button(nombreBD);
 							comercioVBox.setMaxWidth(Double.MAX_VALUE);
 							Separator s = new Separator(Orientation.HORIZONTAL);
-							System.out.println("El boton es creado");
+					//		System.out.println("El boton es creado");
 							carruselComercios.getChildren().addAll(comercioVBox,s);
-							System.out.println("El boton es añadido");
+					//		System.out.println("El boton es añadido");
 							carruselComercios.setSpacing(2);
 							//comercioVBox=null;
 							nombreBD="";

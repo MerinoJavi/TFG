@@ -51,7 +51,7 @@ public class ProductosComercioDetalladoController {
 	
 	//al hacer click sobre el boton, que cargue en el initialize todos los productos pertenecientes a esa empresa
 	@FXML
-	public void initialize() { 
+	public void initialize() {  
 		loadProducts(idcomercio);
 	}
 	
@@ -182,6 +182,8 @@ public class ProductosComercioDetalladoController {
 						     if(SesionUsuario.usuarioABuscar==null) {
 						    	 addcart.setDisable(true);
 						    	
+						     } else if(LoginMenuController.esAdmin) {
+						    	 addcart.setDisable(true);
 						     }
 						     
 						    	 addcart.setOnAction(event2 -> {
