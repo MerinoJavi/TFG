@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.LoginMenuController">
+   <children>
+      <Button fx:id="CommerceButton" layoutX="367.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleCommerceButton" text="Comercio" />
+      <Button fx:id="ClientButton" layoutX="366.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleNextScreen" prefHeight="25.0" prefWidth="67.0" text="Cliente" />
+      <Button fx:id="AdminButton" layoutX="366.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleAdminButton" prefHeight="25.0" prefWidth="67.0" text="Admin" />
+      <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#goBack" text="&lt;-" />
+   </children>
+</AnchorPane>
