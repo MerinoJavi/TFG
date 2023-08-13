@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import java.sql.Statement;
-
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -33,6 +33,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class CarritoController { 
 
@@ -45,7 +46,6 @@ public class CarritoController {
 	
 	private String idcliente = "";
 	private TextField newCantidad = new TextField();
-
 	@FXML
 	private void initialize() {
 		try {

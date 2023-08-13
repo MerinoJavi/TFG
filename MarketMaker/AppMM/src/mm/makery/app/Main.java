@@ -115,7 +115,12 @@ public class Main extends Application {
 		String url = "jdbc:mysql://localhost:3306/TFG";
 		String user = "root";
 		String pass = "9P$H7nI5!*8p";
-		Connection conexion = DriverManager.getConnection(url,user,pass);
+		try {
+			Connection conexion = DriverManager.getConnection(url,user,pass);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new SQLException("Conecta la base de datos");
+		}
 		launch(args);
 	}
 }

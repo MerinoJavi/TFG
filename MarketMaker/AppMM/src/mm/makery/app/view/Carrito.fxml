@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.CarritoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom, #2A92D6, #ffffff);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.CarritoController">
    <children>
       <Separator layoutY="57.0" prefHeight="0.0" prefWidth="1024.0" />
-      <Label layoutX="97.0" layoutY="22.0" prefHeight="17.0" prefWidth="74.0" text="Mi carrito" />
+      <Label layoutX="449.0" layoutY="1.0" prefHeight="59.0" prefWidth="126.0" text="Mi carrito">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="27.0" />
+         </font></Label>
       <ScrollPane layoutY="59.0" prefHeight="708.0" prefWidth="1024.0">
          <content>
             <SplitPane dividerPositions="0.7567030784508441" prefHeight="708.0" prefWidth="1009.0">
@@ -25,7 +30,6 @@
                               <Separator prefWidth="200.0" />
                            </children></VBox>
                         <Separator layoutX="-3.0" layoutY="129.0" prefHeight="3.0" prefWidth="248.0" />
-                        <Label layoutX="-4.0" layoutY="139.0" prefHeight="17.0" prefWidth="254.0" text="                    Acerca de la compra" />
                         <Label layoutX="14.0" layoutY="179.0" text="Total: ">
                            <font>
                               <Font size="23.0" />
@@ -36,8 +40,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Button layoutX="74.0" layoutY="271.0" mnemonicParsing="false" onAction="#confirmPurchase" style="-fx-background-color: #E4C00B; -fx-background-radius: 20 20 20 20;" text="Tramitar pedido" />
-                        <Separator layoutY="163.0" prefHeight="3.0" prefWidth="248.0" />
+                        <Button layoutX="52.0" layoutY="271.0" mnemonicParsing="false" onAction="#confirmPurchase" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #E4C00B; -fx-background-radius: 20 20 20 20;" text="Tramitar pedido" />
                         <Separator layoutX="-2.0" layoutY="307.0" prefHeight="3.0" prefWidth="246.0" />
                      </children>
                   </AnchorPane>
@@ -45,6 +48,9 @@
             </SplitPane>
          </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#goBack" text="&lt;-" />
+      <Button layoutY="-5.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="126.0" styleClass="button-base" stylesheets="@../style/backButton.css" text="←">
+         <font>
+            <Font name="Bell MT" size="19.0" />
+         </font></Button>
    </children>
 </AnchorPane>
