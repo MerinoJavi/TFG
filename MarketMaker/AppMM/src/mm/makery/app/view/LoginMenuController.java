@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import  javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
-
+import javafx.util.Duration;
+import javafx.animation.FillTransition;
 public class LoginMenuController { 
 
 	@FXML
@@ -21,6 +23,7 @@ public class LoginMenuController {
 	public static boolean esComercio=false; 
 	public static boolean esAdmin=false;
 	public static boolean esAnonimo=true;
+	
 	//Metodo para cargar el login de cada uno de los usuarios y pasar de una vista a otra.
 	@FXML
 	public void handleNextScreen(ActionEvent event) throws IOException{

@@ -12,7 +12,7 @@
       <Separator layoutY="57.0" prefHeight="0.0" prefWidth="1024.0" />
       <Label layoutX="449.0" layoutY="1.0" prefHeight="59.0" prefWidth="126.0" text="Mi carrito">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="27.0" />
+            <Font name="Calisto MT" size="28.0" />
          </font></Label>
       <ScrollPane layoutY="59.0" prefHeight="708.0" prefWidth="1024.0">
          <content>
@@ -40,7 +40,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Button layoutX="52.0" layoutY="271.0" mnemonicParsing="false" onAction="#confirmPurchase" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #E4C00B; -fx-background-radius: 20 20 20 20;" text="Tramitar pedido" />
+                        <Button layoutX="42.0" layoutY="251.0" mnemonicParsing="false" onAction="#confirmPurchase" prefHeight="36.0" prefWidth="155.0" styleClass="button-base" stylesheets="@../style/button.css" text="Tramitar pedido" />
                         <Separator layoutX="-2.0" layoutY="307.0" prefHeight="3.0" prefWidth="246.0" />
                      </children>
                   </AnchorPane>

@@ -3,14 +3,14 @@
     -fx-background-radius: 30.0; /* Radio para formar el cilindro */
     -fx-border-color: transparent;
     -fx-text-fill: black; /* Color del texto */
-    -fx-font-family: "Roboto"; /* Fuente */
+    -fx-font-family: "Arial Black"; /* Fuente */
     -fx-font-weight: bold; /*Negrita */
-    -fx-font-size: 14.0px; /* Tamaño de fuente */
+    -fx-font-size: 31.0px; /* Tamaño de fuente */
     -fx-padding: 10.0px 20.0px; /* Espaciado interno */
    -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); /* Sombra */ 
 }
 .button:hover {
-  -fx-scale-x: 1.2; /* Reducir la escala horizontal */
-  -fx-scale-y: 1.2; /* Reducir la escala vertical */
-  -fx-background-color: transparent;
+  -fx-scale-x: 1; /* Reducir la escala horizontal */
+  -fx-scale-y: 1; /* Reducir la escala vertical */
+  -fx-background-color: #237F08;
 }
