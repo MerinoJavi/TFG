@@ -1,31 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.PaginaComercioController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom, #12C4E7, #ffffff);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.PaginaComercioController">
    <children>
-      <SplitPane dividerPositions="0.1306532663316583" layoutY="-2.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0">
+      <SplitPane dividerPositions="0.06788511749347259" layoutY="-2.0" orientation="VERTICAL" prefHeight="774.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom, #12C4E7, #ffffff);">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #12C4E7;">
                <children>
-                  <Button fx:id="logoutButton" layoutX="552.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="30.0" prefWidth="31.0" styleClass="transparent-button" stylesheets="@../style/logoutbutton.css">
+                  <Button fx:id="logoutButton" layoutX="962.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="30.0" prefWidth="31.0" styleClass="transparent-button" stylesheets="@../style/logoutbutton.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../images/LogOut.png" />
+                              <Image url="@../images/LogOut.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField layoutX="53.0" layoutY="13.0" prefHeight="25.0" prefWidth="246.0" />
-                  <Button layoutX="350.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleGoProducts" text="Mis productos" />
-                  <Button fx:id="ProfileClient" layoutX="472.0" layoutY="12.0" mnemonicParsing="false" onAction="#handlegoProfile" text="Ajustes" />
+                  <Button layoutX="585.0" layoutY="-1.0" mnemonicParsing="false" onAction="#handleGoProducts" styleClass="button-base" stylesheets="@../style/button.css" text="Mis productos">
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/product.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="ProfileClient" layoutX="795.0" layoutY="3.0" mnemonicParsing="false" onAction="#handlegoProfile" styleClass="button-base" stylesheets="@../style/button.css" text="Mi cuenta">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Label layoutX="105.0" layoutY="7.0" prefHeight="40.0" prefWidth="315.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="27.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/wave-unscreen.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="598.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="598.0">
+               <children>
+                  <Separator layoutY="685.0" prefHeight="4.0" prefWidth="1024.0" />
+                  <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="14.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/copyright.png" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </children>
