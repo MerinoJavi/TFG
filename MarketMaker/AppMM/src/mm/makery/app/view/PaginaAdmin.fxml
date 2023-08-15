@@ -13,7 +13,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="198.0" prefWidth="752.0" style="-fx-background-color: #12C4E7;">
                <children>
-                  <Button fx:id="logoutButton" layoutX="951.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="21.0" prefWidth="31.0" styleClass="transparent-button" stylesheets="@../style/logoutbutton.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="951.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+                  <Button fx:id="logoutButton" layoutX="951.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="21.0" prefWidth="31.0" styleClass="button-base" stylesheets="@../style/button.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="951.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
