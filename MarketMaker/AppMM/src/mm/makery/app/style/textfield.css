@@ -1,0 +1,4 @@
+.custom-textfield {
+    -fx-prompt-text-fill: white; /* Cambia este color al que desees */
+ 	-fx-background-color:transparent;
+}

@@ -1,16 +1,16 @@
 .button-base {
-	-fx-background-color: transparent; /* Color de fondo */
-    -fx-background-radius: 30.0; /* Radio para formar el cilindro */
+	-fx-background-color: transparent; 
+    /*-fx-background-radius: 30.0;  */
     -fx-border-color: transparent;
-    -fx-text-fill: black; /* Color del texto */
-    -fx-font-family: "Arial Black"; /* Fuente */
-    -fx-font-weight: bold; /*Negrita */
-    -fx-font-size: 31.0px; /* Tamaño de fuente */
-    -fx-padding: 10.0px 20.0px; /* Espaciado interno */
-   -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); /* Sombra */ 
+    -fx-text-fill: black; 
+    -fx-font-family: "Segoe UI Light"; 
+    -fx-font-weight: bold; 
+    -fx-font-size: 31.0px; 
+    -fx-padding: 10.0px 20.0px;
+   -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); 
 }
 .button:hover {
-  -fx-scale-x: 1; /* Reducir la escala horizontal */
-  -fx-scale-y: 1; /* Reducir la escala vertical */
+  -fx-scale-x: 1.1; 
+  -fx-scale-y: 1.1; 
   -fx-background-color: #237F08;
 }

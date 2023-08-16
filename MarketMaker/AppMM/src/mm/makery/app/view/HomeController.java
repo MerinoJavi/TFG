@@ -133,7 +133,7 @@ public class HomeController {
 		commerceFound=false;
 		String commerceName = searchField.getText();
 		carruselComercios.getChildren().clear(); //Lo vacio para que no me repita los mismos botones una y otra vez
-		
+		//Recargo la pagina si introduzco un nombre vacio
 		if(commerceName.isEmpty()) {
 		//   isLoggedIn = false;
 					// Cargo la pagina XML correspondiente al menu de logins

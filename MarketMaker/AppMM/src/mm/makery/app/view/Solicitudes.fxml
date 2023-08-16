@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.SolicitudesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.SolicitudesController">
    <children>
-      <SplitPane dividerPositions="0.49498327759197325" layoutY="-2.0" prefHeight="406.0" prefWidth="600.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox fx:id="nombres" layoutX="-4.0" layoutY="-1.0" prefHeight="406.0" prefWidth="299.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#goBack" text="&lt;-" />
-                     </children></VBox>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox fx:id="datos" prefHeight="404.0" prefWidth="299.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <ImageView fitHeight="768.0" fitWidth="1024.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/pxfuel.jpg" />
+         </image>
+      </ImageView>
+      <VBox fx:id="nombres" prefHeight="768.0" prefWidth="530.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goBack" prefHeight="65.0" prefWidth="79.0" styleClass="button-base" stylesheets="@../style/backButton.css" text="←" />
+         </children>
+      </VBox>
+      <VBox fx:id="datos" layoutX="528.0" layoutY="1.0" prefHeight="768.0" prefWidth="496.0" />
+      <Separator layoutX="527.0" orientation="VERTICAL" prefHeight="768.0" prefWidth="0.0" />
    </children>
 </AnchorPane>

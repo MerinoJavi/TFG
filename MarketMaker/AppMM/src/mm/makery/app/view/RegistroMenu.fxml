@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.RegistroMenuController">
    <children>
-      <Button layoutX="233.0" layoutY="118.0" mnemonicParsing="false" onAction="#handleClientRegisterButton" prefHeight="25.0" prefWidth="115.0" text="Cliente" />
-      <Button layoutX="233.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleCommerceRegisterButton" prefHeight="25.0" prefWidth="115.0" text="Comercio" />
-      <Button layoutX="29.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" text="&lt;-" />
+      <ImageView fitHeight="400.0" fitWidth="606.0" layoutX="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/pxfuel.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="-1.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleClientRegisterButton" prefHeight="165.0" prefWidth="606.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Cliente">
+         <graphic>
+            <ImageView fitHeight="99.0" fitWidth="198.0" pickOnBounds="true" preserveRatio="true" translateX="-33.0">
+               <image>
+                  <Image url="@../images/rating.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="-1.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleCommerceRegisterButton" prefHeight="177.0" prefWidth="606.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Comercio">
+         <graphic>
+            <ImageView fitHeight="88.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" translateX="-15.0">
+               <image>
+                  <Image url="@../images/shopping.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutY="-8.0" mnemonicParsing="false" onAction="#goBack" prefHeight="56.0" prefWidth="70.0" styleClass="button-base" stylesheets="@../style/backButton.css" text="←" />
+      <Label layoutX="131.0" prefHeight="56.0" prefWidth="365.0" text="¿Q u é  e r e s?" textFill="WHITE">
+         <font>
+            <Font name="Lucida Sans Typewriter Regular" size="35.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

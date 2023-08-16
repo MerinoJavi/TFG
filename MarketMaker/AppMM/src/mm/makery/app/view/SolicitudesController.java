@@ -64,10 +64,23 @@ public class SolicitudesController extends Authenticator{
 	@FXML
 	private PasswordField password=new PasswordField();
 	@FXML
+	//Inicializo el FXML para que aparezcan las solicitudes al ser ejecutado
 	public void initialize() {
 		List<String> nombresComercios = obtenerNombresComercios();
 		for (String nombre : nombresComercios) {
 			Button botonNombre = new Button(nombre);
+			botonNombre.setMaxWidth(Double.MAX_VALUE); //Establezco anchura de boton para que ocupe lo máximo posible 
+			//Aplico estilo al boton
+			botonNombre.setStyle("-fx-text-fill: black; -fx-font-size: 12.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+			//Cuando pase el ratón por encima
+			botonNombre.setOnMouseEntered(e->{
+				botonNombre.setStyle("-fx-background-color: #237F08; -fx-scale-x: 1.2; -fx-scale-y: 1.2; -fx-text-fill: black; -fx-font-size: 12.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+			});
+			//Cuando se quita el cursor del raton de encima
+			botonNombre.setOnMouseExited(e->{
+				botonNombre.setStyle("-fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-text-fill: black; -fx-font-size: 12.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+			});
+			//Muestro los datos de la solicitud cuando hago clic
 			botonNombre.setOnAction(event -> {
 				try {
 					mostrarDatosComercio(nombre);

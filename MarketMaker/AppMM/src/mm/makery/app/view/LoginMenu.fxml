@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -9,29 +10,49 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.LoginMenuController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="1.0" pickOnBounds="true">
+      <ImageView fitHeight="600.0" fitWidth="806.0" layoutX="-5.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/loginbg.jpg" />
+            <Image url="@../images/pxfuel.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="CommerceButton" layoutY="66.0" mnemonicParsing="false" onAction="#handleCommerceButton" prefHeight="151.0" prefWidth="800.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Comercio">
+      <Button fx:id="CommerceButton" layoutX="-6.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleCommerceButton" prefHeight="177.0" prefWidth="812.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Comercio">
          <font>
             <Font name="Arial Black" size="32.0" />
-         </font></Button>
-      <Button fx:id="ClientButton" layoutX="1.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleNextScreen" prefHeight="189.0" prefWidth="800.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Cliente">
+         </font>
+         <graphic>
+            <ImageView fitHeight="74.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" translateX="-47.0">
+               <image>
+                  <Image url="@../images/shopping.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="ClientButton" layoutX="1.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleNextScreen" prefHeight="177.0" prefWidth="800.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Cliente">
          <font>
             <Font name="Arial Black" size="32.0" />
-         </font></Button>
-      <Button fx:id="AdminButton" layoutX="-2.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleAdminButton" prefHeight="196.0" prefWidth="800.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="Administrador">
+         </font>
+         <graphic>
+            <ImageView fitHeight="77.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" translateX="-65.0">
+               <image>
+                  <Image url="@../images/rating.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="AdminButton" layoutX="-2.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleAdminButton" prefHeight="196.0" prefWidth="806.0" styleClass="button-base" stylesheets="@../style/MenuButton.css" text="    Administrador">
          <font>
             <Font name="Arial Black" size="31.0" />
-         </font></Button>
-      <Button mnemonicParsing="false" onAction="#goBack" prefHeight="69.0" prefWidth="111.0" styleClass="button-base" stylesheets="@../style/backButton.css" text="&lt;-" />
-      <Label layoutX="277.0" layoutY="15.0" prefHeight="40.0" prefWidth="248.0" text="Elige tu usuario">
+         </font>
+         <graphic>
+            <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/blogger.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button mnemonicParsing="false" onAction="#goBack" prefHeight="69.0" prefWidth="111.0" styleClass="button-base" stylesheets="@../style/backButton.css" text="←" />
+      <Label layoutX="229.0" layoutY="14.0" prefHeight="42.0" prefWidth="344.0" text="Elige tu usuario" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Lato Light" size="35.0" />
+            <Font name="Lucida Sans Typewriter Regular" size="35.0" />
          </font>
       </Label>
-      <Separator layoutX="1.0" layoutY="65.0" prefHeight="0.0" prefWidth="800.0" />
    </children>
 </AnchorPane>

@@ -9,28 +9,41 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mm.makery.app.view.ProductosComercioDetalladoController">
    <children>
-      <SplitPane dividerPositions="0.07049608355091384" layoutY="-1.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.07049608355091384" layoutY="-1.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #12C4E7, #ffffff);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="198.0" prefWidth="752.0">
                <children>
-                  <TextField fx:id="productField" layoutX="127.0" layoutY="13.0" onAction="#searchProducts" prefHeight="25.0" prefWidth="451.0" promptText="Buscar producto" />
-                  <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="559.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                  <TextField fx:id="productField" layoutX="196.0" layoutY="14.0" onAction="#searchProducts" prefHeight="25.0" prefWidth="568.0" promptText="Busca el producto para añadirlo al carrito" style="-fx-background-radius: 20;" />
+                  <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="739.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../images/pngegg.png" />
+                        <Image url="@../images/magnifying-glass.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleGoBack" text="&lt;-" />
+                  <Button layoutY="-6.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="61.0" prefWidth="83.0" styleClass="button-base" stylesheets="@../style/backButton.css" text="← " />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="332.0" prefWidth="568.0">
                <children>
-                  <Label layoutX="73.0" layoutY="10.0" prefHeight="21.0" prefWidth="73.0" text="Productos" />
+                  <Label layoutX="438.0" prefHeight="36.0" prefWidth="118.0" text="Productos">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="25.0" />
+                     </font></Label>
                   <Separator layoutY="35.0" prefHeight="4.0" prefWidth="1022.0" />
                   <Separator layoutY="676.0" prefHeight="4.0" prefWidth="1022.0" />
                   <ScrollPane layoutX="-1.0" layoutY="39.0" prefHeight="640.0" prefWidth="1024.0">
                      <content>
-                        <VBox fx:id="productos" prefHeight="639.0" prefWidth="1010.0" />
+                        <VBox fx:id="productos" prefHeight="639.0" prefWidth="1010.0" style="-fx-background-color: linear-gradient(to bottom, #12C4E7, #ffffff);" />
                      </content></ScrollPane>
+                  <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="8.0" layoutY="681.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/copyright.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="36.0" fitWidth="33.0" layoutX="563.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/box.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </items>
