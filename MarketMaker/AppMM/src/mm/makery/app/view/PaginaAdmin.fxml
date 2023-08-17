@@ -22,7 +22,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="profile" layoutX="636.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleGoAdminProfile" styleClass="button-base" stylesheets="@../style/button.css" text="Mi cuenta">
+                  <Button fx:id="profile" layoutX="564.0" layoutY="4.0" mnemonicParsing="false" onAction="#handleGoAdminProfile" styleClass="button-base" stylesheets="@../style/button.css" text="Mi cuenta">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -34,13 +34,13 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="searchField" layoutX="14.0" layoutY="15.0" onAction="#searchCommerce" prefHeight="25.0" prefWidth="451.0" promptText="Buscar comercio" style="-fx-background-radius: 20;" />
-                  <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="438.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                  <TextField fx:id="searchField" layoutY="14.0" onAction="#searchCommerce" prefHeight="25.0" prefWidth="451.0" promptText="Buscar comercio" style="-fx-background-radius: 20;" />
+                  <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="424.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/magnifying-glass.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="769.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleGoRequest" styleClass="button-base" stylesheets="@../style/button.css" text="Solicitudes">
+                  <Button layoutX="722.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleGoRequest" styleClass="button-base" stylesheets="@../style/button.css" text="Solicitudes">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -52,11 +52,6 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label fx:id="statusLabel" layoutX="474.0" layoutY="18.0" text="Label">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="332.0" prefWidth="568.0" style="-fx-background-color: linear-gradient(to bottom, #12C4E7, #ffffff);">
@@ -82,6 +77,16 @@
                   <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="14.0" layoutY="686.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/copyright.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="statusLabel" layoutX="61.0" layoutY="10.0" text="Label">
+                     <font>
+                        <Font name="Arial Black" size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="24.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/wave-unscreen.gif" />
                      </image>
                   </ImageView>
                </children></AnchorPane>

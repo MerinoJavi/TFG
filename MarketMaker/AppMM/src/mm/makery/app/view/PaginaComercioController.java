@@ -9,7 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import mm.makery.app.model.SesionUsuario;
 
 public class PaginaComercioController {
 	@FXML
@@ -17,6 +19,19 @@ public class PaginaComercioController {
 	
 	@FXML
     private Button ProfileClient;
+	@FXML
+	private Label statusLabel;
+	@FXML
+	private void initialize() {
+		//Para mostrar el nombre del usuario
+				for(SesionUsuario sesion: SesionUsuario.usuarios) {
+					if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
+						//Almacenar los datos en la label para mostrar el nombre de usuario
+						statusLabel.setText("¡Hola, "+ sesion.getNombre()+"!");
+					}
+				}
+	}
+	
 	@FXML
 	   //****************Cerrar sesion*******************************//
 	    private void handleLogout(ActionEvent event) throws IOException {

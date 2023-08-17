@@ -90,17 +90,24 @@ public class ProductosComercioController {
 			}
 			List<String>productos = getProductos();
 			for(String p:productos) {
-				Separator separator = new Separator(Orientation.HORIZONTAL);
-				Button boton = new Button(p);
-				//Establezco el ancho del boton al mismo que el del VBox para que ocupe toda su celda
+				final Button boton = new Button(p); //Variable final para crear los productos que tiene el comercio
+				//Establezco el ancho del boton y los estilos que correspondan.
 				boton.setMaxWidth(Double.MAX_VALUE);
-				botones.setVgrow(boton, Priority.ALWAYS);
-				botones.getChildren().addAll(boton,separator);
+				boton.setStyle("-fx-text-fill: black; -fx-font-size: 14.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent; -fx-font-style: italic;");
+				boton.setOnMouseEntered(e->{
+					boton.setStyle("-fx-font-style: italic; -fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-text-fill: black; -fx-font-size: 14.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				//Cuando se quita el cursor del raton de encima
+				boton.setOnMouseExited(e->{
+					boton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-font-style: italic; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-text-fill: black; -fx-font-size: 14.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+				//	botones.setVgrow(boton, Priority.ALWAYS);
+				botones.getChildren().addAll(boton);
 				botones.setSpacing(5); //Espacio de separacion de 10px
 				boton.setOnAction(event->{
 					mostrarDatos(p);
 				});
-				boton=null;
+			//	boton=null;
 			}
 		}
 		//Tengo que crear un boton por cada producto que tenga el comercio, y que al clikcar me muestre la informacion d ese producto
@@ -138,14 +145,26 @@ public class ProductosComercioController {
 			//Almaceno los valores de la base de datos para mostrarlos. El tratamiento de la imagen queda pendiente para mas adelante
 			if(result.next()) {
 				nombre.setText(result.getString("nombre"));
-				pvp.setText(result.getString("pvp"));
+				pvp.setText(result.getString("pvp")+"€");
 				descripcion.setText(result.getString("descripcion"));
 				imagen = result.getString("imagen");
 			}
 			//Ahora meto los datos en el VBox creado en Scenebuilder para mostrar los datos. El boton de salvar o cancelar los datos también los incluyo
-			infoproducto.getChildren().addAll(new Label("Título: "),nombre);
-			infoproducto.getChildren().addAll(new Label("PVP: "),pvp);
-			infoproducto.getChildren().addAll(new Label("Descripción: "),descripcion);
+			Label title = new Label("Título");
+			Label pvpLabel = new Label("PVP");
+			Label descripcionLabel = new Label("Descripción");
+			
+			title.setStyle("-fx-text-fill:white; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 30.0px; -fx-font-style: italic;");
+			pvpLabel.setStyle("-fx-text-fill:white; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 30.0px; -fx-font-style: italic;");
+			descripcionLabel.setStyle("-fx-text-fill:white; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 30.0px; -fx-font-style: italic;");
+			
+			nombre.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 20.0px; ");
+			pvp.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 20.0px; ");
+			descripcion.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 20.0px; ");
+			//añadimos la informacion al vbox
+			infoproducto.getChildren().addAll(title,new Separator(Orientation.HORIZONTAL),nombre);
+			infoproducto.getChildren().addAll(pvpLabel,new Separator(Orientation.HORIZONTAL),pvp);
+			infoproducto.getChildren().addAll(descripcionLabel,new Separator(Orientation.HORIZONTAL),descripcion);
 			
 			
 			//Transformacion de la ruta de la imagen para que se muestre la imagen correctamente. Obtengo la ruta y lo transformo en un objeto ImageView de JavaFX
@@ -160,8 +179,32 @@ public class ProductosComercioController {
 			imageview.setFitWidth(100);
 			imageview.setFitHeight(100);
 			infoproducto.getChildren().add(imageview);
-			fixpath="";
-			//Añado boton editar y eliminar
+			fixpath=""; //Variable que uso para arreglar el path donde están guardadas las imágenes
+			
+			//Añado boton editar y eliminar, y les aplico el estilo
+			edit.setMaxWidth(Double.MAX_VALUE);
+			delete.setMaxWidth(Double.MAX_VALUE);
+			
+			edit.setStyle(
+					"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+			edit.setOnMouseEntered(e -> {
+				edit.setStyle(
+						"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+			});
+			edit.setOnMouseExited(e -> {
+				edit.setStyle(
+						"-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+			});
+			delete.setStyle(
+					"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+			delete.setOnMouseEntered(e -> {
+				delete.setStyle(
+						"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+			});
+			delete.setOnMouseExited(e -> {
+				delete.setStyle(
+						"-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+			});
 			infoproducto.getChildren().add(edit);
 			infoproducto.getChildren().add(delete);
 			edit.setOnAction(e->{ 

@@ -104,7 +104,6 @@ public class PaginaClienteController {
 	}
 	
 	@FXML
-	
 	public void initialize() {
 		for(SesionUsuario sesion: SesionUsuario.usuarios) {
 			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
@@ -118,7 +117,8 @@ public class PaginaClienteController {
 	        
 	        for (String n : nombres) {
 	            Button comercio = new Button(n);
-	            comercio.setPrefWidth(carrusel.getWidth() / 2);
+	            comercio.setPrefWidth(carrusel.getWidth());
+	            comercio.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
 	            carrusel.getChildren().add(comercio);
 	        }
 	        
@@ -128,7 +128,7 @@ public class PaginaClienteController {
 	
 	private void startAnimation() {
 		// Duracion de la animacion
-		int animationDuration=5000;
+		int animationDuration=25000;
 		// Crea la transición de desplazamiento
 		carrusel.setTranslateX(-carrusel.getWidth());
         TranslateTransition transitionRight = new TranslateTransition(Duration.millis(animationDuration), carrusel);
@@ -189,9 +189,9 @@ public class PaginaClienteController {
 								Button comercioVBox = new Button(nombreBD);
 								comercioVBox.setMaxWidth(Double.MAX_VALUE);
 								Separator s = new Separator(Orientation.HORIZONTAL);
-								System.out.println("El boton es creado");
+//								System.out.println("El boton es creado");
 								carruselComercios.getChildren().addAll(comercioVBox,s);
-								System.out.println("El boton es añadido");
+//								System.out.println("El boton es añadido");
 								carruselComercios.setSpacing(2);
 								//comercioVBox=null;
 								nombreBD="";

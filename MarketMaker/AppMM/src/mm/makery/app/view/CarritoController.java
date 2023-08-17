@@ -46,6 +46,8 @@ public class CarritoController {
 	
 	private String idcliente = "";
 	private TextField newCantidad = new TextField();
+	
+	private Button goBack=new Button("←");
 	@FXML
 	private void initialize() {
 		try {
@@ -90,33 +92,105 @@ public class CarritoController {
 					ImageView imageview = new ImageView(image);
 					imageview.setFitWidth(100);
 					imageview.setFitHeight(100);
-
+					//Cargo el boton del producto para que pueda ser clicable
 					Button productoButton = new Button(getDatosProductoResultSet.getString("nombre"));
+					//Aplico estilo al boton
+					productoButton.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+					productoButton.setOnMouseEntered(e->{
+						productoButton.setStyle("-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+					});
+					//Cuando se quita el cursor del raton de encima
+					productoButton.setOnMouseExited(e->{
+						productoButton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+					});
+					//añado el boton y los campos al vbox, y aplico estilos. Creo los Label de los campos para poder modificar la apariencia
 					productos.getChildren().add(productoButton);
-					productos.getChildren().addAll(new Label(pvpString + "€"));
-					productos.getChildren().add(new Label("Cantidad: " + cantidad));
+					Label pvpLabel = new Label(pvpString+"€");
+					pvpLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+					Label cantidadLabel = new Label("Cantidad: "+Integer.toString(cantidad));
+					cantidadLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+					
+					productos.getChildren().addAll(pvpLabel);
+					productos.getChildren().add(cantidadLabel);
 					productos.getChildren().add(imageview);
 					productos.getChildren().add(new Separator(Orientation.HORIZONTAL));
 
 					productoButton.setOnAction(e -> {
 						Button deleteItem = new Button("Eliminar del carrito");
 						Button cantidadButton = new Button("Cantidad");
-
-						// Agrego botones al vbox
+						
+						deleteItem.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+						deleteItem.setOnMouseEntered(ev->{
+							deleteItem.setStyle("-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+						});
+						//Cuando se quita el cursor del raton de encima
+						deleteItem.setOnMouseExited(e2->{
+							deleteItem.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+						});
+						
+						cantidadButton.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+						cantidadButton.setOnMouseEntered(ev->{
+							cantidadButton.setStyle("-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+						});
+						//Cuando se quita el cursor del raton de encima
+						cantidadButton.setOnMouseExited(e2->{
+							cantidadButton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+						});
+						
+						// Agrego botones al vbox y aplico estilos
 						productosOptions.getChildren().add(deleteItem);
 						productosOptions.getChildren().add(cantidadButton);
 						// Actualizo la cantidad del producto especifico que ha sido clickado
 						// anteriormente
 						cantidadButton.setOnAction(k -> {
 							VBox formulario = new VBox(10);
-							formulario.getChildren().add(new Label("Cantidad"));
+							Label newCantidadLabel = new Label("Cantidad");
+							newCantidadLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+							formulario.getChildren().add(newCantidadLabel);
+							
+							newCantidad.setPromptText("Introduce la cantidad");
+							newCantidad.setStyle("-fx-background-color: transparent;-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");	
 							formulario.getChildren().add(newCantidad);
+							
+							goBack.setMaxWidth(Double.MAX_VALUE);
+							goBack.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+							goBack.setOnMouseEntered(ev->{
+								goBack.setStyle("-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+							});
+							//Cuando se quita el cursor del raton de encima
+							goBack.setOnMouseExited(e2->{
+								goBack.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+							});
+							formulario.getChildren().add(goBack);
 							// Abro la nueva ventana
 							Scene formularioScene = new Scene(formulario, 600, 400);
 							// Obtengo ventana actual
 							Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 							currentStage.setScene(formularioScene);
-
+							
+							//Vuelve al carrito
+							goBack.setOnAction(ev->{
+								// Recargo la pagina
+								FXMLLoader loader = new FXMLLoader(getClass().getResource("Carrito.fxml"));
+								// LoginController log = new LoginController();
+								// loader.setController(log);
+								Parent nextScreen;
+								try {
+									nextScreen = loader.load();
+								// log = loader.getController();
+								// Cargo el XML siguiente en una nueva escena, que posteriormente casteo la
+								// ventana que obtengo y la establezco en la escena actual para que no me
+								// cree otra ventana.
+								Scene nextScreenScene = new Scene(nextScreen);
+								Stage current = (Stage) ((Node) k.getSource()).getScene().getWindow();
+								currentStage.setScene(nextScreenScene);
+								currentStage.show(); // Muestro la pagina LoginMenu
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+							});
 							// Actualizo la cantidad del producto
 							newCantidad.setOnKeyPressed(key -> {
 								double c = Double.parseDouble(newCantidad.getText());
@@ -174,7 +248,7 @@ public class CarritoController {
 								}
 							});
 						});
-
+						
 						deleteItem.setOnAction(ev -> {
 							String getProducto = "SELECT idproducto from producto where nombre='"
 									+ productoButton.getText() + "'";

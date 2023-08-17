@@ -30,6 +30,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import mm.makery.app.model.SesionUsuario;
 
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -54,6 +55,8 @@ public class PaginaAdmin {
 	private Button settings;
 	@FXML
 	private Button solicitudes;
+	@FXML
+	private Label statusLabel;
 	
 	private String nombreBD=""; //Nombre del coemrcio recogido de la base de datos 
 	private ArrayList<String> nombrescomercios = new ArrayList<>();
@@ -84,14 +87,21 @@ public class PaginaAdmin {
 	
 	@FXML
 	private void initialize() {
-		
+		//Para mostrar el nombre del usuario
+		for(SesionUsuario sesion: SesionUsuario.usuarios) {
+			if(sesion.getUsuario().equals(SesionUsuario.usuarioABuscar)) {
+				//Almacenar los datos en la label para mostrar el nombre de usuario
+				statusLabel.setText("¡Hola, "+ sesion.getNombre()+"!");
+			}
+		}
 		Platform.runLater(() -> {
 	        ArrayList<String> nombres = searchCommercesDB();
 	        carrusel.setAlignment(Pos.CENTER);
 	        
 	        for (String n : nombres) {
 	            Button comercio = new Button(n);
-	            comercio.setPrefWidth(carrusel.getWidth() / 2);
+	            comercio.setPrefWidth(carrusel.getWidth());
+	            comercio.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
 	            carrusel.getChildren().add(comercio);
 	        }
 	        
@@ -99,10 +109,10 @@ public class PaginaAdmin {
 	    });
 	}
 	
-	
+	//Animacion para simular un carrusel
 	private void startAnimation() {
-		// Duracion de la animacion
-		int animationDuration=5000;
+		// Duracion de la animacion en milisegundos
+		int animationDuration=25000;
 		// Crea la transición de desplazamiento
 		carrusel.setTranslateX(-carrusel.getWidth());
         TranslateTransition transitionRight = new TranslateTransition(Duration.millis(animationDuration), carrusel);
@@ -291,8 +301,5 @@ public class PaginaAdmin {
 		}
 		return id;
 	}
-	
-	
-	
-	
+
 }

@@ -12,7 +12,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #12C4E7;">
                <children>
-                  <Button fx:id="logoutButton" layoutX="962.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="30.0" prefWidth="31.0" styleClass="transparent-button" stylesheets="@../style/logoutbutton.css">
+                  <Button fx:id="logoutButton" layoutX="952.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="30.0" prefWidth="31.0" styleClass="button-base" stylesheets="@../style/button.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -37,9 +37,9 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Label layoutX="105.0" layoutY="7.0" prefHeight="40.0" prefWidth="315.0" text="Label" textFill="WHITE">
+                  <Label fx:id="statusLabel" layoutX="105.0" layoutY="7.0" prefHeight="40.0" prefWidth="455.0" text="Label" textFill="WHITE">
                      <font>
-                        <Font name="Arial Black" size="27.0" />
+                        <Font name="Arial Black" size="20.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="37.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
