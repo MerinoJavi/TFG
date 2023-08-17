@@ -274,7 +274,7 @@ public class PerfilComercioController {
 				st.executeUpdate();
 
 				Alert a = new Alert(AlertType.INFORMATION);
-				a.setTitle("¡Cambios guardados");
+				a.setTitle("¡Cambios guardados!");
 				a.setHeaderText(null);
 				a.setContentText(null);
 				a.showAndWait();
