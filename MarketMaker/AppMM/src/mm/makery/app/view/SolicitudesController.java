@@ -17,6 +17,7 @@ import javax.mail.Authenticator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Separator;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -71,14 +73,14 @@ public class SolicitudesController extends Authenticator{
 			Button botonNombre = new Button(nombre);
 			botonNombre.setMaxWidth(Double.MAX_VALUE); //Establezco anchura de boton para que ocupe lo máximo posible 
 			//Aplico estilo al boton
-			botonNombre.setStyle("-fx-text-fill: black; -fx-font-size: 12.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+			botonNombre.setStyle("-fx-text-fill: black; -fx-font-size: 14.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent; -fx-font-style: italic;");
 			//Cuando pase el ratón por encima
 			botonNombre.setOnMouseEntered(e->{
-				botonNombre.setStyle("-fx-background-color: #237F08; -fx-scale-x: 1.2; -fx-scale-y: 1.2; -fx-text-fill: black; -fx-font-size: 12.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				botonNombre.setStyle("-fx-font-style: italic; -fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-text-fill: black; -fx-font-size: 14.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
 			});
 			//Cuando se quita el cursor del raton de encima
 			botonNombre.setOnMouseExited(e->{
-				botonNombre.setStyle("-fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-text-fill: black; -fx-font-size: 12.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				botonNombre.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-font-style: italic; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-text-fill: black; -fx-font-size: 14.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
 			});
 			//Muestro los datos de la solicitud cuando hago clic
 			botonNombre.setOnAction(event -> {
@@ -152,14 +154,14 @@ public class SolicitudesController extends Authenticator{
 	            emailStr = result.getString("email");
 	            //Labels para mostrar los datos
 	            nombreLabel = new Label("Nombre: " + nombrecomercio + "\n\n");
-	            nifLabel = new Label("NIF: " + nif);
-	            municipio = new Label("Municipio: " + municipioStr);
-	            provincia = new Label("Provincia: " + provinciaStr);
-	            codigopostal = new Label("Codigo postal: " + codigopostalStr);
-	            pais = new Label("Pais: " + paisStr);
-	            direccion = new Label("Direccion: " + direccionStr);
-	            telefono = new Label("Telefono: " + telefonoStr);
-	            email = new Label("Email: " + emailStr);
+	            nifLabel = new Label("NIF: " + nif+ "\n\n");
+	            municipio = new Label("Municipio: " + municipioStr+ "\n\n");
+	            provincia = new Label("Provincia: " + provinciaStr+ "\n\n");
+	            codigopostal = new Label("Codigo postal: " + codigopostalStr+ "\n\n");
+	            pais = new Label("País: " + paisStr+ "\n\n");
+	            direccion = new Label("Dirección: " + direccionStr+ "\n\n");
+	            telefono = new Label("Teléfono: " + telefonoStr+ "\n\n");
+	            email = new Label("Email: " + emailStr+ "\n\n");
 	            //Labels para almacenar los datos
 	            nombreBD=new Label(nombrecomercio);
 	            nifBD=new Label(nif);
@@ -170,14 +172,71 @@ public class SolicitudesController extends Authenticator{
 	            direccionBD=new Label(direccionStr);
 	            telefonoBD=new Label(telefonoStr);
 	            emailBD=new Label(emailStr);
+	            //Agrego los datos al VBox correspondiente, y aplico la hoja de estilos para modificar el estilo predeterminado que poseen los Labels de JavaFX
+	            nombreLabel.setStyle("-fx-text-fill:white; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic;");
+	            nifLabel.setStyle("-fx-text-fill:white; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            municipio.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            provincia.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            codigopostal.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            pais.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            direccion.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            telefono.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
+	            email.setStyle("-fx-text-fill:white;-fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px;-fx-font-style: italic;");
 	            
-	            datos.getChildren().addAll(nombreLabel, nifLabel, municipio, provincia, codigopostal, pais, direccion,
-	                    telefono, email);
-	            datos.getChildren().addAll(new Label("Introduce el nombre de usuario: "), usuario);
-	            datos.getChildren().addAll(new Label("Introduce la contraseña: "), password);
+				datos.getChildren().addAll(nombreLabel, new Separator(Orientation.HORIZONTAL), nifLabel,
+						new Separator(Orientation.HORIZONTAL), municipio, new Separator(Orientation.HORIZONTAL),
+						provincia, new Separator(Orientation.HORIZONTAL), codigopostal,
+						new Separator(Orientation.HORIZONTAL), pais, new Separator(Orientation.HORIZONTAL), direccion,
+						new Separator(Orientation.HORIZONTAL), telefono, new Separator(Orientation.HORIZONTAL), email,new Separator(Orientation.HORIZONTAL));
+				datos.getChildren().add(new Label("\n\n"));
+				
+				//Establezco estilo para los botones
+				usuario.setPromptText("Usuario"); //Texto que sale por defecto en el campo del usuario, idem con contraseña
+				password.setPromptText("********");
+				
+				usuario.setStyle("-fx-background-radius: 30.0; -fx-prompt-text-fill: white; -fx-background-color: transparent; -fx-font-style: italic;");
+				password.setStyle("-fx-background-radius: 30.0; -fx-prompt-text-fill: white; -fx-background-color: transparent; -fx-font-style: italic;");
+				
+				Label title = new Label("En caso de que la solicitud sea aprobada...");
+				title.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 25.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+
+				//Añado campos de usuario y contraseña, y le aplico los estilos correspondientes
+				datos.getChildren().add(title);
+				Label userTitle = new Label("Introduce el usuario: ");
+				Label passwordTitle=new Label("Introduce la contraseña:");
+				
+				userTitle.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+				passwordTitle.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+				
+				datos.getChildren().add(userTitle);
+	            datos.getChildren().addAll(usuario, new Separator(Orientation.HORIZONTAL));
+	            datos.getChildren().add(passwordTitle);
+	            datos.getChildren().addAll(password);
+	            //Aplico estilo CSS a los botones aceptar y rechazar
+	            acceptButton.setMaxWidth(Double.MAX_VALUE); //Establezco anchura de boton para que ocupe lo máximo posible 
+	            rejectButton.setMaxWidth(Double.MAX_VALUE);
+	            
+	            acceptButton.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+	            acceptButton.setOnMouseEntered(e->{
+					acceptButton.setStyle("-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				//Cuando se quita el cursor del raton de encima
+				acceptButton.setOnMouseExited(e->{
+					acceptButton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+				
+	            rejectButton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-font-size: 17.0px;-fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+				rejectButton.setOnMouseEntered(e->{
+					rejectButton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-background-color: #237F08; -fx-text-fill: black; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				//Cuando se quita el cursor del raton de encima
+				rejectButton.setOnMouseExited(e->{
+					rejectButton.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+				
 	            datos.getChildren().add(acceptButton);
 	            datos.getChildren().add(rejectButton);
-
+	            
 	            acceptButton.setOnAction(event -> {
 	                try (Connection conAceptar = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
 	                        "9P$H7nI5!*8p");
@@ -212,7 +271,7 @@ public class SolicitudesController extends Authenticator{
 	                                Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
 	                                alertInfo.setTitle("¡Solicitud aceptada!");
 	                                alertInfo.setHeaderText(null);
-	                                alertInfo.setContentText("La solicitud ha sido aceptada con éxito. Proporciona los datos al comercio para que pueda iniciar sesión");
+	                                alertInfo.setContentText("La solicitud ha sido aceptada con éxito.");
 	                                alertInfo.showAndWait();
 	                                
 	                                //Correo de confirmacion
@@ -406,7 +465,7 @@ public class SolicitudesController extends Authenticator{
 		String msg = "Estimado " + nombrecomercio + ", \n\n"
 				+ "Lamento comunicarle que su solicitud ha sido rechazada por un administrador de nuestro sistema. Puede rellenarla de nuevo si así lo desea.";
 	    //La clave de aplicación obtenida:
-	    String claveemail = "aaagpnrcalddicky";
+	    String claveemail = "zsmznuxfauftexzk";
 
 	    Properties props = System.getProperties();
 	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
