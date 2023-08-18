@@ -35,6 +35,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import mm.makery.app.model.SesionUsuario;
 import javafx.scene.control.Tooltip;
 
@@ -181,9 +182,11 @@ public class ProductosComercioDetalladoController {
 						     //Si es el usuario anonimo, que se desactive
 						     if(SesionUsuario.usuarioABuscar==null) {
 						    	 addcart.setDisable(true);
+						    	 addcart.setText("Debes registrarte como cliente para poder realizar compras.");
 						    	
 						     } else if(LoginMenuController.esAdmin) {
 						    	 addcart.setDisable(true);
+						    	 addcart.setText("Debes registrarte como cliente para poder realizar compras.");
 						     }
 						     
 						    	 addcart.setOnAction(event2 -> {

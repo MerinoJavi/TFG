@@ -62,43 +62,45 @@ public class SolicitudComercioController {
 			a.setHeaderText("Error en algun campo introducido. Revise los campos");
 			a.setContentText("Revise los campos de nuevo");
 			a.showAndWait();
-		}
-		
-		try {
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
-			String sql = "INSERT INTO solicitudcomercio(nombre,nif,municipio,provincia,codigopostal,pais,direccion,telefono,email) VALUES ('"
-		             + name + "','" + nif + "','" + mun + "','" + prov + "','" + cod + "','" + p + "','" + dir + "','" + tlf + "','" + correo + "')";
-			PreparedStatement prep = conexion.prepareStatement(sql);
-			prep.executeUpdate();
-			prep.close();
+		}else {
+			try {
+				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG","root","9P$H7nI5!*8p");
+				String sql = "INSERT INTO solicitudcomercio(nombre,nif,municipio,provincia,codigopostal,pais,direccion,telefono,email) VALUES ('"
+			             + name + "','" + nif + "','" + mun + "','" + prov + "','" + cod + "','" + p + "','" + dir + "','" + tlf + "','" + correo + "')";
+				PreparedStatement prep = conexion.prepareStatement(sql);
+				prep.executeUpdate();
+				prep.close();
+				
+				conexion.close();
+			}catch(SQLException e) {
+				//Mostrar mensaje de error al intentar guardar la solicitud en la BBDD
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error al guardar");
+				alert.setHeaderText(null);
+		        alert.setContentText("No se pudo guardar los datos. Por favor, inténtalo de nuevo.");
+		        alert.showAndWait();
+		        e.printStackTrace();
+			}
 			
-			conexion.close();
-		}catch(SQLException e) {
-			//Mostrar mensaje de error al intentar guardar la solicitud en la BBDD
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error al guardar");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("¡Solicitud enviada! :-)");
 			alert.setHeaderText(null);
-	        alert.setContentText("No se pudo guardar los datos. Por favor, inténtalo de nuevo.");
+	        alert.setContentText("La solicitud está a la espera de ser aceptada por un administrador. Será comunicado por el correo introducido en la solicitud una vez se sepa la resolución de la misma.");
 	        alert.showAndWait();
-	        e.printStackTrace();
+			
+			//Borro los campos
+			nombre.clear();
+			NIF.clear();
+			municipio.clear();
+			provincia.clear();
+			codigopostal.clear();
+			pais.clear();
+			direccion.clear();
+			telefono.clear();
+			email.clear();
+			
 		}
 		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("¡Solicitud enviada! :-)");
-		alert.setHeaderText(null);
-        alert.setContentText("La solicitud está a la espera de ser aceptada por un administrador. Será comunicado por el correo introducido en la solicitud una vez se sepa la resolución de la misma.");
-        alert.showAndWait();
-		
-		//Borro los campos
-		nombre.clear();
-		NIF.clear();
-		municipio.clear();
-		provincia.clear();
-		codigopostal.clear();
-		pais.clear();
-		direccion.clear();
-		telefono.clear();
-		email.clear();
 		
 	}
 	

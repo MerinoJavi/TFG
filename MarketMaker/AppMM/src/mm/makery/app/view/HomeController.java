@@ -51,15 +51,15 @@ public class HomeController {
 		Platform.runLater(() -> {
 	        ArrayList<String> nombres = searchCommercesDB();
 	        carrusel.setAlignment(Pos.CENTER);
-	        
+	        //Creo los nombres de los comercios y los añado al carrusel
 	        for (String n : nombres) {
 	            Button comercio = new Button(n);
 	            comercio.setPrefWidth(carrusel.getWidth());
-	            comercio.setPrefHeight(carrusel.getHeight());
+	            comercio.setStyle("-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
 	            carrusel.getChildren().add(comercio);
 	        }
 	        
-	        startAnimation();
+	        startAnimation(); //Empieza la animacion
 	    });
 	}
 	
@@ -84,7 +84,7 @@ public class HomeController {
 	
 	private void startAnimation() {
 		// Duracion de la animacion
-		int animationDuration=15000;
+		int animationDuration=25000;
 		// Crea la transición de desplazamiento
 		carrusel.setTranslateX(-carrusel.getWidth());
         TranslateTransition transitionRight = new TranslateTransition(Duration.millis(animationDuration), carrusel);
@@ -169,12 +169,24 @@ public class HomeController {
 							a.setTitle("El comercio existe!");
 							a.showAndWait();
 							 */
+							//Se crea el boton de los comercios y se añaden
 							commerceFound=true;
 							Button comercioVBox = new Button(nombreBD);
 							comercioVBox.setMaxWidth(Double.MAX_VALUE);
-							Separator s = new Separator(Orientation.HORIZONTAL);
+							comercioVBox.setStyle(
+									"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+							comercioVBox.setOnMouseEntered(ev -> {
+								comercioVBox.setStyle(
+										"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+							});
+							//Cuando se quita el cursor del raton de encima
+							comercioVBox.setOnMouseExited(eve->{
+								comercioVBox.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+							});
 						//	System.out.println("El boton es creado");
-							carruselComercios.getChildren().addAll(comercioVBox,s);
+							
+							
+							carruselComercios.getChildren().addAll(comercioVBox);
 						//	System.out.println("El boton es añadido");
 							carruselComercios.setSpacing(2);
 							//comercioVBox=null;

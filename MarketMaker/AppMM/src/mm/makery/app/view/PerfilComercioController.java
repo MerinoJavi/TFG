@@ -222,19 +222,64 @@ public class PerfilComercioController {
 		direccionField.setText("");
 		telefonoField.setText("");
 		emailField.setText("");
-		
-		
-		// Agrego los campos al formulario, y los botones guardar y cancelar
-		formulario.getChildren().addAll(new Label("Nombre: "), nombreField);
-		formulario.getChildren().addAll(new Label("Usuario: "), usuarioField);
+		//Aplico estilo a todos los campos, labels y botones
+		Label nombreLabel = new Label("Nombre");
+		nombreLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label usuarioLabel = new Label("Usuario");
+		usuarioLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label municipioLabel = new Label("Municipio");
+		municipioLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label provinciaLabel = new Label("Provincia");
+		provinciaLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label codigopostalLabel = new Label("Código Postal");
+		codigopostalLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label paisLabel = new Label("País");
+		paisLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label direccionLabel = new Label("Dirección");
+		direccionLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label telefonoLabel = new Label("Teléfono");
+		telefonoLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label emailLabel = new Label("Email");
+		emailLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+	
+		nombreField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		usuarioField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		municipioField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		provinciaField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		codigopostalField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		paisField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		direccionField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		telefonoField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		emailField.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		//Añado los campos y sus correspondientes labels
+		formulario.getChildren().addAll(nombreLabel, nombreField);
+		formulario.getChildren().addAll(usuarioLabel, usuarioField);
 		//formulario.getChildren().addAll(new Label("NIF: "), nifField);
-		formulario.getChildren().addAll(new Label("Municipio: "), municipioField);
-		formulario.getChildren().addAll(new Label("Provincia: "), provinciaField);
-		formulario.getChildren().addAll(new Label("Codigo posta: "), codigopostalField);
-		formulario.getChildren().addAll(new Label("Pais: "), paisField);
-		formulario.getChildren().addAll(new Label("Direccion: "), direccionField);
-		formulario.getChildren().addAll(new Label("Telefono: "), telefonoField);
-		formulario.getChildren().addAll(new Label("Email: "), emailField);
+		formulario.getChildren().addAll(municipioLabel, municipioField);
+		formulario.getChildren().addAll(provinciaLabel, provinciaField);
+		formulario.getChildren().addAll(codigopostalLabel, codigopostalField);
+		formulario.getChildren().addAll(paisLabel, paisField);
+		formulario.getChildren().addAll(direccionLabel, direccionField);
+		formulario.getChildren().addAll(telefonoLabel, telefonoField);
+		formulario.getChildren().addAll(emailLabel, emailField);
 		
 		//Pongo los datos actuales del perfil
 		nombreField.setText(nombre.getText());
@@ -249,12 +294,36 @@ public class PerfilComercioController {
 		emailField.setText(email.getText());
 		
 		
-		//Añado los botones
+		//Añado los botones y aplico los estilos
+		saveEdits.setMaxWidth(Double.MAX_VALUE);
+		cancelEdits.setMaxWidth(Double.MAX_VALUE);
+		saveEdits.setStyle(
+				"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+		saveEdits.setOnMouseEntered(eve -> {
+			saveEdits.setStyle(
+					"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+		});
+		// Cuando se quita el cursor del raton de encima
+		saveEdits.setOnMouseExited(e3 -> {
+			saveEdits.setStyle(
+					"-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+		});
+
+		cancelEdits.setStyle(
+				"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+		cancelEdits.setOnMouseEntered(ev -> {
+			cancelEdits.setStyle(
+					"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+		});
+		//Cuando se quita el cursor del raton de encima
+		cancelEdits.setOnMouseExited(e2->{
+			cancelEdits.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+		});
 		formulario.getChildren().add(saveEdits);
 		formulario.getChildren().add(cancelEdits);
 		// Crear escena con el formulario
 
-		Scene formularioScene = new Scene(formulario, 600, 400);
+		Scene formularioScene = new Scene(formulario, 1024, 768);
 		// Obtengo ventana actual
 		Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		currentStage.setScene(formularioScene);
@@ -354,9 +423,38 @@ public class PerfilComercioController {
 				VBox formulario = new VBox(10);
 				passField.setText("");
 				repeatpassField.setText("");
+				//Estilos para los botones
+				saveEdits.setMaxWidth(Double.MAX_VALUE);
+				cancelEdits.setMaxWidth(Double.MAX_VALUE);
+				saveEdits.setStyle(
+						"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+				saveEdits.setOnMouseEntered(e -> {
+					saveEdits.setStyle(
+							"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				// Cuando se quita el cursor del raton de encima
+				saveEdits.setOnMouseExited(e -> {
+					saveEdits.setStyle(
+							"-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+
+				cancelEdits.setStyle(
+						"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+				cancelEdits.setOnMouseEntered(e -> {
+					cancelEdits.setStyle(
+							"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				//Cuando se quita el cursor del raton de encima
+				cancelEdits.setOnMouseExited(e->{
+					cancelEdits.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+				Label passLabel = new Label("Nueva contraseña");
+				passLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+				Label repeatpassLabel = new Label("Repite la contraseña");
+				repeatpassLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
 				
-				formulario.getChildren().addAll(new Label("Nueva contraseña: "),passField);
-				formulario.getChildren().addAll(new Label("Repite la contraseña: "),repeatpassField);
+				formulario.getChildren().addAll(passLabel,passField);
+				formulario.getChildren().addAll(repeatpassLabel,repeatpassField);
 				formulario.getChildren().add(saveEdits);
 				formulario.getChildren().add(cancelEdits);
 				
@@ -367,29 +465,30 @@ public class PerfilComercioController {
 				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				currentStage.setScene(formularioScene);
 				saveEdits.setOnAction(ev->{
-					if(passField.getText().equals(repeatpassField.getText())) {
-						String salt = PerfilAdminController.cadenaAleatoria(8);
+					if(passField.getText().equals(repeatpassField.getText())) { //Las contraseñas coinciden
+						String salt = PerfilAdminController.cadenaAleatoria(8); //Creo salt aleatoria
 						try {
-							MessageDigest digest = MessageDigest.getInstance("SHA-256");
+							MessageDigest digest = MessageDigest.getInstance("SHA-256"); //Especifico el algoritmo para encriptarlo
 						} catch (NoSuchAlgorithmException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						String passhashed = null;
+						String passhashed = null; //Contraseña hasheada
 						try {
-							passhashed = PerfilAdminController.hashPasswordSHA256(passField.getText(), salt);
+							passhashed = PerfilAdminController.hashPasswordSHA256(passField.getText(), salt); //Hash de la contraseña junto a la sal para añadir un plus de seguridad
 						} catch (NoSuchAlgorithmException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
 						try {
+							//Actualizo la contraseña en la base de datos
 							Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
 									"9P$H7nI5!*8p");
 							String sql = "UPDATE comercio SET contraseña='" + passhashed + "', salt='" + salt + "' WHERE usuario='" + user.getText() + "'";
 							PreparedStatement st = conexion.prepareStatement(sql);
 							st.executeUpdate();
-
+							//Creo alerta y la muestro
 							Alert a = new Alert(AlertType.INFORMATION);
 							a.setTitle("¡Cambios guardados!");
 							a.setHeaderText(null);
@@ -398,7 +497,7 @@ public class PerfilComercioController {
 							st.close();
 							conexion.close();
 							Optional<ButtonType> action = a.showAndWait();
-							if(action.get()==ButtonType.OK) {
+							if(action.get()==ButtonType.OK) { //El usuario pulsa OK, se redirige a la pagina principal
 								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaComercio.fxml"));
 					    		LoginController log = new LoginController();
 					    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
