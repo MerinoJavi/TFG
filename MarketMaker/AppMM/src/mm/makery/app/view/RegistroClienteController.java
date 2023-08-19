@@ -75,62 +75,62 @@ public class RegistroClienteController {
 	    if (nombre.isEmpty() || nombre.matches("\\d+")) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en el nombre introducido Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (apellidos.isEmpty() || apellidos.matches("\\d+")) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
 			a.setHeaderText("Error en el campo de apellidos. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (usuario.isEmpty()) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en el usuario introducido Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (email.isEmpty()) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en el email introducido Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (!esEmailValido(email)) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en el email introducido Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (password.isEmpty() || password.length() < 8) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en la contraseña introducida. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (fechaNacimiento == null) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en la fecha de nacimiento introducida. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (provincia.isEmpty()) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en la provincia introducida.Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (pais.isEmpty()) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en el país introducido. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos");
 			a.showAndWait();
 	    } else if (direccion.isEmpty()) {
 	    	Alert a = new Alert(AlertType.ERROR);
 			a.setTitle("Error");
-			a.setHeaderText("Error en la direccion introducida. Revise los campos");
-			a.setContentText("Revise de nuevo el campo");
+			a.setHeaderText("Revise los campos");
+			a.setContentText("Revise de nuevo los campos.");
 			a.showAndWait();
 	    } else {
 		//Encripto contraseña

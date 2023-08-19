@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -328,53 +330,111 @@ public class PerfilComercioController {
 		Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		currentStage.setScene(formularioScene);
 
-		// Guardar los cambios en la base de datos
+		// Guardar los cambios en la base de datos. Comprobacion de los campos que son editables.
 		saveEdits.setOnAction(event -> {
-			try {
-				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
-						"9P$H7nI5!*8p");
-				String sql = "UPDATE comercio SET nombre='" + nombreField.getText() + "',nif='" + nifField.getText()
-						+ "',municipio='" + municipioField.getText() + "',provincia='" + provinciaField.getText()
-						+ "',codigopostal='" + codigopostalField.getText() + "',pais='" + paisField.getText()
-						+ "',direccion='" + direccionField.getText() + "',telefono='" + telefonoField.getText()
-						+ "',email='" + emailField.getText() + "',usuario='" + usuarioField.getText()
-						+ "' WHERE usuario='" + usuarioField.getText() + "'";
-				PreparedStatement st = conexion.prepareStatement(sql);
-				st.executeUpdate();
-
-				Alert a = new Alert(AlertType.INFORMATION);
-				a.setTitle("¡Cambios guardados!");
+			if(nombreField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Nombre vacío");
+				a.setContentText("Introduce el nombre.");
 				a.setHeaderText(null);
-				a.setContentText(null);
 				a.showAndWait();
-				// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
-				st.close();
-				conexion.close();
-				
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilComercio.fxml"));
-				//LoginController log = new LoginController();
-		        
-		        
-				//loader.setController(log);
-				Parent nextScreen = loader.load();
-				//log = loader.getController();
-				Scene nextScreenScene = new Scene(nextScreen);
-				Stage c = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				currentStage.setScene(nextScreenScene);
-				currentStage.show();
-
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				Alert a= new Alert(AlertType.ERROR);
-				a.setTitle("Error");
-				a.setHeaderText("Error al actualizar los datos. Inténtelo de nuevo");
-				a.setContentText(null);
+			}else if(usuarioField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Usuario vacío");
+				a.setContentText("Introduce el usuario..");
+				a.setHeaderText(null);
 				a.showAndWait();
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			}else if(municipioField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Municipio vacio");
+				a.setContentText("Introduce el municipio.");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(provinciaField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Nombre de la provincia vacío");
+				a.setContentText("Introduce el nombre de la provincia.");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(codigopostalField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Código postal vacío");
+				a.setContentText("Introduce el código postal.");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(paisField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("País no válido");
+				a.setContentText("Introduce tu país");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(direccionField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Direccion no valida");
+				a.setContentText("Introduce una dirección válida");
+				a.setHeaderText(null);
+				a.showAndWait();
 			}
+			else if(telefonoField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Teléfono vacío");
+				a.setContentText("Introduce el teléfono.");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(!RegistroClienteController.esEmailValido(emailField.getText())) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Email no válido");
+				a.setContentText("Introduce el email correctamente.");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else {
+				try {
+					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+							"9P$H7nI5!*8p");
+					String sql = "UPDATE comercio SET nombre='" + nombreField.getText() + "',nif='" + nifField.getText()
+							+ "',municipio='" + municipioField.getText() + "',provincia='" + provinciaField.getText()
+							+ "',codigopostal='" + codigopostalField.getText() + "',pais='" + paisField.getText()
+							+ "',direccion='" + direccionField.getText() + "',telefono='" + telefonoField.getText()
+							+ "',email='" + emailField.getText() + "',usuario='" + usuarioField.getText()
+							+ "' WHERE usuario='" + usuarioField.getText() + "'";
+					PreparedStatement st = conexion.prepareStatement(sql);
+					st.executeUpdate();
+
+					Alert a = new Alert(AlertType.INFORMATION);
+					a.setTitle("¡Cambios guardados!");
+					a.setHeaderText(null);
+					a.setContentText(null);
+					a.showAndWait();
+					// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
+					st.close();
+					conexion.close();
+					
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilComercio.fxml"));
+					//LoginController log = new LoginController();
+			        
+			        
+					//loader.setController(log);
+					Parent nextScreen = loader.load();
+					//log = loader.getController();
+					Scene nextScreenScene = new Scene(nextScreen);
+					Stage c = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					currentStage.setScene(nextScreenScene);
+					currentStage.show();
+
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					Alert a= new Alert(AlertType.ERROR);
+					a.setTitle("Error");
+					a.setHeaderText("Error al actualizar los datos. Inténtelo de nuevo");
+					a.setContentText(null);
+					a.showAndWait();
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
 		});
 
 		cancelEdits.setOnAction(event -> {
@@ -465,6 +525,21 @@ public class PerfilComercioController {
 				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				currentStage.setScene(formularioScene);
 				saveEdits.setOnAction(ev->{
+					if(passField.getText().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Contraseña vacia");
+						a.setContentText("Introduce una contraseña..");
+						a.setHeaderText(null);
+						a.showAndWait();
+					}else if(repeatpassField.getText().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Contraseña vacia");
+						a.setContentText("Introduce una contraseña..");
+						a.setHeaderText(null);
+						a.showAndWait();
+					}else {
+						
+					
 					if(passField.getText().equals(repeatpassField.getText())) { //Las contraseñas coinciden
 						String salt = PerfilAdminController.cadenaAleatoria(8); //Creo salt aleatoria
 						try {
@@ -525,6 +600,7 @@ public class PerfilComercioController {
 						a.setContentText(null);
 						a.showAndWait();
 					}
+				}
 				});
 				cancelEdits.setOnAction(e->{
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilComercio.fxml"));

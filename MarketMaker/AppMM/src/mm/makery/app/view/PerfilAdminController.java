@@ -128,17 +128,56 @@ public class PerfilAdminController {
 		usuarioField.setText("");
 		correoField.setText("");
 		// Agrego los campos al formulario, y los botones guardar y cancelar
-		formulario.getChildren().addAll(new Label("Nombre: "), nombreField);
-		formulario.getChildren().addAll(new Label("Apellidos: "), apellidosField);
-		formulario.getChildren().addAll(new Label("Usuario: "), usuarioField);
-		formulario.getChildren().addAll(new Label("Correo: "), correoField);
+		// Agrego los campos al formulario, y los botones guardar y cancelar y sus estilos
+		Label nombreLabel = new Label("Nombre");
+		nombreLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label usuarioLabel = new Label("Usuario");
+		usuarioLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label apellidosLabel = new Label("Apellidos");
+		apellidosLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		Label correoLabel = new Label("Email");
+		correoLabel.setStyle(
+				"-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+		
+		formulario.getChildren().addAll(nombreLabel, nombreField);
+		formulario.getChildren().addAll(apellidosLabel, apellidosField);
+		formulario.getChildren().addAll(usuarioLabel, usuarioField);
+		formulario.getChildren().addAll(correoLabel, correoField);
 		
 		//Pongo los datos actuales del perfil
 		nombreField.setText(nombre.getText());
 		apellidosField.setText(apellidos.getText());
 		usuarioField.setText(usuario.getText());
 		correoField.setText(correo.getText());
-		//Añado los botones
+		//Añado los botones y sus estilos
+		saveEdits.setStyle(
+				"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+		saveEdits.setOnMouseEntered(eve -> {
+			saveEdits.setStyle(
+					"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+		});
+		// Cuando se quita el cursor del raton de encima
+		saveEdits.setOnMouseExited(e3 -> {
+			saveEdits.setStyle(
+					"-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+		});
+
+		cancelEdits.setStyle(
+				"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+		cancelEdits.setOnMouseEntered(ev -> {
+			cancelEdits.setStyle(
+					"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+		});
+		//Cuando se quita el cursor del raton de encima
+		cancelEdits.setOnMouseExited(e2->{
+			cancelEdits.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+		});
+		saveEdits.setMaxWidth(Double.MAX_VALUE);
+		cancelEdits.setMaxWidth(Double.MAX_VALUE);
+		
 		formulario.getChildren().add(saveEdits);
 		formulario.getChildren().add(cancelEdits);
 		// Crear escena con el formulario
@@ -239,8 +278,38 @@ public class PerfilAdminController {
 				passField.setText("");
 				repeatpassField.setText("");
 				
-				formulario.getChildren().addAll(new Label("Nueva contraseña: "),passField);
-				formulario.getChildren().addAll(new Label("Repite la contraseña: "),repeatpassField);
+				//Estilos a los botones
+				saveEdits.setStyle(
+						"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+				saveEdits.setOnMouseEntered(e -> {
+					saveEdits.setStyle(
+							"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				// Cuando se quita el cursor del raton de encima
+				saveEdits.setOnMouseExited(e -> {
+					saveEdits.setStyle(
+							"-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+
+				cancelEdits.setStyle(
+						"-fx-font-size: 17.0px; -fx-font-family: 'Segoe UI Light';  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);-fx-background-color: transparent;");
+				cancelEdits.setOnMouseEntered(e -> {
+					cancelEdits.setStyle(
+							"-fx-font-family: 'Segoe UI Light';-fx-background-color: #237F08; -fx-font-size: 17.0px; -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0);");
+				});
+				//Cuando se quita el cursor del raton de encima
+				cancelEdits.setOnMouseExited(e->{
+					cancelEdits.setStyle("-fx-font-family: 'Segoe UI Light'; -fx-scale-x:1; -fx-scale-y:1; -fx-border-color: transparent; -fx-font-size: 17.0px;  -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 5.0); -fx-background-color: transparent;");
+				});
+				
+				//Labels personalizados para la contraseña
+				Label passLabel = new Label("Nueva contraseña");
+				passLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+				Label repeatpassLabel = new Label("Repite la contraseña");
+				repeatpassLabel.setStyle("-fx-text-fill:black; -fx-font-family: 'Segoe UI Light'; -fx-font-size: 15.0px; -fx-font-style: italic; -fx-font-weight:bold;");
+				//Se agregan los botones y las etiquetas correspondientes a la introduccion de la contraseña al formulario creado anteriormente
+				formulario.getChildren().addAll(passLabel,passField);
+				formulario.getChildren().addAll(repeatpassLabel,repeatpassField);
 				formulario.getChildren().add(saveEdits);
 				formulario.getChildren().add(cancelEdits);
 				
@@ -251,6 +320,19 @@ public class PerfilAdminController {
 				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				currentStage.setScene(formularioScene);
 				saveEdits.setOnAction(ev->{
+					if(passField.getText().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Error en la contraseña");
+						a.setContentText("Introduce la contraseña");
+						a.setHeaderText(null);
+						a.showAndWait();
+					}else if(repeatpassField.getText().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Error en la contraseña");
+						a.setContentText("Introduce la contraseña");
+						a.setHeaderText(null);
+						a.showAndWait();
+					}else {
 					if(passField.getText().equals(repeatpassField.getText())) {
 						String salt = cadenaAleatoria(8);
 						try {
@@ -310,6 +392,8 @@ public class PerfilAdminController {
 						a.setContentText(null);
 						a.showAndWait();
 					}
+				}
+					
 				});
 				cancelEdits.setOnAction(e->{
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilAdmin.fxml"));

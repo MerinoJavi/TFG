@@ -294,41 +294,93 @@ public class PerfilClienteController {
 
 				// Guardar los cambios en la base de datos
 				saveEdits.setOnAction(event -> {
-					try {
-						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
-								"9P$H7nI5!*8p");
-						String sql = "UPDATE cliente SET Nombre='" + nombreField.getText() + "',Apellidos='"
-								+ apellidosField.getText() + "',usuario='" + usuarioField.getText() + "',email='"
-								+ correoField.getText() + "',provincia='" + provinciaField.getText() + "',pais='"
-								+ paisField.getText() + "',direccion='" + direccionField.getText() + "' WHERE usuario='"
-								+ user.getText() + "'";
-						PreparedStatement st = conexion.prepareStatement(sql);
-						st.executeUpdate();
+					
+						if(nombreField.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en el nombre introducido");
+							a.setContentText("Introduce el nombre.");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(apellidosField.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en el campo apellidos");
+							a.setContentText("Introduce los apellidos..");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(usuarioField.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en el usuario introducido");
+							a.setContentText("Introduce el usuario.");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(!RegistroClienteController.esEmailValido(correoField.getText())) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en el correo introducido");
+							a.setContentText("Introduce el email..");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(provinciaField.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en la provincia introducida");
+							a.setContentText("Introduce la provincia.");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(paisField.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en el pais introducido");
+							a.setContentText("Introduce el pais");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(direccionField.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en la direccion introducida");
+							a.setContentText("Introduce la direccion");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else if(user.getText().isEmpty()) {
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Error en el usuario introducido");
+							a.setContentText("Introduce el usuario.");
+							a.setHeaderText(null);
+							a.showAndWait();
+						}else {
+							try {
+							Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+									"9P$H7nI5!*8p");
+							String sql = "UPDATE cliente SET Nombre='" + nombreField.getText() + "',Apellidos='"
+									+ apellidosField.getText() + "',usuario='" + usuarioField.getText() + "',email='"
+									+ correoField.getText() + "',provincia='" + provinciaField.getText() + "',pais='"
+									+ paisField.getText() + "',direccion='" + direccionField.getText() + "' WHERE usuario='"
+									+ user.getText() + "'";
+							PreparedStatement st = conexion.prepareStatement(sql);
+							st.executeUpdate();
 
-						Alert a = new Alert(AlertType.INFORMATION);
-						a.setTitle("¡Cambios guardados");
-						a.setHeaderText(null);
-						a.setContentText(null);
-						a.showAndWait();
-						// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
-						st.close();
-						conexion.close();
-						FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilCliente.fxml"));
-						LoginController log = new LoginController();
-						
-						//loader.setController(log);
-						Parent nextScreen = loader.load();
-						Scene nextScreenScene = new Scene(nextScreen);
-						Stage c = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						currentStage.setScene(nextScreenScene);
-						currentStage.show();
-						
-						initialize();
+							Alert a = new Alert(AlertType.INFORMATION);
+							a.setTitle("¡Cambios guardados");
+							a.setHeaderText(null);
+							a.setContentText(null);
+							a.showAndWait();
+							// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
+							st.close();
+							conexion.close();
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("PerfilCliente.fxml"));
+							LoginController log = new LoginController();
+							
+							//loader.setController(log);
+							Parent nextScreen = loader.load();
+							Scene nextScreenScene = new Scene(nextScreen);
+							Stage c = (Stage) ((Node) event.getSource()).getScene().getWindow();
+							currentStage.setScene(nextScreenScene);
+							currentStage.show();
+							
+							initialize();
 
-					} catch (SQLException | IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						} catch (SQLException | IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
+						
 				
 				});
 
@@ -414,56 +466,72 @@ public class PerfilClienteController {
 				// Obtengo ventana actual
 				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				currentStage.setScene(formularioScene);
+				//comprobacion de errores en los campos de la contraseña
 				saveEdits.setOnAction(ev->{
-					if(passField.getText().equals(repeatpassField.getText())) {
-						String salt = BCrypt.gensalt();
-						
-						String passhashed = null;
-						passhashed = BCrypt.hashpw(passField.getText(), salt);
-						
-						try {
-							Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
-									"9P$H7nI5!*8p");
-							String sql = "UPDATE cliente SET password='" + passhashed + "', salt='" + salt + "' WHERE usuario='" + user.getText() + "'";
-							PreparedStatement st = conexion.prepareStatement(sql);
-							st.executeUpdate();
+					if(passField.getText().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Error en la contraseña");
+						a.setContentText("Introduce la contraseña");
+						a.setHeaderText(null);
+						a.showAndWait();
+					}else if(repeatpassField.getText().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR);
+						a.setTitle("Error en la contraseña");
+						a.setContentText("Introduce la contraseña");
+						a.setHeaderText(null);
+						a.showAndWait();
+					}else {
+						if(passField.getText().equals(repeatpassField.getText())) {
+							String salt = BCrypt.gensalt();
+							
+							String passhashed = null;
+							passhashed = BCrypt.hashpw(passField.getText(), salt);
+							
+							try {
+								Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
+										"9P$H7nI5!*8p");
+								String sql = "UPDATE cliente SET password='" + passhashed + "', salt='" + salt + "' WHERE usuario='" + user.getText() + "'";
+								PreparedStatement st = conexion.prepareStatement(sql);
+								st.executeUpdate();
 
-							Alert a = new Alert(AlertType.INFORMATION);
-							a.setTitle("¡Cambios guardados!");
-							a.setHeaderText(null);
-							a.setContentText(null);
-							// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
-							st.close();
-							conexion.close();
-							Optional<ButtonType> action = a.showAndWait();
-							if(action.get()==ButtonType.OK) {
-								FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
-					    		LoginController log = new LoginController();
-					    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
-					    		Parent nextScreen = loader.load();
-					    		Scene nextScreenScene = new Scene(nextScreen);
-					    		Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
-					    		currentStage.setScene(nextScreenScene);
-					    		currentStage.show();
+								Alert a = new Alert(AlertType.INFORMATION);
+								a.setTitle("¡Cambios guardados!");
+								a.setHeaderText(null);
+								a.setContentText(null);
+								// Cierro recursos, esta vez lo hago asi porque estoy en una expresion lambda
+								st.close();
+								conexion.close();
+								Optional<ButtonType> action = a.showAndWait();
+								if(action.get()==ButtonType.OK) {
+									FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaCliente.fxml"));
+						    		LoginController log = new LoginController();
+						    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
+						    		Parent nextScreen = loader.load();
+						    		Scene nextScreenScene = new Scene(nextScreen);
+						    		Stage current = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						    		currentStage.setScene(nextScreenScene);
+						    		currentStage.show();
+								}
+								
+								
+
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
 							
-							
-
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						}else {// Alerta de contraseña no coincidentes
+							Alert a = new Alert(AlertType.ERROR);
+							a.setTitle("Las contraseñas no coinciden.");
+							a.setHeaderText(null);
+							a.setContentText(null);
+							a.showAndWait();
 						}
-						
-					}else {// Alerta de contraseña no coincidentes
-						Alert a = new Alert(AlertType.ERROR);
-						a.setTitle("Las contraseñas no coinciden.");
-						a.setHeaderText(null);
-						a.setContentText(null);
-						a.showAndWait();
 					}
+					
 				});
 				cancelEdits.setOnAction(e->{
 					//Recargo el perfil del cliente
