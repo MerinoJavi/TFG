@@ -189,6 +189,31 @@ public class PerfilAdminController {
 
 		// Guardar los cambios en la base de datos
 		saveEdits.setOnAction(event -> {
+			if(nombreField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Error en los campos");
+				a.setContentText("Revise los campos");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(apellidosField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Error en los campos");
+				a.setContentText("Revise los campos");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(usuarioField.getText().isEmpty()) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Error en los campos");
+				a.setContentText("Revise los campos");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else if(!RegistroClienteController.esEmailValido(correoField.getText())) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setTitle("Error en los campos");
+				a.setContentText("Revise los campos");
+				a.setHeaderText(null);
+				a.showAndWait();
+			}else {
 			try {
 				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TFG", "root",
 						"9P$H7nI5!*8p");
@@ -211,6 +236,7 @@ public class PerfilAdminController {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}
 		});
 
 		cancelEdits.setOnAction(event -> {
