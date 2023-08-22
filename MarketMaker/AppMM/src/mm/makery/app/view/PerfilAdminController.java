@@ -66,8 +66,7 @@ public class PerfilAdminController {
 	private PasswordField passField=new PasswordField();
 	@FXML
 	private PasswordField repeatpassField = new PasswordField();
-	@FXML
-	private Label newName = new Label("Nombre: ");
+	
 
 	@FXML
 	// ****************Cerrar sesion*******************************//
