@@ -124,7 +124,7 @@ public class LoginController {
 			String usuarioBBDD = result.getString("usuario");// atributo que se encuentra en la BBDD
 			String passwordHashed = result.getString("password");// password hasheada en la bbdd
 			String salt = result.getString("salt");
-			
+			//Datos del administrador que requiere acceso a la plataforma
 			String nombre = result.getString("Nombre");
 			String apellidos = result.getString("Apellidos");
 			String email = result.getString("email");

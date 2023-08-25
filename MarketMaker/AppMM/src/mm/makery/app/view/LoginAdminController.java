@@ -54,12 +54,10 @@ public class LoginAdminController {
 	        String password = passwordField.getText();
 	        if (isValidCredentials(username, password)) {
 	            isLoggedIn = true;
-	            //statusLabel.setText("Bienvenido,  " + username);
 	            usernameField.clear();
 	            passwordField.clear();
 	            //Cargo la pantalla del usuario
 	        	FXMLLoader loader = new FXMLLoader(getClass().getResource("PaginaAdmin.fxml"));
-	    		LoginController log = new LoginController();
 	    		//Cargo la siguiebnte pantalla en la escena actual, para ello hago un cast a Stage 
 	    		Parent nextScreen = loader.load();
 	    		Scene nextScreenScene = new Scene(nextScreen);
@@ -67,7 +65,7 @@ public class LoginAdminController {
 	    		currentStage.setScene(nextScreenScene);
 	    		currentStage.show();
 	            
-	        } else {
+	        } else { //Muestro alerta informando del error
 	        	Alert alert = new Alert(Alert.AlertType.ERROR);
 	        	alert.setHeaderText(null);
 	        	alert.setTitle("Error al iniciar sesión");

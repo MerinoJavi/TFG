@@ -204,13 +204,14 @@ public class RegistroClienteController {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
 	@FXML
 	private void goBack(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistroMenu.fxml"));
-		LoginController log = new LoginController();
-		
-		//loader.setController(log);
 		Parent nextScreen = loader.load();
+		// Cargo el XML siguiente en una nueva escena, que posteriormente casteo la
+		// ventana que obtengo y la establezco en la escena actual para que no me cree
+		// otra ventana.
 		Scene nextScreenScene = new Scene(nextScreen);
 		Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		currentStage.setScene(nextScreenScene);

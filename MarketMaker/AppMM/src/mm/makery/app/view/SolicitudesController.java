@@ -419,6 +419,7 @@ public class SolicitudesController extends Authenticator{
 	}
 	//Envia un correo automaticamente para confirmar que ya está registrado, junto a su usuario y contraseña. En este caso solo uso de gmail uno creado e inventado
 	private static void enviarCorreo(String nombrecomercio,String usuario, String password, String destinatario) {
+		//Variables de las partes que forman un email.
 		String remitente="marketmakertfg@gmail.com";
 		String asunto="Registro en plataforma. Resolución";
 		String msg = "Estimado " + nombrecomercio + ",\n\n"
@@ -430,27 +431,27 @@ public class SolicitudesController extends Authenticator{
 	    //La clave de aplicación obtenida:
 	    String claveemail = "zsmznuxfauftexzk";
 
-	    Properties props = System.getProperties();
+	    Properties props = System.getProperties(); //Objeto para establecer las propiedades para el envio del correo (servidor, contraseña de aplicación...)
 	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
-	    props.put("mail.smtp.user", remitente);
-	    props.put("mail.smtp.clave", claveemail);    //La clave de la cuenta
-	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+	    props.put("mail.smtp.user", remitente); //Remitente del correo
+	    props.put("mail.smtp.clave", claveemail);    //La clave de aplicación para aplicaciones de terceros
+	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave, estableciendo una conexión segura
 	    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
 	    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
 
-	    Session session = Session.getDefaultInstance(props);
-	    MimeMessage message = new MimeMessage(session);
+	    Session session = Session.getDefaultInstance(props); //Creo la sesión con las propiedades establecidas
+	    MimeMessage message = new MimeMessage(session); //Se crea el objeto para enviar el email
 
 	    try {
 	        message.setFrom(new InternetAddress(remitente));
-	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
-	        message.setSubject(asunto);
-	        message.setText(msg);
-	        Transport transport = session.getTransport("smtp");
-	        transport.connect("smtp.gmail.com", remitente, claveemail);
-	        transport.sendMessage(message, message.getAllRecipients());
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se añade el destinatario del correo
+	        message.setSubject(asunto); //Asunto del email
+	        message.setText(msg); //Cuerpo del correo
+	        Transport transport = session.getTransport("smtp"); //Establezco protocolo SMTP para el envío del correo
+	        transport.connect("smtp.gmail.com", remitente, claveemail); //Establecimiento de la conexión con el servidor SMTP para el envío del correo
+	        transport.sendMessage(message, message.getAllRecipients()); //Envío del correo
 	      //  System.out.println("MENSAJE ENVIADO");
-	        transport.close();
+	        transport.close(); //Cierre de conexión
 	    }
 	    catch (MessagingException me) {
 	        System.out.println(me.getMessage());   //Si se produce un error

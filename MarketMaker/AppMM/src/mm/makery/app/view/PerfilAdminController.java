@@ -268,11 +268,11 @@ public class PerfilAdminController {
 		String saltedPassword = salt+password;
 		//Clase para utilzar sha-256
 		MessageDigest dig = MessageDigest.getInstance("SHA-256"); //Establezco algoritmo
-		byte[]hashBytes = dig.digest(saltedPassword.getBytes(StandardCharsets.UTF_8)); //Completes the hash computation by performing final operationssuch as padding. The digest is reset after this call is made
+		byte[]hashBytes = dig.digest(saltedPassword.getBytes(StandardCharsets.UTF_8)); //Convierte la contraseña en un array de bytes, necesario para operar con el algoritmo SHA-256 
 		
 		StringBuilder string = new StringBuilder();
 		for(byte b:hashBytes) {
-			String hex = String.format("%02x", b); //Convierto el byte en su representacion hexadecimal con un ancho de 2 digitos como minomo para formar el hash
+			String hex = String.format("%02x", b); //Convierto el byte en su representacion hexadecimal con un ancho de 2 digitos como minImo para formar el hash
 			string.append(hex);
 		}
 		return string.toString();
