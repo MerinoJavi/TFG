@@ -43,6 +43,8 @@ public class CarritoController {
 	private VBox productosOptions;
 	@FXML
 	private Label totalPrecio;
+	@FXML
+	private Button tramitarButton;
 	
 	private String idcliente = "";
 	private TextField newCantidad = new TextField();
@@ -116,6 +118,8 @@ public class CarritoController {
 					productos.getChildren().add(new Separator(Orientation.HORIZONTAL));
 
 					productoButton.setOnAction(e -> {
+						productosOptions.getChildren().clear(); //Limpiamos la lista para que no se repitan los botones
+						
 						Button deleteItem = new Button("Eliminar del carrito");
 						Button cantidadButton = new Button("Cantidad");
 						
